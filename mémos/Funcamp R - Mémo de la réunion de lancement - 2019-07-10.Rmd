@@ -1,0 +1,355 @@
+---
+title: "Funcamp R - Journée de lancement du groupe de prototypage"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_depth: 2
+    toc_float: true
+  pdf_document:
+      default
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Compte-rendu de la journée du 10 juillet**
+
+Référents : arnaud.degorre@insee.fr ; jean-luc.lipatz@insee.fr
+
+
+Participants :
+
+- DSI, projet Palettes : Jean-Luc Lipatz, jean-luc.lipatz@insee.fr
+- DSI, Unissi : Arnaud Degorre, arnaud.degorre@insee.fr
+- SDES, Sylvie Didier-Perot, sylvie.didier-perot@developpement-durable.gouv.fr
+- SDES, DREAL Pays-de-la-Loire, Maël Theulière, mael.theuliere@developpement-durable.gouv.fr
+- CEFIL, Julien Nicolas, julien.nicolas@insee.fr
+- DR Nouvelle Aquitaine, Laure Genebes, laure.genebes@insee.fr
+- DR PACA,  Pascal Eusébio, pascal.eusebio@insee.fr
+- DR Centre Val de Loire, Sébastien Terra (en visio), sebastien.terra@insee.fr
+- DR Hauts de France, Fabrice Danielou, fabrice.danielou@insee.fr
+
+
+Destinataires pour information :
+
+- Olivier Lefebvre, Insee, Directeur du système d'information
+- Cédric Afsa, Coordonateur d'Insee 2025
+- Sylvain Moreau, chef du SDES
+- Lionel Janin,  sous-directeur Valorisation et stratégie de la donnée; 
+- Yvonne Pérot, directrice régionale Insee Centre-Val de Loire
+- Alberto Lopez, directeur régional Insee Paca
+- Fabienne Le Hellaye, directrice régionale Insee Nouvelle Aquitaine
+- Jean-Christophe Fanouillet, directeur régional Insee Hauts-de-France
+- Alain Malmartel, directeur du Cefil
+
+
+
+\pagebreak
+
+
+# 1. Eléments de contexte
+
+## 1.1 Rappel de l'ordre de jour
+
+Dédiée à la mise en place du groupe de prototypage des funcamps R, la journée a été structurée selon l'ordre du jour suivant :
+
+- Présentation d’ensemble de la démarche et mission du groupe de prototypage
+- Panorama des démarches pédagogiques autour de R et liens avec le Funcamp (formations Palettes, formation Cefil, formations SDES, travaux des communautés locales)
+- Format et principes du funcamp et des « modules pédagogiques » à concevoir
+- La cible des acquis pédagogiques à couvrir dans un funcamp
+- Perspectives d’accompagnement et place des autres acteurs associés
+- Debriefing à chaud avec le direction du système d’information et le coordonateur d’Insee 2025.
+- Organisation des travaux estivaux
+
+Parmi ces items, le point "Perspectives d’accompagnement et place des autres acteurs associés" n'a pu être traité en séance, au regard du temps disponible. L'information correspondante a toutefois été transmise aux participants, via le cahier des charges pour recruter un prestataire dédié à l'accompagnement d'ensemble de la démarche.
+
+## 1.2 Modalités de préparation du funcamp R et place du groupe de prototypage
+
+La cible de déploiement d’une première journée “Funcamp” est fixée au 1er trimestre 2020. Elle a vocation à être suivie de l’organisation d’autres journées tout au long de l’année 2020, reprenant l’ensemble des éléments du Funcamp et permettant de couvrir plusieurs régions prenant la responsabilité d’organiser ces “répliques” et de les adapter selon leur contexte local. Le calendrier d'ensemble de l’action est organisé autour de 4 phases.
+
+**Phase 1 - prototypage (juillet à octobre 2019)**
+
+C'est l'objet du présent groupe que de mener à bien cette première phase sur les mois de juillet à octobre 2019. Le prototypage consiste à définir les principes d'apprentissage à respecter lors du Funcamp, et d'identifier le champ des acquis pédagogiques à couvrir. Pour cela, le groupe sera amené à dresser un panorama des “profils de découverte” selon la diversité du public des débutants visé par le Funcamp, puis à établir des exemples de modules pédagogiques, qui pourront être ensuite repris et complétés par des groupes de conception.
+
+Principaux livrables attendus : 
+
+- définition des principes d’apprentissage collectif en R pour des débutants et sur les modes de mise en oeuvre au cours d’une journée de type Funcamp 
+- cartographie des cibles d’acquis pédagogiques à couvrir à travers les différents parcours de découverte du funcamp 
+- élaboration de premiers modules ayant valeur d'illustration
+- élaboration d’un kit d’élaboration de modules pédagogiques
+
+**Phase 2 - Conception (d'octobre à décembre 2019)**
+
+Suite à un appel à candidature qui sera engagé en septembre 2019, il sera demandé à des volontaires parmi les directions et directions régionales de l’Insee, ainsi qu’au sein du réseau du SDES (Dreal), d’établir des modules pédagogiques élaborés à partir du kit fourni par le groupe de prototypage. L’objectif est de mobiliser autant que possible les communautés R pour que ces dernières se saisissent de la réalisation d’un module pédagogique comme support à leur animation locale. Une cible d’une dizaine de modules pédagogiques est envisagée, à préciser selon le ou les formats retenus en phase 1. Ces modules gagneront à s’illustrer sur des cas d’usage diversifiés, permettant à un spectre large d’agents de se reconnaître dans la trame proposée, tout en restant en cohérence avec l’articulation d’ensemble qui aura été définie en phase 1 sur le spectre d’acquis pédagogiques à couvrir.
+
+
+Principaux livrables attendus :
+
+- mobilisation de plusieurs équipes locales (Insee et réseau SDES), idéalement de l'ordre d'une dizaine, pour produire des modules.
+- réception-contrôle des modules pédagogiques
+
+**Phase 3 - Expérimentation (de janvier à février 2020)**
+Sur la base des modules pédagogiques réceptionnés, un travail de consolidation sera engagé pour établir des parcours de découverte. Ce travail visera à vérifier, en pratique, les modalités d’animation d’une journée Funcamp fondée sur ces matériaux et à établir un canevas des différents moments rythmant le funcamp (temps plénier d’introduction ou de restitution, temps à suivre des modules pédagogiques, éventuels temps complémentaires de présentations thématiques). Une “journée blanche”, de petite échelle, sera organisée avec l’appui de testeurs volontaires. Ce travail sera suivi par un groupe d’animation du Funcamp, composé du coordonnateur du projet Palettes, du chef de l’Unité Innovation et stratégie du système d’information, de professionnels de l’organisation d’évènements collaboratifs à l’Insee (division animation conseil, division innovation et instruction technique et/ou SSPLab), de professionnels de la formation (DRH et Cefil).
+
+Principaux livrables attendus : 
+
+- consolidation et articulation des modules pédagogiques 
+- l’établissement d’une trame de Funcamp mobilisant ces matériaux
+- dimensionner le niveau d’accompagnement des stagiaires (nombre de formateurs, de tuteurs, de facilitateurs, fonction de chaque acteurs)
+- organisation d'une journée blanche pour identifier les points à corriger
+
+**Phase 4 - Déploiement (premier funcamp envisagé en mars 2020)**
+
+A l’issue d’un plan de communication assuré conjointement par l’Insee et le SDES, un premier Funcamp sera organisé dans le courant du 1er trimestre 2020, a priori dans l’une des régions correspondant aux directions régionales Insee pilotes de la démarche. Le Funcamp visera à associer les agents de l’Insee et des services déconcentrés de l’ensemble des SSM (Dreal, Direccte, Rectorat, Drjscs, etc.), avec une implication particulière attendue des Dreal et des DR Insee. L’association pourra être élargie selon les orientations retenues par la région d’accueil (autres acteurs publics locaux, revelant de l’Etat ou des collectivités locales) ou selon les attentes des SSM (association d’équipes de SSM ; dans l’exemple du SDES, possible association de l’antenne SDES à Orléans, des DDT, des Cerema…).
+
+Principaux livrables attendus : 
+
+- délégation au site d'accueil de la gestion locale de l'évènement (communication, gestion des inscriptions)
+- appui pour la mise en place logistique (équipement informatique)
+- briefing des équipes pédagogiques
+- animation de l’évènement lui-même
+ - établissement d’un bilan portant à la fois sur le contenu pédagogique et les méthodes d’animation.
+
+
+## 1.3 Les attentes des membres du groupe de prototypage
+
+
+Afin d'établir les valeurs communes du groupe et de définir une vision commune du Funcamp, chaque participant du groupe a été appelé à indiquer :
+
+- ses attentes par rapport à la journée de lancement
+- les écueils, ou ce que le funcamp ne doit pas être
+- les réussites, ou les marqueurs de succès d'un funcamp.
+
+S'agissant des attentes par rapport à la journée, ont été formulés les points suivants :
+
+- le contexte : un panorama des démarches en cours / échanger sur l'état des lieux des pratiques au sein de l'Insee et des SSM
+- le public : cibler les publics / définir un dénominateur commun d'attentes pour les publics / identifier les freins pour chacun
+- le contenu : définir le "contenu" d'un funcamp  / définir les objectifs d'un funcamp 
+- le comment : comment un atelier fonctionnera-t-il ? comment le funcamp dans son ensemble fonctionnera-t-il ?
+- la feuille de route : convenir des modalités de construction du funcamp / définir le partage des tâches au sein du groupe
+- les acteurs : faire du groupe de prototypage une équipe à part entière
+
+S'agissant des écueils, les membres du groupe de prototypage alertent sur le fait qu'un funcamp ne doit pas être :
+
+- une formation (une formation classique, une formation complète, un catalogue de formations...)
+- une vitrine des talents, une démonstration de force de quelques uns, une compétition
+- une simple action de communication
+- un moment ennuyeux
+- une liste d'activités compliquées
+- un évènement sans lendemain
+
+S'agissant des marqueurs de réussite, le funcamp sera considéré comme un succès si :
+
+- des personnes qui ne connaissent pas R ont envie de se former ou d'en savoir plus ; si le nombre d'inscrits en formation R augmente
+- davantage d'agents du SSP se mettent à utiliser R
+- de nouvelles communautés R se créent, ou les communautés accueillent de nouveaux membres
+- un élargissement des cas d'usage de R dans les travaux du SSP est observé
+- un groupe de tuteurs R est identifié dans chaque site organisateur d'un Funcamp
+- l'ensemble des SSM se retrouvent dans la démarche ; le SSP dans son ensemble envoie un signal sur la diffusion de R
+
+**Illustration : les post-it des participants sur les marqueurs de réussite**
+\ 
+```{r out.width = "100%", echo=FALSE} 
+include_graphics("Funcamp-Réussite.jpg")
+```
+\
+
+# 2 La présentation des démarches actuelles
+
+
+## 2.1 Côté Insee, le projet Palettes
+
+[[ A COMPLETER/AMENDER SI BESOIN PAR JEAN-LUC ]]
+
+Le programme Palettes (Palette ALternative pour les Etudes et TraitEments Statistiques) vise à doter l’Insee d’une palette pérenne d’outils de traitements de l’information en alternative au logiciel SAS, à en promouvoir l’usage et à la partager avec le SSP. Le projet doit coordonner les actions visant à former, sensibiliser, accompagner les utilisateurs vers l’usage de ces nouveaux outils qui vont progressivement se substituer au logiciel SAS. Parmi cette gamme d'outils alternatifs, R se présente comme la couleur dominante, aux côtés d'autres solutions complémentaires comme Python.
+
+Le programme Palettes se compose de plusieurs de 3 projets :
+
+**Le projet COLS** ("Certification des Outils pour le Libre Service") doit définir le contenu de la palette d’outils de traitements de l’information, et en définir le cadre d’utilisation, avec notamment :
+
+- la mise à disposition un « univers statistique simplifié sous R », apportant un ensemble de travaux et méthodes conçues pour baliser le terrain autour de R pour offrir un environnement de travail simple à maîtriser. 
+- la mise en place d'une instance de certification et de distribution des « packages » (COmité de certification des PackageS COPS) ;
+ 
+**Le projet Infrastructure du Libre Service** (PILS) pour s’assurer de la mise en place d'une architecture rénovée pour le self service  qui garantisse plus de disponibilité, plus conviviale, plus performante, plus sécurisée, par rapport à l'offre actuelle à l'Insee fondée sur l’ "architecture unifiée statistique" (AUS). 
+
+**Le projet AFC** (Accompagnement Formation Communication), de nature plus organisationnelle, consiste à coordonner, centraliser les initiatives et les faire connaître, multiplier les actions d’incitations, accompagner la transition... Il comprend notamment les facettes suivantes :
+
+- l'association des managers, pour susciter l’adhésion, détecter les besoins en formation et en accompagnement mais aussi les risques sur les processus de production et de diffusion... ;
+- la constitution d'un dispositif de formations, en particulier dans le domaine de la formation continue, en s'articulant également à la formation initiale (Cefil, Ensai, Ensae).
+- le cadrage des pratiques d’une « filière R » pour le développement et le self, et la mise en place d’un marché d’accompagnement pour la réécriture et la réingénierie de chaînes SAS en R (self ou applicative)
+      
+Le projet Palettes permet ainsi de refondre l'offre de formation continue R pour les agents de l'Insee. Pour les modules davantage axés pour un public débutant, l'offre comprend actuellement les formations suivantes :
+
+- **prise en main rapide de données sous R** : cette formation a pour objectif de permettre la réalisation de traitements de statistique exploratoire ou de transformation de données à l’aide du logiciel R. La formation repose sur l’utilisation d’outils permettant aux agents de devenir rapidement opérationnels sans avoir entrer dans la programmation R ni maîtriser le langage R de base.
+- **prise en main** : La formation détaille le fonctionnement du logiciel R et de son interface sous RStudio puis explicite les différentes manières de représenter les données, de les interroger et de les transformer au travers des outils offerts. Le public visé porte sur les agents ayant à utiliser régulièrement R pour la construction de processus de traitements de données. 
+- **IgoR** : Ce module reprend l'intégralité du contenu de la formation "Prise en main rapide de données sous R" avec l'assistance d'un environnement de programmation permettant de passer plus de temps sur les mécanismes de base du traitement de données sous R et moins de temps sur la maîtrise de la syntaxe. La formation "Prise en main rapide de données sous R" a été conçue autour de l'usage de SAS pour proposer rapidement une solution alternative; mais elle est quand même construite autour de pratiques de transformation de données, pratiques usuelles pour quelqu'un qui vient de SAS. IGoR a pour objectif de proposer le même contenu, mais en s'affranchissant des pratiques évoquées.
+- **WiRed** : cette nouvelle formation 2019 permet la découverte du logiciel R : ses principes, ses possibilités et quelques façons élémentaires de l’utiliser. Elle n’est pas destinée à être le point d’entrée pour des agents devant travailler en R en sortie de formation (c’est la formation « Prise en main rapide de données sous R » qui a cet objectif) ; cependant, elle apporte les informations nécessaires pour démarrer, par exemple, en auto-formation.
+
+
+Parmi les autres formations proposées, sont à citer :
+
+- Expérimental : Introduction à SQL
+- En cours de montage : Consolidation : R de base et automatisation (fonctions)
+- En cours de montage : Développement d’une application Shiny
+- En cours de montage : Travail collaboratif en R
+- A l’étude : Programmation fonctionnelle sous R
+- A l’étude : Graphiques pour la diffusion, cartograhie
+- A l’étude : Processus statistiques avancés
+
+
+## 2.2 Côté SDES 
+
+[[ A COMPLETER/AMENDER SI BESOIN PAR MAEL ET SYLVIE ]]
+
+Avec l'objectif d'acclimater à R des agents du pôle ministériel, le SDES a engagé la construction  d'un cursus de formation, qui puisse concerner le plus large public possible en raison de l’hétérogénéité des profils des agents. Ce parcours pédagogique se veut progressif et très orienté pratique et exercices. Autour de ce parcours, a également été constitué un groupe des référents R (réseau G2R), avec une réunion de lancement du groupe le 18 mars 2016 par appel à candidature auprès des agents du Soes et du réseau des Dreal (participation sur la base du volontariat). Aujourd'hui ce groupe réunit une douzaine de membres
+
+La mise en place du parcours a été progressive et a suivi le calendrier suivant :
+
+Année de déploiement|Module
+-----------------|---
+2016|Socle
+2017|Préparation des données en R
+2017|Statistiques descriptives
+2017|Analyse des données multi-dimmensionnelles
+2018|Datavisualisation
+2019|Analyse spatiale
+2019|Publications reproductibles avec Rmarkdown
+2019|Travail collaboratif avec R
+2020|Shiny
+
+Le parcours se fonde sur les éléments suivants :
+
+- Un kit modulaire pour tenir compte de la diversité des besoins.
+- Une approche *Tidyverse first* pour abaisser la courbe d'apprentissage et garder les modules en cohérences.
+- Une [mise en ligne](https://mtes-mct.github.io/parcours-r/) des modules sur internet pour permettre aux stagiaires de toujours bénéficier d'une version à jour des modules.
+- Une mise à disposition en [licence ouverte](https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf) pour susciter la collaboration avec l'extérieur.
+- La création d'une liste mail pour construire un réseau d'entraide.
+
+Quelques chiffres clés sur le dispositif depuis son lancement (en 3 ans environ) :
+
+- 5 modules déployés
+- 24 formateurs mobilisables
+- 52 sessions de formation
+- 305 stagiaires formés à au moins un module
+
+Les enseignements de cette expérience :
+
+- L'important se joue dans les premiers pas après la formation, il faut pouvoir accompagner les stagiaires, via de l'entraide et du tutorat.
+- Faire le choix de mises en pratique qui *parlent* aux stagiaires : bien choisir des jeux de données et des exercices adéquats
+- Viser l'opérationnel : permettre aux stagiaires  de savoir rapidement *faire des choses* en R qui leur soit utile.
+- Donner envie : identifier des exemples métiers avancés qui *donnent envie* de s'y mettre, communiquer sur les réussites.
+- Demander un retour aux stagiaires sur un temps plus long : on ne mesure pas le nombre de personnes qui ont finalement sauté le pas.
+- Se rapprocher au maximum de la "culture R" existante : importance de la veille et de l'ouverture sur l'écosytème.
+- La montée en compétence ne suffit pas, il faut lever les multiples verrous de la structure (par exemple : adapter la configuration des postes,  ouvrir la possibilité de publier des documents réalisés en Rmarkdown, mettre en place des infrastructures cloud  avec shiny / rstudio server)
+- Le choix de l'open source change les façons de travailler (besoin de montée en compétence sur git, favoriser le partage de code et la mise en package, ouverture sur l'extérieur, travail en réseau...)
+
+
+## 2.3 Côté Cefil
+
+[[ A COMPLETER/AMENDER SI BESOIN PAR JULIEN ]]
+
+Le CEFIL forme les contrôleurs stagiaires à l’utilisation d’un logiciel et d’un langage de traitement du chiffre. Il s’agit là de les doter des savoir-faire nécessaires pour traiter la donnée dès leur prise de poste et, au besoin, être à même de suivre des formations plus poussées. Depuis sa création, le logiciel retenu par le CEFIL est celui majoritairement utilisé à l’Insee, à savoir SAS. Pour déployer à terme R dans les formations initiales, une équipe projet s’est mise en place au sein du CEFIL, composée des deux formateurs qui ont investi dans R. L’un est formateur national et membre du groupe de conception « R prise en main rapide », l’autre a suivi un parcours de datascientist via le CEPE dont l’outil de production principal était R.
+
+Cette équipe a conçu un parcours R en huit modules pour permettre aux contrôleurs stagiaires d’en connaître progressivement les principales fonctionnalités et pour acquérir un peu de pratique. Elle a aussi développé un parcours de cinq modules en direction des attachés, promus au choix ou lauréats de la RAEP qui ne soit pas un plaquage de la formation initiale mais un module en phase avec les apports en statistique dispensés. Enfin, une banque d’exercices avec une correction a été constituée et a servi de base d'apprentissage pour l'ensemble de l’équipe pédagogique du Cefil. 
+
+Le parcours R au CEFIL doit répondre au fil rouge de la formation – développer l’attitude du statisticien – en mettant en œuvre les bonnes pratiques de l’analyse statistique. La traduction de ce besoin en objectifs pédagogiques est de faire en sorte qu’à l’issue de la formation, le contrôleur stagiaire soit capable :
+    • d’effectuer les premiers traitements d’exploration de base de données ; 
+    • de produire des indicateurs et des tableaux statistiques simples ; 
+    • de mettre en valeur des résultats statistiques simples.
+
+Ce nouveau dispositif de formation a été présenté et validé en CD Insee début juillet, pour déploiement dès l'année académique 2019-2020.
+
+
+## 2.4 Côté Communautés locales
+
+[[ A COMPLETER SI BESOIN PAR LAURE, SEBASTIEN, PASCAL ET/OU FABRICE ]]
+
+Les Directions régionales de l'Insee sont nombreuses à avoir mis en place des groupes plus ou moins formalisés de soutien à l'apprentissage de R : sous l'appelation de "communautés" ou de "clubs", ces démarches visent à proposer un format d'échange entre praticiens et apprenants, autour de cas d'applications de R, en relais aux temps de formation. Chaque communauté a son mode de fonctionnement propre : il peut s'agit de rendez-vous réguliers (mensuels, trimestriels...) avec des présentations de travaux, de système organisé de tutorat, d'ateliers de codage...
+
+Des illustrations ont été données pour les DR de Nouvelle-Aquitaine (Laure), Centre Val de Loire (Sébastien), Paca (Pascal) et Hauts-de-France (Fabrice). Dans l'exemple des Hauts-de-France, la communauté R fait l'objet d'un suivi formalisé, avec la mise en place d'un groupe d'animation regroupant des membres de chaque service de la DR, et un copilotage entre le SED et le SNDI. Les agents des SSM sont également associés aux réunions. Quelques exemples de présentation : la réalisation de cartes avec Leaflet, la génération d'un fichier KML à partir de PostgreSQL, la réalisation de requêtes sur des données RDF, les ressources R utiles (sites internet, intranet, blogs…).
+
+
+# 3. Premières réflexions sur les modules pédagoqiques du Funcamp
+
+La journée de mise en place du groupe de prototypage a permis de conduire une analyse des publics ciblés par le Funcamp, d'échanger sur le déroulé type de l'évènement et, partant, d'imaginer la nature des modules pédagogiques à développer.
+
+## 3.1 Les publics du funcamp
+
+S'agissant des publics, les membres du groupe ont proposé une lecture selon deux axes : (i) le degré d'appropriation en R (ii) la proximité de l'environnement professionnel (et du poste exercé) avec une pratique de R. Découle de cette lecture 3 cibles prioritaires, portant sur des personnes novices dans l'utilisation de R, mais avec des pratiques différentes d'autres outils de traitement du chiffre et exerçant dans des fonctions proches ou au contraires éloignées des logiciels statistiques :
+
+- public novice en R, sans pratique antérieure de SAS, en poste dans un environnement faiblement lié aux logiciels statistiques (par ex, fonctions administratives)
+- public novice en R, avec une pratique antérieure de SAS, a priori en poste dans des environnements utilisant des logiciels statistiques
+- public novice en R, sans pratique antérieure de SAS, a priori en poste dans des environnements utilisant des logiciels statistiques
+
+Autres acteurs concernés, ceux ayant un niveau d'appropriation plus élevé en R, en distinguant d'une part ceux ayant des fonctions de formateurs, et ceux qui, avec une maîtrise intermédiaire du domaine, pourraient jouer une fonction d'accompagnateurs ou de tuteurs à l'occasion du Funcamp, puis dans les activités locales assurées par les communautés. Ce cas particulier des "accompagnateurs potentiels" est aussi une cible du Funcamp, non pas en tant que stagiaires lors de l'évènement, mais pour aider à son animation et pour se positionner dans cette fonction spécifique, à mi-chemin entre la formation et le tutorat. Notamment, ce public peut aussi prendre part aux groupes de conception prévus en phase 2 d'élaboration du funcamp, au moment de fabriquer les modules pour disposer d'une bibliothèque de ressources.
+
+Enfin, les managers doivent également jouer une fonction particulière dans l'évènement : en amont, pour faciliter l'inscription des agents ; pendant le funcamp, étant susceptibles d'être eux-mêmes stagiaires pour mieux percevoir les apports de R (et prendre la mesure de l'effort d'apprentissage) ; en aval, à la fois pour veiller à ce que les stagiaires puissent poursuivre leur parcours de formation, et pour faire évoluer les processus de travail de telle façon que ces derniers puissent être réalisés avec R comme outil statistique. Ce dernier point concerne la conversion des chaînes SAS, mais couvre plus généralement toute évolution des systèmes locaux d'information pour qu'ils puissent être adaptés, y compris pour les processus fondés sur des outils bureautiques (données gérées sous calc ou excel, éditions de documents gérés avec des traitements de texte, là où R peut apporter des alternatives à examiner).
+
+**Illustration : l'analyse des publics et acteurs d'un Funcamp**
+\ 
+```{r out.width = "100%", echo=FALSE} 
+include_graphics("Funcamp-Public.jpg")
+```
+\
+
+## 3.2 Le déroulé type d'un funcamp et le format des modules pédagogiques
+
+Imaginé sur la durée d'une journée, un funcamp présente un temps utile estimé autour de 7 heures pour proposer aux stagiaires des présentations, des ateliers, des moments de prise en main... 
+
+Sous cette hypothèse, le coeur du funcamp vise à proposer des temps de travail en groupe, sous la forme d'équipes de petite taille (environ 5 à 6 stagiaires). Selon la taille de l'évènement pour un site donné (de 30 à 60 participants), cela conduit donc à proposer une animation avec 5 à 10 équipes de stagiaires.
+
+Le travail en groupe serait organisé sur des cas pratiques, pour avoir une manipulation effective de données et réaliser des traitements. L'on peut envisager qu'une équipe soit amenée à conduire une succession d'opérations, le module pédagogique amenant à construire un traitement statistique complet : chargement et appariement de données, exploration via quelques graphiques et statistiques descriptives, opérations de transformation, calcul d'indicateurs, représentations graphiques ou tabulées des résultats... Les modules pourraient aussi comporter des niveaux différenciés de difficulté, à la condition de pouvoir répartir les stagiaires selon leur niveau préalable. 
+
+Réaliser autant d'opérations pour un public novice en R, en une seule journée et de façon participative, semble un objectif difficile à atteindre s'il s'agit d'apprendre en même temps la syntaxe du langage R (ie, de coder soi-même). Par contre, si la journée vise à appréhender les usages de R sans coder soi-même, il apparaît tout à fait envisageable de proposer aux stagiaires de réaliser des traitements relativement avancés. A cet égard, l'utilisation d'un environnement assisté de programmation comme IgoR apparaît un axe clé permettant aux stagiaires de facilement produire de premiers résultats. IgoR permet en effet de spécifier un traitement statistique sans connaître la syntaxe R : par exemple, le stagiaire aura simplement à indiquer qu'il veut faire une jointure de deux bases pour que IgoR réalise l'opération, et par la même occasion présente le code correspondant dans une optique de découverte progressive de la syntaxe.
+
+Afin de rendre engageants ces temps de manipulation, il est proposé de porter un soin particulier aux données qui seront manipulées. Ces dernières peuvent faciliter l'implication des stagiaires de deux façons : soit parce qu'elles s'apparentent aux données effectivement manipulées en situation professionnelle (par exemple, données d'enquêtes), soit parce qu'elles portent sur des sujets sociétaux ou économiques d'intérêt collectif et parlant au plus grand nombre. 
+
+Pour apporter la dimension ludique au funcamp, il est également proposé d'adosser des énigmes aux modules pédagogiques. Deux modalités sont envisagées :
+
+- modalité 1 (vue pendant la réunion du groupe de prototypage): la succession des tâches réalisées par une équipe leur permet d'obtenir, in fine, un résultat spécifique (par exemple, un code). Chaque code permet de retourner une pièce d'un puzzle qui est, en début de journée, complètement caché, de sorte que si un nombre suffisant d'équipes atteint son objectif pédagogique, le puzzle fait apparaître la solution d'une énigme commune à l'ensemble des participants (un portrait d'un statisticien ? le logo d'un package R particulier ?)
+- modalité 2 (vue après la réunion du groupe de prototypage): le narratif du funcamp serait construit autour de la vie d'un jeu de données. Chaque équipe serait amenée à explorer un "parcours de la donnée" dans une sorte de labyrinthe constitué de pièces. A chaque pièce correspond des fichiers différents qu'il faut traiter à tour de rôle pour collecter des "objets" et savoir dans quelle pièce aller ensuite. Le challenge est de collecter le bon jeu d'objets (il pourrait y avoir des fausses pistes, si elles conduisent rapidement à une impasse). L'indice pour savoir quelle doit être la pièce suivante pourrait être par exemple : le résultat d'un calcul (p.e. la médiane des populations sur le département dont le code vient de la pièce précedent), un élément caché dans un graphique (p.e. un nuage de points représentant un numéro d'enregistrement d'un fichier donné), un indice caché dans le code R lui même, soit un nom de fonction, soit un commentaire généré par IGoR... Enfin, l'exploration des pièces viserait à couvrir un ensemble de traitements (p.e., 9 pieces à explorer, reprenant 9 fonctions élémentaires de transformation de données présentes dans IGoR) 
+
+Ces travaux en équipe gagneraient à couvrir la plus grande partie de la journée de funcamp : a été évoqué le fait d'y consacrer 2x2h30 voire 2x3h. 
+
+En amont, il est proposé de  présenter (i) le déroulé d'ensemble de la journée (ii) une offre de services sur R, tournée sur l'accompagnement local dans le site d'accueil (qui fait quoi dans ma région ? quelle communauté locale ? quels référents ?).
+
+En aval, la journée pourrait se clôturer par (i) la présentation des résultats de chaque équipe, avec un bref debriefing des apports/difficultés rencontrées (ii) l'évocation des prochaines formations ouvertes en R
+
+D'autres éléments ont été évoqués par les membres du groupe, mais sont à ce stade envisagées en option (et selon les sites organisateurs), du fait du temps qu'elles requièrent au détriment du travail en équipe :
+
+- témoignages externes (par exemple, une migration sur R d'une entreprise / administration ; témoignage d'un datascientist...) -> cette proposition peut être éloignée des préoccupations d'un public débutant
+- résolution de problèmes "en live" apportés par les participants (cas d'une réingénierie en direct sur une situation rencontrée dans le site d'accueil) -> ce cas de figure peut nécessiter des investigations importantes et excéder le format d'un funcamp.
+
+**Illustration : les propositions du groupe de prototypage sur le contenu d'un funcamp**
+\ 
+```{r out.width = "100%", echo=FALSE} 
+include_graphics("Funcamp-Déroulé-a.jpg")
+```
+\
+
+
+\ 
+```{r out.width = "100%", echo=FALSE} 
+include_graphics("Funcamp-Déroulé-b.jpg")
+```
+\
+
+
+
+# En conclusion : prochains travaux
+
+En clôture des échanges, le groupe de prototypage s'est réparti en 3 sous-groupes pour travailler, sur la période de juillet à septembre, à la réalisation de premiers exemples d'exercices selon les éléments décrits dans la partie *"Le déroulé type d'un funcamp et le format des modules pédagogiques"*. Les sous-groupes sont composés de la façon suivante :
+
+- sous-groupe 1 : Arnaud, Maël et Laure
+- sous-groupe 2 : Fabrice, Sylvie et Pascal
+- sous-groupe 3 : Sébastien, Julien et Jean-Luc
+
+Chaque sous-groupe visera à itérer en visio d'ici la prochaine réunion du groupe de prototypage, le 25 septembre 2019, qui sera dédiée à l'examen de ces premiers essais et à la définition du spectre des acquis pédagogiques à couvrir dans le funcamp R.
+
+
+
+
+
