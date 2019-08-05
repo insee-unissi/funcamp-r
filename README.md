@@ -2,7 +2,7 @@
 
 Cet espace collaboratif est dédié au projet d'organisation d'une journée ludique d'apprentissage sur R ouverture au système statistique public. Sont accessibles :
 + [les mémos des réunions](../mémos/) plénières de l'équipe de conception 
-+ [les travaux en cours des groupes](../groupes/) travaillant à la préparation des Funcamps (premiers exercices, jeux de données pour les tests...).
++ [les travaux en cours des groupes](../groupe-conception/) travaillant à la préparation des Funcamps (premiers exercices, jeux de données pour les tests...).
 
 ## Une démarche globale d'accompagnement pour l'utilisation de R
 
