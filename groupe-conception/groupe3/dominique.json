@@ -1,0 +1,58 @@
+[{
+"id": 0,
+"consigne": "Lire le fichier prenoms2017.dbf; renommer les variables 'preusuel' et 'annais' en 'prénom' et 'année'.",
+"clé": "Le nombre de lignes de la table résultat.",
+".pages": "import, rename, contents",
+".acquis": "La lecture de données, la structure d'une table.",
+".problèmes": "La lenteur de l'opération."
+},
+{
+"id": 3573026,
+"consigne": "Convertir le sexe en variable qualitative; faire un tableau des proportions garçon/fille.",
+"clé": "Pourcentage de filles avec deux décimales.",
+".pages": "factor, tabular",
+".acquis": "Le type énumération; un premier tableau statistique"
+},
+{
+"id": 49.63,
+"consigne": "Convertir l'année en entier; cumuler par prénom, sexe, année; écrire le résultat en format fst.",
+"clé" : "La taille en octets du fichier résultat.",
+".pages": "factor, summarise, export",
+".acquis": "Les types numériques; l'écriture de données; le cumul statistique par groupe."
+},
+{
+"id": 3094954,
+"consigne": "Depuis le fichier cumulé, ne lire que les données de DOMINIQUE.",
+"clé": "Le pourcentage de filles avec deux décimales",
+".pages": "import, tabular",
+".problèmes": "Le test à l'égalité, les constantes de type caractère",
+".acquis": "Le test à l'égalité; la lecture partielle dans les fichiers fst." 
+},
+{
+"id": 40.99,
+"consigne": "Tracer la courbe nombre de naissances/année; réduire à la plage 1940-1980.",
+"clé": "L'année où les filles l'emportent le plus sur les garçons",
+".pages": "points, filter",
+".acquis": "Les tests; un premier graphique."
+},
+{
+"id": 1952,
+"consigne": "Extraire en deux tables les garçons et les filles, puis fabriquer la pyramide des ages.",
+"clé": "La première année où on ne comptabilise pas de filles.",
+".pages": "filter, join, col, view",
+".acquis": "Les jointures sur clé."
+},
+{
+"id": 1919,
+"consigne": "Cartographier les proportions départementales du prénom masculin",
+"clé": "Le code du département de Nouvelle Aquitaine ayant la plus forte proportion",
+".pages": "import, summarise, mutate, spplot",
+".acquis": "Une représentation cartographique"
+},
+{
+"id": 17,
+"consigne": "Estimer les données manquantes et refaire la cartographie",
+".pages": "import, fuzzyjoin, spplot",
+".acquis": "Une fonction simple",
+".problèmes": "Décomposer l'opération"
+}]
