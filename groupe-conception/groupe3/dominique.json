@@ -3,14 +3,15 @@
 "consigne": "Lire le fichier prenoms2017.dbf; renommer les variables 'preusuel' et 'annais' en 'prénom' et 'année'.",
 "clé": "Le nombre de lignes de la table résultat.",
 ".pages": "import, rename, contents",
-".acquis": "La lecture de données, la structure d'une table.",
-".problèmes": "La lenteur de l'opération."
+".problèmes": "La lenteur de l'opération de lecture.",
+".acquis": "La lecture de données, la structure d'une table."
 },
 {
 "id": 3573026,
 "consigne": "Convertir le sexe en variable qualitative; faire un tableau des proportions garçon/fille.",
 "clé": "Pourcentage de filles avec deux décimales.",
 ".pages": "factor, tabular",
+".problèmes": "Ne pas oublier de pondérer",
 ".acquis": "Le type énumération; un premier tableau statistique"
 },
 {
@@ -21,16 +22,16 @@
 ".acquis": "Les types numériques; l'écriture de données; le cumul statistique par groupe."
 },
 {
-"id": 3094954,
+"id": 2375254,
 "consigne": "Depuis le fichier cumulé, ne lire que les données de DOMINIQUE.",
 "clé": "Le pourcentage de filles avec deux décimales",
 ".pages": "import, tabular",
-".problèmes": "Le test à l'égalité, les constantes de type caractère",
+".problèmes": "Le test à l'égalité, les constantes de type caractère; pondérer",
 ".acquis": "Le test à l'égalité; la lecture partielle dans les fichiers fst." 
 },
 {
 "id": 40.99,
-"consigne": "Tracer la courbe nombre de naissances/année; réduire à la plage 1940-1980.",
+"consigne": "Tracer la courbe du nombre de naissances/année; réduire à la plage 1940-1980.",
 "clé": "L'année où les filles l'emportent le plus sur les garçons",
 ".pages": "points, filter",
 ".acquis": "Les tests; un premier graphique."
@@ -40,19 +41,30 @@
 "consigne": "Extraire en deux tables les garçons et les filles, puis fabriquer la pyramide des ages.",
 "clé": "La première année où on ne comptabilise pas de filles.",
 ".pages": "filter, join, col, view",
-".acquis": "Les jointures sur clé."
+".acquis": "Les jointures sur clé; valeur manquante"
 },
 {
 "id": 1919,
 "consigne": "Cartographier les proportions départementales du prénom masculin",
-"clé": "Le code du département de Nouvelle Aquitaine ayant la plus forte proportion",
+"clé": "Le code du département de Nouvelle Aquitaine ayant la plus faible proportion",
 ".pages": "import, summarise, mutate, spplot",
 ".acquis": "Une représentation cartographique"
 },
 {
-"id": 17,
+"id": 19,
 "consigne": "Estimer les données manquantes et refaire la cartographie",
+"clé": "Le ratio précédemment non cartographié avec trois décimales",
 ".pages": "import, fuzzyjoin, spplot",
-".acquis": "Une fonction simple",
-".problèmes": "Décomposer l'opération"
+".problèmes": "Décomposer l'opération; un test complexe; de l'expression à la fonction",
+".acquis": "Une fonction simple"
+},
+{
+"id": 0.032,
+"consigne": "Quels sont les autres prénoms androgynes présents plus de 1000 fois?",
+".clé": "Le prénom le plus androgyne",
+".pages": "summarise, factor, gather, rename, filter",
+".acquis": "Les transpositions"
+},
+}
+"id":"YAEL"
 }]
