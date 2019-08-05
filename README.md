@@ -1,5 +1,6 @@
 # Funcamp R
-Projet d'organisation d'une journée ludique d'apprentissage sur R ouverture au système statistique public
+
+Cet espace collaboratif est dédié au projet d'organisation d'une journée ludique d'apprentissage sur R ouverture au système statistique public. Sont accessibles les mémos des réunions, de même que les travaux en cours des groupes travaillant à la préparation des Funcamps (premiers exercices, jeux de données pour les tests...).
 
 ## Une démarche globale d'accompagnement pour l'utilisation de R
 
@@ -13,3 +14,12 @@ S’inspirant de l’élan événementiel qu’apporte un hackathon, mais davant
 
 Le dispositif du Funcamp s’appuiera sur des scripts pédagogiques conçus expressement à cet effet, et prenant la forme d’ “énigmes collectives”, ie d’une succession d’exercices à résoudre en petits groupes, avec l’aide d’un tuteur. Les énigmes sont regroupées en séries, correspondant à un parcours d’apprentissage. Ces dernières s’inscrivent dans une narration qui assure à la journée un caractère ludique et permettent d’incarner le propos avec des situations illustrées (et de manipuler les outils sur des matériaux réels, avec l’objectif d’un output qui favorise la motivation). La résolution des énigments peut se conduire avec un "assistant automatisé" pour la rédaction de code en R : c'est en particulier le cas de [IGoR](https://github.com/jllipatz/IGoR) (prononcer "Aïe gore", pour "I go R" : je deviens R), interface graphique de prise en main de fonctions simples de manipulation de tables de données sous R. IGoR, développé à l'Insee par le coordonateur du programme Palettes est un générateur de code qui, à partir d'éléments fournis sous une interface construite avec Shiny, délivre le code nécessaire.
 
+## Calendrier et organisation
+
+La cible de déploiement d’un première journée “Funcamp” au sein du système statistique publique est fixée au 1er trimestre 2020. Elle a vocation à être suivie de l’organisation d’autres journées tout au long de l’année 2020, reprenant l’ensemble des éléments du Funcamp et permettant de couvrir plusieurs régions prenant la responsabilité d’organiser ces “répliques” et de les adapter selon leur contexte local, avec l’appui des équipes qui auront assuré le prototypage du premier évènement.
+
+Le calendrier de l’action est organisé autour de 4 phases :
++ prototypage :  un groupe de prototypage du Funcamp est mis en place à compter l’été 2019 sous le pilotage du coordinateur du projet Palettes et du chef de l’Unité Innovation et stratégie du système d’information. Le groupe a les objectifs suivants : (i) définition des principes à respecter par les modules pédagogiques. (ii) identification du champ des acquis pédagogiques à couvrir. (iii) panorama des “profils de découverte” selon la diversité du public des débutants visé par le Funcamp. (iv) réalisation d’un exemple de module pédagogique. (v) réalisation d’un “kit” de conception pour les autres modules
++ Conception : il sera demandé à des volontaires parmi les directions et directions régionales de l’Insee, ainsi qu’au sein du réseau du SDES (Dreal), d’établir des modules pédagogiques élaborés à partir du kit fourni par le groupe de prototypage avec l’appui du prestataire. L’objectif est de mobiliser autant que possible les communautés R de l’Insee pour que ces dernières se saisissent de la réalisation d’un module pédagogique comme support à leur animation locale. 
++ Expérimentation : sur la base des modules pédagogiques réceptionnés, un travail de consolidation sera engagé pour établir des parcours de découverte. Ce travail visera à vérifier, en pratique, les modalités d’animation d’une journée Funcamp fondée sur ces matériaux et à établir un canevas des différents moments rythmant le funcamp. 
++ Déploiement : un premier Funcamp sera organisé dans le courant du 1er trimestre 2020. Le Funcamp visera à associer les agents de l’Insee et des services déconcentrés de l’ensemble des SSM (Dreal, Direccte, Rectorat, Drjscs, etc.), avec une implication particulière attendue des Dreal et des DR Insee. 
