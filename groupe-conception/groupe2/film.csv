@@ -1,0 +1,88 @@
+name,nb_films,A New Hope,Attack of the Clones,Return of the Jedi,Revenge of the Sith,The Empire Strikes Back,The Force Awakens,The Phantom Menace
+Ackbar,2,NA,NA,1,NA,NA,1,NA
+Adi Gallia,2,NA,NA,NA,1,NA,NA,1
+Anakin Skywalker,3,NA,1,NA,1,NA,NA,1
+Arvel Crynyd,1,NA,NA,1,NA,NA,NA,NA
+Ayla Secura,3,NA,1,NA,1,NA,NA,1
+Bail Prestor Organa,2,NA,1,NA,1,NA,NA,NA
+Barriss Offee,1,NA,1,NA,NA,NA,NA,NA
+BB8,1,NA,NA,NA,NA,NA,1,NA
+Ben Quadinaros,1,NA,NA,NA,NA,NA,NA,1
+Beru Whitesun lars,3,1,1,NA,1,NA,NA,NA
+Bib Fortuna,1,NA,NA,1,NA,NA,NA,NA
+Biggs Darklighter,1,1,NA,NA,NA,NA,NA,NA
+Boba Fett,3,NA,1,1,NA,1,NA,NA
+Bossk,1,NA,NA,NA,NA,1,NA,NA
+C-3PO,6,1,1,1,1,1,NA,1
+Captain Phasma,1,NA,NA,NA,NA,NA,1,NA
+Chewbacca,5,1,NA,1,1,1,1,NA
+Cliegg Lars,1,NA,1,NA,NA,NA,NA,NA
+Cordé,1,NA,1,NA,NA,NA,NA,NA
+Darth Maul,1,NA,NA,NA,NA,NA,NA,1
+Darth Vader,4,1,NA,1,1,1,NA,NA
+Dexter Jettster,1,NA,1,NA,NA,NA,NA,NA
+Dooku,2,NA,1,NA,1,NA,NA,NA
+Dormé,1,NA,1,NA,NA,NA,NA,NA
+Dud Bolt,1,NA,NA,NA,NA,NA,NA,1
+Eeth Koth,2,NA,NA,NA,1,NA,NA,1
+Finis Valorum,1,NA,NA,NA,NA,NA,NA,1
+Finn,1,NA,NA,NA,NA,NA,1,NA
+Gasgano,1,NA,NA,NA,NA,NA,NA,1
+Greedo,1,1,NA,NA,NA,NA,NA,NA
+Gregar Typho,1,NA,1,NA,NA,NA,NA,NA
+Grievous,1,NA,NA,NA,1,NA,NA,NA
+Han Solo,4,1,NA,1,NA,1,1,NA
+IG-88,1,NA,NA,NA,NA,1,NA,NA
+Jabba Desilijic Tiure,3,1,NA,1,NA,NA,NA,1
+Jango Fett,1,NA,1,NA,NA,NA,NA,NA
+Jar Jar Binks,2,NA,1,NA,NA,NA,NA,1
+Jek Tono Porkins,1,1,NA,NA,NA,NA,NA,NA
+Jocasta Nu,1,NA,1,NA,NA,NA,NA,NA
+Ki-Adi-Mundi,3,NA,1,NA,1,NA,NA,1
+Kit Fisto,3,NA,1,NA,1,NA,NA,1
+Lama Su,1,NA,1,NA,NA,NA,NA,NA
+Lando Calrissian,2,NA,NA,1,NA,1,NA,NA
+Leia Organa,5,1,NA,1,1,1,1,NA
+Lobot,1,NA,NA,NA,NA,1,NA,NA
+Luke Skywalker,5,1,NA,1,1,1,1,NA
+Luminara Unduli,2,NA,1,NA,1,NA,NA,NA
+Mace Windu,3,NA,1,NA,1,NA,NA,1
+Mas Amedda,2,NA,1,NA,NA,NA,NA,1
+Mon Mothma,1,NA,NA,1,NA,NA,NA,NA
+Nien Nunb,1,NA,NA,1,NA,NA,NA,NA
+Nute Gunray,3,NA,1,NA,1,NA,NA,1
+Obi-Wan Kenobi,6,1,1,1,1,1,NA,1
+Owen Lars,3,1,1,NA,1,NA,NA,NA
+Padmé Amidala,3,NA,1,NA,1,NA,NA,1
+Palpatine,5,NA,1,1,1,1,NA,1
+Plo Koon,3,NA,1,NA,1,NA,NA,1
+Poe Dameron,1,NA,NA,NA,NA,NA,1,NA
+Poggle the Lesser,2,NA,1,NA,1,NA,NA,NA
+Quarsh Panaka,1,NA,NA,NA,NA,NA,NA,1
+Qui-Gon Jinn,1,NA,NA,NA,NA,NA,NA,1
+R2-D2,7,1,1,1,1,1,1,1
+R4-P17,2,NA,1,NA,1,NA,NA,NA
+R5-D4,1,1,NA,NA,NA,NA,NA,NA
+Ratts Tyerell,1,NA,NA,NA,NA,NA,NA,1
+Raymus Antilles,2,1,NA,NA,1,NA,NA,NA
+Rey,1,NA,NA,NA,NA,NA,1,NA
+Ric Olié,1,NA,NA,NA,NA,NA,NA,1
+Roos Tarpals,1,NA,NA,NA,NA,NA,NA,1
+Rugor Nass,1,NA,NA,NA,NA,NA,NA,1
+Saesee Tiin,2,NA,NA,NA,1,NA,NA,1
+San Hill,1,NA,1,NA,NA,NA,NA,NA
+Sebulba,1,NA,NA,NA,NA,NA,NA,1
+Shaak Ti,2,NA,1,NA,1,NA,NA,NA
+Shmi Skywalker,2,NA,1,NA,NA,NA,NA,1
+Sly Moore,2,NA,1,NA,1,NA,NA,NA
+Tarfful,1,NA,NA,NA,1,NA,NA,NA
+Taun We,1,NA,1,NA,NA,NA,NA,NA
+Tion Medon,1,NA,NA,NA,1,NA,NA,NA
+Wat Tambor,1,NA,1,NA,NA,NA,NA,NA
+Watto,2,NA,1,NA,NA,NA,NA,1
+Wedge Antilles,3,1,NA,1,NA,1,NA,NA
+Wicket Systri Warrick,1,NA,NA,1,NA,NA,NA,NA
+Wilhuff Tarkin,2,1,NA,NA,1,NA,NA,NA
+Yarael Poof,1,NA,NA,NA,NA,NA,NA,1
+Yoda,5,NA,1,1,1,1,NA,1
+Zam Wesell,1,NA,1,NA,NA,NA,NA,NA
