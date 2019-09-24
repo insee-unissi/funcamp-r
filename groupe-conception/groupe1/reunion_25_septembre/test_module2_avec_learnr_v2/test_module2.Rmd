@@ -11,7 +11,7 @@ runtime: shiny_prerendered
 library(learnr)
 library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
-setwd("D:/giau12/Mes Documents/FUNCAMP_R/reunion_25_septembre/test_module2_avec_learnr_v2")
+
 ```
 
 
@@ -139,11 +139,11 @@ Pensez donc à modifier le chemin du répertoire lors d'un copier coller de ce d
 </p>
 
 
-Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `data/registre_pontes.csv`. Il nous reste simplement à préciser le séparateur, qui est ici une virgule `,`. C'est parti :
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/registre_pontes.csv`. Il nous reste simplement à préciser le séparateur, qui est ici une virgule `,`. C'est parti :
 </p>
 
 ```{r, collapse = TRUE}
-mon_fichier <- read.csv(file="data/registre_pontes.csv", sep=",")
+mon_fichier <- read.csv(file="https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/registre_pontes.csv", sep=",")
 ```
 
 
@@ -229,7 +229,7 @@ sum(mon_fichier$Pontes)
 
 ## A vous de jouer...
 
-Sauf que... toutes ces explications portaient sur un faux registre. A vous désormais d'appliquer ces calculs sur le véritable registre, qui figure dans votre répertoire `data/pontes.csv`
+Sauf que... toutes ces explications portaient sur un faux registre. A vous désormais d'appliquer ces calculs sur le véritable registre, qui figure ici :   `https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/pontes.csv`
 
 
 L'exécution du code se fait en appuyant sur le bouton :
@@ -258,7 +258,7 @@ knitr::include_graphics("images/run_code.png")
 ### <span style="font-size:16px">**Calculer le nombre de lignes du registre avec nrow:**</span>
 
 ```{r,include=FALSE}
-registre <- read.csv(file="data/registre_pontes.csv", sep=",")
+registre <- read.csv(file="https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/registre_pontes.csv", sep=",")
 ```
 
 
