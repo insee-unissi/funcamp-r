@@ -1,0 +1,346 @@
+---
+title: "Module 2 - des poules et des oeufs"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+setwd("D:/giau12/Mes Documents/FUNCAMP_R/reunion_25_septembre/test_module2_avec_learnr_v2")
+```
+
+
+
+
+
+
+
+## Une histoire de séparateur
+
+Vous venez de rencontrer la fermière du village Kokoro, désespérée d'avoir perdu le livre de compte où, chaque jour, elle note consciencieusement le nombre de pontes. 
+
+Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, dans un format ancestral que les habitants de Kokoro ont visiblement oublié, depuis que les Runes ont été dérobées par SaSSoS : le format CSV.  
+**Nous allons donc apprendre, en R, à lire puis écrire un fichier CSV.** 
+
+<span style="color:#FF9999;font-size:16px">**Au fait, c'est quoi un CSV ?**</span>  
+  
+
+CSV, c'est un format de fichier dans lequel:
+
+* chaque enregistrement apparaît sur sa propre ligne
+* les champs sont séparés par un caractère unique appelé “séparateur” (ou “délimiteur”), en l'occurrence une virgule ou un point-virgule: c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (Comma = virgule en anglais).
+
+<p style="border:1px; border-style:solid; border-color:#000000; padding: 1em;">
+*Mais, les virgules, c'est plutôt pour indiquer les décimales dans un nombre, non ? Comme 3,14 pour Pi ?  
+Certes, mais les pays anglophones ont choisi le point comme séparateur décimal, et c'est cette convention que l'on retrouve dans les langages comme R. D'ailleurs, si vous demandez à R la valeur de Pi, la réponse utilisera un point pour délimiter les décimales.*
+</p>
+
+
+```{r, collapse = TRUE}
+print(pi)
+```
+
+
+
+Revenons à nos poules...**Bonne nouvelle :** IcaRius a trouvé, dans le poulailler, un document CSV qui pourrait bien nous aider à reproduire le livre de compte. 
+
+
+<table style="width:400px">.
+<tbody>
+<tr>
+  <th width="45%">Fichier au format .csv</th>
+  <th width="10%"></th>
+  <th width="45%">Représentation tabulaire</th>
+</tr>
+<tr valign="top">
+  <td>
+    <pre>Jour,Poule,Pontes
+1,Cocotte,2
+1,Daisy,3
+1,GlouGlou,2
+1,Poupette,4</pre>
+  </td>
+  <td></td>
+  <td>
+  <table style="width:180px ;border: 1px solid black; border-collapse:collapse; text-align:center;">
+    <tbody>
+      <tr>
+        <th scope="col">Jour</th>
+        <th scope="col">Poule</th>
+        <th scope="col">Pontes</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Cocotte</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Daisy</td>
+        <td>3</td>
+      </tr>    
+      <tr>
+        <td>1</td>
+        <td>Glouglou</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Poupette</td>
+        <td>4</td>
+      </tr>
+    </tbody>
+  </table>
+  </td>
+</tr>
+</tbody>
+</table>
+
+Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être utilisable aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
+
+
+![Le fichier pontes.csv ouvert dans notepad](images/pontes_csv.PNG "Le fichier pontes.csv ouvert dans notepad")
+
+
+## Chargeons le fichier
+
+Pour charger un fichier, nous allons utiliser une fonction prévue à cet effet dans R. La fonction `read.csv()` permet, comme son nom l'indique, de lire (*read*) un fichier CSV.
+
+Une fonction a des paramètres, aussi appelés `arguments`. Ces derniers sont renseignés dans la parenthèse de la fonction.  
+
+Pour `read.csv`, il y a deux arguments obligatoires :  
+
+1. l’emplacement du fichier à lire
+2. le type de délimiteur (séparateur) du fichier.
+
+```{r, collapse = TRUE, eval=FALSE}
+ma_table<-read.csv(file="chemin_du_fichier", sep="separateur_du_fichier")
+```
+
+Le chemin du fichier doit préciser l'emplacement du document csv que vous cherchez à ouvrir, sur votre poste de travail par exemple. Cherchons donc l'emplacement à partir  de l'explorateur dans windows. 
+
+![Le chemin du fichier pontes.csv dans windows](images/pontes_chemin.png "Le chemin du fichier pontes.csv dans windows")
+
+
+
+
+
+
+<p style="border:1px; border-style:solid; border-color:#000000; padding: 1em;">
+**Attention :**  
+Pour spécifier le chemin d’un fichier, il va falloir jongler avec les signes cabalistiques que sont les `/` et les `\` (ça ne s'appelle pas le langage des Runes pour rien).  
+Contrairement à windows (ou SAS) où le backslash `\` est utilisé pour écrire un chemin, en R il faut écrire avec un slash `/`.  
+Pensez donc à modifier le chemin du répertoire lors d'un copier coller de ce dernier depuis l’explorateur. Enfin, n'oubliez pas d'ajouter à la fin le nom du fichier (pontes) avec son extension (.csv). 
+</p>
+
+
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `data/registre_pontes.csv`. Il nous reste simplement à préciser le séparateur, qui est ici une virgule `,`. C'est parti :
+</p>
+
+```{r, collapse = TRUE}
+mon_fichier <- read.csv(file="data/registre_pontes.csv", sep=",")
+```
+
+
+
+
+
+## Découvrons le contenu du fichier
+
+Nous voilà avec un fichier chargé dans R. 
+
+<span style="color:#FF9999;font-size:16px">**Affichage des premières lignes du fichier :**</span> 
+
+Nous voilà avec un fichier chargé dans R. Pour afficher les premières lignes du fichier, nous allons utiliser la fonction `head()` (head = tête, début), en lui indiquant comme argument le nom du fichier tel que nous l'avons choisi, ici `mon_fichier`.
+
+```{r, collapse = TRUE}
+# Affichage des premières lignes contenues dans le fichier
+head(mon_fichier) 
+```
+
+<p>&nbsp;</p>
+
+<span style="color:#FF9999;font-size:16px">**Affichage du nom des variables :**</span> 
+
+Notre registre des pontes semble comporter 3 variables différentes relatives:
+
+* au jour de ponte `Jour`, 
+*  à l'appellation de la poule `Poule`
+* au nombre d'oeufs pondus `Pontes`. 
+
+L'instruction `names()` permet de connaître les différentes variables comprises dans un fichier, ou dit autrement de connaître le nom des colonnes du tableau de données : 
+
+```{r, collapse = TRUE}
+# Affichage du nom des variables
+names(mon_fichier) 
+```
+
+<p>&nbsp;</p>
+
+<span style="color:#FF9999;font-size:16px">**Affichage du nombre de lignes :**</span> 
+
+Reste à savoir combien d'observations - combien de lignes - comprend notre tableau de données. Mot à mot, nous voulons connaître le *n*ombre de lignes (*row* en anglais), d'où l'instruction `nrow()`
+
+
+```{r, collapse = TRUE}
+# Affichage du nombre de lignes (nombre d'observations)
+nrow(mon_fichier) 
+```
+
+
+## Calculons le nombre d'oeufs pondus
+
+Notre fichier se compose de 3 variables (3 colonnes), qui ont chacune un nom : `Jour`, `Poule`, `Oeufs`.  
+
+<span style="color:#FF9999;font-size:16px">**Accéder à une variable dans un fichier :**</span>
+
+Une variable nommée `NomVariable` au sein d'un fichier `NomFichier` est accessible dans R comme un objet nommé `NomFichier$NomVariable`. 
+C'est donc le signe `$` (encore un signe cabalistique) placé entre le nom du fichier et le nom de la variable qui permet d'indiquer à R que l'on souhaite manipuler le contenu de cette variable. Par exemple, pour connaître la liste des valeurs (des modalités) qu'une variable peut prendre. 
+
+<p>&nbsp;</p>
+
+<span style="color:#FF9999;font-size:16px">**Connaître les modalités d'une variable :**</span>
+
+La variable `Poule` désigne les poules par leur prénom : si je veux connaître la liste des prénoms des poules (la liste des modalités de la variable `Poule`), j'utilise l'instruction `Levels` (level = niveau, une modalité étant comme un "niveau" dans une liste de valeurs possibles)
+
+```{r, collapse = TRUE}
+# Quels sont les noms des poules pondeuses ?
+levels(mon_fichier$Poule) 
+```
+
+<p>&nbsp;</p>
+
+<span style="color:#FF9999;font-size:16px">**Sommer une variable :**</span>
+
+Le registre des pontes comporte donc les informations pour 4 poules. Chaque ligne du registre indique le nombre d'oeufs pondus pour une poule et pour un jour de la semaine.  
+Pour savoir le nombre d'oeufs pondus (enfin), je n'ai plus qu'à sommer les valeurs de la variable `Pontes` (pour toutes les poules et pour tous les jours de la semaine), avec l'instruction `sum()`... appliquée à la variable `Pontes` au sein du fichier `mon_fichier`, soit :
+
+```{r, collapse = TRUE}
+# Combien d'oeufs ont été pondus au total selon le registre ?
+sum(mon_fichier$Pontes) 
+```
+
+**Gagné ! Il y a 81 oeufs pondus selon le registre.**
+
+## A vous de jouer...
+
+Sauf que... toutes ces explications portaient sur un faux registre. A vous désormais d'appliquer ces calculs sur le véritable registre, qui figure dans votre répertoire `data/pontes.csv`
+
+
+L'exécution du code se fait en appuyant sur le bouton :
+```{r image1, echo=FALSE, fig.cap="", out.width = '10%'}
+knitr::include_graphics("images/run_code.png")
+```
+
+### <span style="color:#FF9999;font-size:16px">**C'est parti...A vous de jouer!**</span>
+
+### <span style="font-size:16px">**Charger le fichier 'pontes.csv'(le séparateur est une virgule) dans une table nommée 'registre'**</span>
+``
+
+```{r AVDJ-question1,exercise=TRUE}
+# Charger le ficher pontes.csv
+
+``` 
+ 
+
+  
+<div id="AVDJ-question1-hint">
+**Aide:** Utiliser la fonction read.csv(file=,sep=). Veillez à indiquer le bon chemin (file=) vers le registre et son séparateur (sep=) qui est une virgule (,)
+</div>
+
+
+
+### <span style="font-size:16px">**Calculer le nombre de lignes du registre avec nrow:**</span>
+
+```{r,include=FALSE}
+registre <- read.csv(file="data/registre_pontes.csv", sep=",")
+```
+
+
+
+
+```{r AVDJ-question2,exercise=TRUE}
+# Calculer le nombre de lignes
+
+``` 
+
+```{r AVDJ-question2-solution}
+# Calculer le nombre de lignes
+nrow(donnees_pontes)
+
+``` 
+
+
+### <span style="color:#FF9999;font-size:16px">**Prêt pour l'exercice suivant/Encore envie de joeur ?**</span>
+
+### <span style="font-size:16px">**Retrouver les noms des variables dans la table 'registre'**</span>
+```{r AVDJ-question3,exercise=TRUE}
+# Connaitre le nom des variables
+
+``` 
+  
+<div id="AVDJ-question3-hint">
+**Aide:** Utiliser la fonction names()
+</div>
+
+
+### <span style="font-size:16px">**Afficher les premières lignes de la table (et en déduire la variable qui indique les pontes du jour)**</span>
+```{r AVDJ-question4,exercise=TRUE}
+# Affichage des premières lignes
+
+``` 
+
+<div id="AVDJ-question4-hint">
+**Aide:** Utiliser la fonction head()
+</div>
+
+
+### <span style="font-size:16px">**Calculer le total des pontes, enregistrer le résultat dans la variable v_pontes et afficher sa valeur**</span> 
+
+```{r AVDJ-question5,exercise=TRUE}
+# Calcul du total des pontes
+
+
+# Affichage du résultat
+
+
+``` 
+
+
+<div id="AVDJ-question5-hint">
+**Aide:** Utiliser la fonction sum()
+</div>
+
+
+```{r AVDJ-question5-check}
+# Calcul du total des pontes
+v_pontes<-sum(registre$Oeufs)
+
+# Affichage du résultat
+v-pontes
+
+``` 
+
+
+
+
+
+```{r question1,echo=FALSE}
+question("Alors, combien d'oeufs ont été pondus ?",
+type="single",
+allow_retry = TRUE,
+incorrect="Retente ta chance",
+answer("123"),
+answer("76"),
+answer("63"),
+answer("91",correct=TRUE),
+correct="Félicitations, tu as trouvé la bonne réponse, l'aventure peut continuer!"
+)
+
+```   
+ 
