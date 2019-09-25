@@ -1,0 +1,125 @@
+---
+title: "Groupe de conception Funcamp R"
+author: "Sous groupe 2 : Fabrice Danielou/Sylvie Didier Perrot/Pascal Eusebio"
+date: "25 septembre 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Contexte des réflexions du sous-groupe
+
+- Public : grands débutants souhaitant découvrir R
+- Durée : 5 heures (2x2:30)
+- Outil de traitement statistique privilégié: Igor
+- Données: disponibles en open-data (insee.fr (fichier logement par exemple), site du Sdes (permis de construire, données locales de l'énergie))
+
+## Organisation générale
+- Groupes de 5 à 6 personnes travaillant sur des séquences d'exercices comparables (présence d'un animateur/modérateur)
+- Programme de la matinée : importation de données et traitements statistiques correspondant à la grammaire usuelle de dplyr
+- Programme de l'après-midi : jointure de données et travaux autour de représentations graphiques
+- Mise à disposition de goodies/récompenses cachés dans la pièce mystère de la DR, une fois l'aventure terminée.
+
+
+## Exemple de séquençage du matin
+```{r seq1, out.width="90%"}
+include_graphics("Z:/Funcamp R/sequence 1.png")
+```
+
+## Exemple d'exercices pour le matin (1)
+```{r seq1b,eval=FALSE,echo=TRUE}
+
+library(tidyverse)
+
+setwd(dir = "Z:/Funcamp R")
+# Importer la table
+Starwars <- read.csv2("donnees.csv")
+
+# Combien il y a de colonnes dans la table 8
+ncol(Starwars)
+
+# Filtrer les humains (on travaillera par la suite sur cette table) 
+# puis determiner quelle est la valeur de la 3eme ligne 6eme colonne 19 
+
+humain <- Starwars %>%
+  filter(species == "Human") 
+```
+
+## Exemple d'exercices pour le matin (2)
+
+```{r seq1c,eval=FALSE,echo=TRUE}
+humain %>%
+  select(6) %>%
+  slice(3)
+
+# combien y a t-il de lignes dans cette table 31 
+
+humain %>%
+  count()
+
+# quelle la hauteur du personnage le plus petit 150 
+
+humain %>%
+  summarise(taille_mini = min(height))
+```
+## Exemple d'exercices pour le matin (3)
+
+
+```{r seq1d,eval=FALSE,echo=TRUE}
+
+# calculer le rapport taille/poids, quelle est la somme de ce rapport 10 
+
+humain %>%
+  mutate(imc = mass/height) %>%
+  summarise(somme = sum(imc, na.rm = TRUE)) %>%
+  round(0)
+
+# Qui a l'age moyen le plus élevé: les femmes (2) ou les hommes (1) 2 
+
+humain %>%
+  group_by(gender) %>%
+  summarise(age_moy = mean(birth_year, na.rm = TRUE))
+
+```
+## Exemple d'exercices pour le matin (4)
+
+```{r seq1e,eval=FALSE,echo=TRUE}
+
+# Quelle planete a les habitants les plus jeunes ? attention ? la casse ! Corellia 
+
+humain %>%
+  group_by(homeworld) %>%
+  summarise(age_moy = mean(birth_year, na.rm = TRUE)) %>%
+  arrange(age_moy) %>%
+  slice(1)
+
+# A la table humain ajouter les Wookiees, combien de lignes desormais 33 
+
+hw <- humain %>%
+  bind_rows(Starwars %>% 
+              filter(species == "Wookiee") ) hw %>%count
+```
+
+
+## Exemple de séquençage de l'après-midi
+```{r seq2, out.width="90%"}
+include_graphics("Z:/Funcamp R/sequence 2.png")
+```
+
+## Exemple d'exercices pour l'après-midi
+
+```{r seq2b,eval=FALSE,echo=TRUE}
+#Lire le fichier de données et représentation graphiquement la fonction y=x
+library(ggformula)
+lettrem=read.csv2("Z:/Funcamp R/exercice graphique/lettremystere.txt")
+gf_line(data=lettrem,y~x)
+
+# Les lettres affichées dans le graphique sont en désordre
+#Retrouver le mot caché et réafficher le dans le bon ordre
+gf_point(1:7~1:7,pch=c(112,99,109,117,97,110,70),size=4)
+
+```
+
