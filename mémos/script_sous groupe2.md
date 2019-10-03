@@ -1,5 +1,4 @@
-# [Funcamp R] Principales notions R abordées dans la 
-## proposition de contenu 
+# [Funcamp R] Principales notions R abordées dans la proposition de contenu 
 Sous-groupe 2
 03/10/2019
 
