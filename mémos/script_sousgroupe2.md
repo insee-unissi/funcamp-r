@@ -124,7 +124,9 @@ Objectif pédagogique : sensiblement le même que précédemment avec une diffi
 
 	gf_line(data=lettrem,y~x)
 
-	#Les lettres affichées dans le graphique sont en désordre, retrouver le mot caché et l’afficher (réponse = « Funcamp »)
+	#Les lettres affichées dans le graphique sont en désordre, retrouver le mot caché et l’afficher 
+	
+	(réponse = « Funcamp »)
 
 	library(ggformula)
 
