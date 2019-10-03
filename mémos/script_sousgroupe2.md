@@ -6,8 +6,10 @@
 # Contexte
 
 La majeure partie des notions abordées dans les « exercices » proposés par le sous-groupe 2 sont associées à la syntaxe « dplyr » et plus largement au tidyverse. Pour autant, ces notions pourront être abordées de deux façons selon le niveau d’entrée des participants au Funcamp :
--via un outil « presse bouton » et générateur de syntaxe ;
--via un codage direct sous R-Studio ou dans un autre environnement (Jupyter par exemple).
+
+-via un outil « presse bouton » et générateur de syntaxe (groupe A) ;
+
+-via un codage direct sous R-Studio ou dans un autre environnement (Jupyter par exemple) (groupe B).
 
 Le séquençage des opérations proposées suit la logique d’un traitement de données statistiques, depuis l’importation jusqu’au calcul de statistiques de bases et de représentations graphiques.
 
