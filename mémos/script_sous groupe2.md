@@ -13,7 +13,7 @@ Le séquençage des opérations proposées suit la logique d’un traitement de 
 
 # Les notions abordées
 
-1. Importation d’un fichier de données
+**1. Importation d’un fichier de données**
 
 **Objectif pédagogique** : être en capacité de créer un objet de type dataframe à partir d’un fichier de données externe à l’environnement R
 → Dans l’exemple, il est proposé de travailler sur un import simple de fichier csv à travers l’utilisation de la fonction **read.csv2**.
@@ -21,7 +21,7 @@ Le séquençage des opérations proposées suit la logique d’un traitement de 
 	setwd(dir = "Z:/Funcamp R")
 	Starwars <- read.csv2("donnees.csv")
 
-2. Examen préalable d’un dataframe
+**2. Examen préalable d’un dataframe**
 
 **Objectif pédagogique**  : savoir déterminer à travers des tests simples si l’importation de la table s’est bien passée
 → Utilisation des fonctions **ncol()** et **count()** pour déterminer le nombre de lignes et de colonnes d’un dataframe. Possibilité d’utiliser directement la fonction **dim()**.
@@ -29,7 +29,7 @@ Le séquençage des opérations proposées suit la logique d’un traitement de 
 	Starwars%>%ncol()
 	Starwars%>%count()
 
-3. Sélection d’observations à travers un filtrage sur critères
+**3. Sélection d’observations à travers un filtrage sur critères**
 
 **Objectif pédagogique**  : être en mesure de sélectionner une sous-population de mon dataframe et de stocker le résultat dans un nouveau dataframe
 
@@ -41,22 +41,22 @@ Le séquençage des opérations proposées suit la logique d’un traitement de 
 
 → Utilisation de la fonction **select()** et **slice()** pour extraire un individu
 
-	#Quelle est l’année de naissance associée au 3ème individu du fichier (réponse = 19)
+	#Quelle est l’année de naissance associée au 3ème individu du fichier ? (réponse = 19)
 
 	humain %>%select(« birth_year ») %>%slice(3)
 
 
-4. Détermination d’une première statistique : le minimum
+**4. Détermination d’une première statistique : le minimum**
 
 **Objectif pédagogique**  : savoir appliquer une fonction mathématique à une variable d’un dataframe
 
 → Utilisation de la fonction **summarise()**
 
-	#Quelle est la hauteur du personnage le plus petit (reponse=150)
+	#Quelle est la hauteur du personnage le plus petit ? (reponse=150)
 
 	humain %>% summarise(taille_mini = min(height))
 
-5. Détermination d’une statistique un peu plus élaborée
+**5. Détermination d’une statistique un peu plus élaborée**
 
 Objectif pédagogique : sensiblement le même que précédemment avec une difficulté supplémentaire
 
@@ -66,7 +66,7 @@ Objectif pédagogique : sensiblement le même que précédemment avec une diffi
 
 	humain %>%  mutate(imc = mass/height) %>%   summarise(somme = sum(imc, na.rm = TRUE))
 
-6. Calcul de statistiques à des fins de comparaison
+**6. Calcul de statistiques à des fins de comparaison**
 
 **Objectif pédagogique**  : être en capacité de comparer deux sous-populations selon un critère donné
 
@@ -83,26 +83,26 @@ Objectif pédagogique : sensiblement le même que précédemment avec une diffi
 	humain %>% group_by(homeworld) %>% summarise(age_moy = mean(birth_year, na.rm = TRUE)) %>%
 	  arrange(age_moy) %>% slice(1)
 
-7. Concaténation de tables
+**7. Concaténation de tables**
     
 **Objectif pédagogique**  : savoir empiler des données provenant de dataframe ayant une structure commune.
 
 → Utilisation de la fonction **union()**
 
-	#Ajouter les Wookiees à la table humain, combien de lignes comporte cette table? (réponse=33)
+	#Ajouter les Wookiees à la table humain, combien de lignes comporte cette table ? (réponse=33)
 
 	hw <- humain %>% union(Starwars%>%filter(species == "Wookiee") ) 
 
 	hw %>% count
 
-8. Jointure de tables
+**8. Jointure de tables**
 
 **Objectif pédagogique**  : savoir mettre en relation au sein d’un même dataframe des informations venant de deux dataframe différents.
 
 → Utilisation de la fonction **inner_join()**
 
 
-9. Premiers cas de représentations graphiques
+**9. Premiers cas de représentations graphiques**
 
 **Objectif pédagogique**  : être en mesure de faire une première représentation graphique simple.
 
