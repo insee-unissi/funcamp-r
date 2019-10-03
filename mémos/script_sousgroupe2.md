@@ -114,7 +114,9 @@ Objectif pédagogique : sensiblement le même que précédemment avec une diffi
 
 	#Importer la table lettremystere.txt
 
-	#Représenter les valeurs de la variable y en fonction des valeurs de x. Quelle est la lettre mystère ? (réponse=M)
+	#Représenter les valeurs de la variable y en fonction des valeurs de x. Quelle est la lettre mystère ? 
+	
+	(réponse=M)
 
 	library(ggformula)
 
@@ -122,7 +124,7 @@ Objectif pédagogique : sensiblement le même que précédemment avec une diffi
 
 	gf_line(data=lettrem,y~x)
 
-#Les lettres affichées dans le graphique sont en désordre, retrouver le mot caché et l’afficher (réponse = « Funcamp »)
+	#Les lettres affichées dans le graphique sont en désordre, retrouver le mot caché et l’afficher (réponse = « Funcamp »)
 
 	library(ggformula)
 
