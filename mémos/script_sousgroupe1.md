@@ -9,20 +9,20 @@ Une liste d'activités qui pourraient être dans le parcours de découverte
 - affichage des caractéristiques d'une table
 - transformation d'une variable numérique en une variable caractère (et inversement)
 - suppression de doublons dans une table
--Avec dplyr:
-  -> filtre sur les colonnes
-  -> réorganisation de colonnes
-  -> filtre sur les lignes
-  -> tri d'une table
-  -> création d'une nouvelle variable 
- -> calcul de statitistiques (min , max, sum) par regroupement
--calcul de fréquences, calcul de pourcentages en ligne et en colonne
--ajout de lignes, ajout de colonnes dans une table
--écriture d'une condition
--écriture d'une fonction
--fusion de tables
--réalisation de graphiques +graphiques interactifs
--rmarkdown
+- Avec dplyr:
+  - filtre sur les colonnes
+  - réorganisation de colonnes
+  - filtre sur les lignes
+  - tri d'une table
+  - création d'une nouvelle variable 
+  - calcul de statitistiques (min , max, sum) par regroupement
+- calcul de fréquences, calcul de pourcentages en ligne et en colonne
+- ajout de lignes, ajout de colonnes dans une table
+- écriture d'une condition
+- écriture d'une fonction
+- fusion de tables
+- réalisation de graphiques +graphiques interactifs
+- rmarkdown
 
 ## Maël (le sage...)
 
