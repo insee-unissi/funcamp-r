@@ -1,0 +1,419 @@
+---
+title: "appui trame pédagogique"
+author: "Diane"
+date: "10 octobre 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+## Habillage technique du grimoire
+
+C'est la solution `{learnr}` qui permet l'interactivité dans la console qui est envisagée. Pour le parcours A, on envisagera des options de type `{parsons}` (réordonner des bouts de code ou des bouts de réponse à la façon d'un puzzle), là où les parcours B seront amenés à taper du code dans la console, quitte à le faire sur des "textes à trous"
+
+`{learnr}` permet également de poser des questions de type QCM 
+
+Les modules ci-après sont décrits par objectifs pédagogiques (à habiller narrativement) et par un déroulé suggéré avec différentes modalités pédagogiques parfois scindées selon les parcours.
+
+
+## Module 0 : Introduction
+
+Objectif pédagogique : 
+
+- comprendre ce qu'est R, à quoi ça sert
+
+- être à l'aise avec la console et l'erreur
+
+- comprendre ce que signifie "sensibilité à la casse"
+
+
+Déroulé : 
+
+- Description des objectifs du modules
+
+- Présenter R (open source, multi-plateforme) et ses possibilités (graphiques, calculatoires, web, SIG...)
+
+- Présenter la programmation avec R comme un dialogue avec la console
+
+- Décrire la boîte de dialogue qui s'offre à eux
+
+- Faire afficher un jeu de données (déjà chargé), si possible celui qui servira dans le prochain module
+
+- Constater qu'écrire `Dataset` en lieu et place de `dataset` renverra une erreur (et la dédramatiser)
+
+Remarques : reprendre une bonne partie de la partie rédigée par Arnaud ?
+
+## Module 1 - Visualiser
+
+Objectifs pédagogiques :
+
+- comprendre les notions de couches graphiques
+
+- tracer un nuage de point 
+
+- tracer un diagramme en barre
+
+- tracer un diagramme en barre empilé (parcours B ?)
+
+Déroulé : 
+
+- Rappel des acquis précedents (afficher un jeu de données)
+
+- Description des objectifs du module : tracer des graphiques
+
+- Rappeler ou expliquer que les graphiques servent à matérialiser des "relations" entre des variables
+
+- Avant de faire tracer le premier graphique, faire réfléchir à la relation "attendue" entre 2 variables sur un jeu de données donné
+
+- Exemple indicatif (mais un nuage de point serait plus pertinent en première intention)
+
+Question : "il naît en proportion plus de filles que de garçons en France", VRAI ou FAUX ?
+
+Voyons ce qu'il en est, on affiche seulement le graphique : 
+```{r echo = FALSE, message=FALSE, eval = TRUE}
+library(prenoms)
+library(ggplot2)
+library(dplyr)
+
+prenoms %>%
+  group_by(year, sex) %>%
+  summarise(total = sum(n)) %>%
+  ggplot() +
+  aes(x = year, y = total, fill = sex) +
+  geom_col(position = "fill", width = 1) +
+  geom_hline(yintercept = 0.5, colour = "red") +
+  scale_fill_viridis_d() +
+  labs(title = "Proportion de filles et garçons en France depuis 1900") +
+  theme_minimal()
+  
+
+```
+
+Question :  Au vu des éléments graphiques fournis : est-ce qu'il naît plus de filles que de garçons ? (excellente question n'est-ce pas ;-) ? et surtout, comment l'expliquer ?)
+
+Explication de la décomposition du graphique : des données (data), un axe des `x`/un axe des `y` (aes) et une "géométrie" (geom) qu'on superpose. 
+
+```{r}
+ggplot(un_dataset_bien_formate)+
+  aes(x = les_x, y = les_y) +
+  geom_bar()
+```
+
+On propose ensuite un exercice où c'est aux participants de compléter ou de changer une valeur
+
+Itérer pour chacun des types de graphiques : 
+1. S'interroger sur la relation attendue a priori (et donc réfléchir aux `x` et `y`, à la "géométrie")
+2. Tracer
+3. conclure
+4. Présenter la géométrie qui correspond
+5. Essayer avec de nouvelles valeurs, un nouveau jeu de données
+
+Parcours A == ggformula et Parcours B == ggplot2 ?
+
+
+## Module 2 - Décrire et comprendre
+
+Objectif pédagogique : 
+
+- comprendre la notion de fonction (définie syntaxiquement par `()`)
+
+- appliquer une fonction de description sur un jeu de données
+
+- comprendre la notion de paramètre
+
+- passer des paramètres à une fonction de description d'un jeu de données (parcours B seulement ?)
+
+- comprendre comment enchaîner des fonctions avec le ` %>%`
+
+Déroulé : 
+
+- Rappel des acquis précédents (afficher un jeu de données, tracer un graphique)
+
+- Description des objectifs du modules 
+
+- Donner des clefs pour identifier les fonctions (syntaxe dans R avec `()`)
+
+- Une fonction très utile pour décrire par exemple `summary(dataset)`
+à comparer avec `dataset`
+
+- Qu'est-ce qu'une fonction en fait ? - schéma d'une fonction- : des inputs (ou pas) et des outputs
+
+- Utilisons une autre fonction avec un output différent  `skimr::skim(donnee)`
+
+- Passons un paramètre `skimr::skim(donnees, unevariable)`, pointer l'existence de la `,`
+
+- Introduction du ` %>% `, notion de grammaire avec `verbe(sujet, complément)` devient `sujet %>% verbe(complément)`
+
+
+Sensibiliser aussi au fait que 
+
+```{r eval=FALSE}
+sujet %>% verbe(complément)
+```
+
+est strictement équivalent à : 
+
+```{r eval=FALSE}
+sujet %>%
+  verbe(complément)
+```
+
+
+On pourra reformuler l'idée avec ` %>% ` avec "ensuite"
+
+```{r eval=FALSE}
+dataset %>%
+  summary()
+```
+
+se lira : 
+
+> je prends un jeu de données et *ensuite*, je fais un résumé
+
+- Tester l'application de la fonction `skim` sur un nouveau jeu de données
+
+- Tester la bonne assimilation du pipe avec des "lectures"
+
+Exemple, donner un bloc de code et en proposer quelques interprétations avec du code vu : 
+
+```{r}
+dataset %>%
+  ggplot()+
+  aes(x = abscisses, y = ordonnees)+
+  geom_bar()
+```
+
+Introduire l'enchaînement de pipes sur du pseudo code : 
+
+```{r}
+farine %>%
+  ajouter(sucre, oeufs, lait) %>% 
+  fouetter() %>% 
+  cuire() %>% 
+  manger("crêpes")
+```
+
+
+> Je prends de la farine, *ensuite*, j'ajoute du sucre, des oeufs, du lait, *ensuite*, je fouette, *ensuite*, je cuis, *ensuite* je mange...des crêpes
+
+(tout habillage narratif avec Icarius est le bienvenu)
+
+
+## Module 3 - Manipuler et transformer
+
+Objectif pédagogique : 
+
+- savoir sélectionner une colonne
+
+- découvrir les opérateurs `==`, `&` et `|`
+
+- découvrir les opérateurs `!=`, `%in%`, `!` (parcours B)
+
+- savoir filtrer un jeu de données
+
+- savoir trier un jeu de données
+
+
+Déroulé : 
+
+- Rappel des acquis précédents (afficher un jeu de données, tracer un graphique, décrire avec une fonction, enchaîner des opérations)
+
+- Décrire les objectifs du module (sélectionner, filtrer et trier)
+
+- Décrire ce que signifie sélectionner (réduire le jeu de données en *largeur*), illustrer avec un schéma
+
+- Décrire la syntaxe dans `select()`, insister sur la `,`
+
+- Experimenter la sélection de variables sur un exemple
+
+- Tester en faisant s'enchaîner une selection de variable et un `skimr`
+
+Leur faire réaliser que 
+```{r}
+donnees %>% 
+  select(une_variable) %>% 
+  skimr::skim()
+```
+
+est identique à :
+
+```{r}
+donnees %>% 
+  skimr::skim(une_variable)
+```
+
+- Décrire ce que signifie trier (réduire le jeu de données en *hauteur*) - illustrer avec un schéma 
+
+- Introduire la notion de critère de tri, faire émerger le besoin d'outils pour ce faire
+
+- Présenter ce qu'est un opérateur
+
+- Présenter  `==`, `&` et `|`
+
+- Tester sur de menus exemple en dehors de `filter()`
+
+- Montrer la syntaxe dans `filter()` et y inscrire un premier critère
+
+- Tester les opérateurs dans `filter()`
+
+- Idem pour les autres opérateurs
+
+- Décrire ce que signifier trier (réordonner selon un critère, de façon croissante ou décroissante)
+
+- Montrer la syntaxe de `arrange()` - y compris en combinant plusieurs critères (parcours B seulement ? )
+
+- Tester la bonne application de la syntaxe sur un critère
+
+- Finir avec un exercice qui combine `select()`, `filter()`, `arrange()` (+ plot pour les plus joueurs ? )
+
+
+## Module 3bis - Manipuler et transformer (mutate, summarise, group_by avec les helpers) - OPTIONNEL
+
+
+## Module 3ter - Manipuler et transformer (verbes scopés _if, _at, _all) - OPTIONNEL
+
+
+## Module 4 - Nettoyer (transposer) - OPTIONNEL
+
+
+## Module 4bis - Nettoyer (traiter les données manquantes) -  OPTIONNEL
+
+
+
+## Module 5 - Importer
+
+Objectifs pédagogiques : 
+
+- comprendre la notion d'assignation (`<-`)
+
+- comprendre la notion de package
+
+- savoir décrypter un fichier en entrée (séparateur de colonne, séparateur décimaux)
+
+- savoir importer un fichier csv (parcours B)
+
+- savoir importer un fichier excel, SAS (parcours B)
+
+Déroulé : 
+
+- Expliquer que les jeux de données ne seront pas toujours mis à disposition et que leur import nécessite des clefs de lecture
+
+- Décrire la séparateur de colonne
+
+- Décrire le séparateur décimal
+
+- Expliquer comment les trouver dans un fichier csv
+
+- Décrire la syntaxe (insister sur les guillemets)
+
+```{r}
+read.csv(chemin_de_fichier, sep = ";", dec = ",")
+```
+
+Remarque : j'ai un doute sur la faisabilité technique de leur faire réellement lancer cette ligne dans learnr...
+
+- Présenter la notion de package, illustrer par un schéma
+
+- Expliquer que `library(package)` rend disponible des fonctionnalités (de packages déjà *installés*)
+
+- Expliquer au moyen d'un schéma quelles fonctions appartiennent à quels packages et les faire charger les packages `{ggplot2}`, `{dplyr}` (les packages vus jusqu'ici)
+
+- Tester la notion en les faisant charger `{readr}`
+
+- Leur faire importer un `.csv` avec `read_csv()` (et constater que ça passe sans paramètres)
+
+- Expliquer les principes de l'assignation (faire vivre dans la mémoire, donner un _certificat de naissance_ aux jeu de données) via le symbole d'assignation
+
+- "Lire" le code comme une phrase
+
+```{r}
+mon_jeu_de_donnees <- read_csv("chemin_d'ordinateur/registre.csv")
+```
+
+> `mon_jeu_de_donnees` vaut le fichier `registre.csv` que l'on peut trouver à l'adresse `chemin_d'ordinateur`
+(Attention à bien jouer sur le `code` et le "français" visuellement parlant)
+
+- Proposer de "lire" plusieurs "phrases"
+
+```{r}
+ma_valeur <- 6
+
+mon_tableau <- un_tableau %>% 
+  filter(une_variable > ma_valeur)
+```
+
+- Tester la bonne compréhension des phrases
+
+> `ma_valeur` vaut `6`
+
+> `mon_tableau` vaut `un_tableau` filtré sur `une_variable` strictement supérieure à `ma_valeur` (qui vaut `6`)
+
+Idem pour les imports de fichiers Excel pour le parcours B ? 
+
+
+## Module 5bis - Importer (Fusionner des jeux de données) - OPTIONNEL
+
+
+
+## Module 6 - Uppercut ! Rejouer
+
+Objectifs pédagogiques : 
+
+- comprendre la notion de reproductibilité
+
+- mobiliser toutes les connaissances acquises dans un ordre typique de l'analyse de données (importer, manipuler et transformer, tracer des graphiques, résumer et comprendre)
+
+- savoir écrire des commentaires `#`
+
+Déroulé
+
+- Expliquer le lien entre la programmation et la reproductibilité
+
+- Leur faire lire plusieurs blocs de code à la suite qui ressembleraient à un embryon d'analyse : importer, décrire, visualiser, transformer.
+
+- Les faire changer le jeu de données en input de la chaîne de traitement
+
+- Satisfaire leur souhait de vouloir commenter les résultats en introduisant la notion de commentaire avec le symbole `#`
+
+- Les inviter à saisir quelques commentaires
+
+
+
+## Module 7 - Communiquer
+
+Objectifs pédagogiques : 
+
+- découvrir la programmation lettrée
+
+- comprendre ce qu'est un RMarkdown
+
+- savoir compiler un Rmardown pré-rempli (à remplir/compléter pour le parcours B ?)
+
+Déroulé : 
+
+- Faire intuiter que l'uppercut du module précédent donne envie d'ajouter des commentaires aux graphiques et tableau : c'est précisément ce que nous allons faire avec un outil spécial
+
+- Présenter RStudio, à quoi ça sert
+
+- Créer un nouveau projet RStudio
+
+- Ouvrir un template RMarkdown (modèle ad hoc, pré-rempli, avec charte graphique ?)
+
+- Expliquer comment RMarkdown peut répondre à ce besoin de commenter en "tissant" des liens étroits entre le code et la rédaction -illustrer par un schéma et/ou capture d'écran- 
+
+- Décrire les zones d'un fichier `.Rmd`
+
+- Les faire compiler (tricoter) un premier RMarkdown (en docx ?)
+
+- Indiquer où se situe le fichier de sortie. 
+
+
+Remarque : 
+
+- ce module ne peut se faire que dans RStudio
+
+- J'ai exploré la piste du package `{editR}` qui permet de modifier un RMarkdown en temps réel, mais le package nécessiterait une refonte totale pour une exploitation en production. 
+
