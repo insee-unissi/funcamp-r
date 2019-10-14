@@ -1,0 +1,102 @@
+---
+title: "Module 3 - des briques pour un mot de passe"
+output: 
+  html_document:
+    theme: cerulean
+    highlight: haddock
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    number_sections: false
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+  
+```{r setup, include=FALSE}
+library(learnr)
+library(knitr)
+library(parsons)
+library(rmarkdown)
+library(dplyr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Les verbes de dplyr
+
+ici se trouve une courte partie pédagogique qui présente le princie de dplyr.
+
+## Enchainez vos fonctions
+  
+Vous venez de rencontrer le maçon `Pipo` du village Kokoro, bloqué devant le chantier de sa maison.
+Aidez le à la construire et vous aurez le code du coffre.
+
+Pour cela l'énigme est simple. Regardez le livre de compte de notre maçon `liste_chantier`.
+
+```{r, echo = F}
+liste_chantier <- tibble::tribble(
+    ~chantier,               ~salle, ~briques,
+  "ma maison",              "salon",     2000,
+  "ma maison",      "salle de bain",     1978,
+  "ma maison",            "cuisine",     2232,
+  "ma maison",            "chambre",     1589,
+     "mairie", "salle de réception",    21978,
+     "mairie",             "bureau",     2018,
+      "école",    "salle de classe",     1349,
+      "école",  "salle des maitres",     2389
+  ) %>% 
+  mutate_at(vars(chantier,salle),as.factor)
+
+```
+
+```{r, liste_chantier, echo = F}
+paged_table(liste_chantier)
+```
+
+
+Sélectionner et ordonner les fonctions ici proposées pour obtenir le nombre total de briques nécessaires à notre maçon pour réaliser sa maison. L'ordre des chiffres du bon enchainement vous donnera le code du coffre.
+
+```{r, pipe, echo = F}
+question_parsons(
+  initial = c(
+    "1 - liste_chantier",
+    "2 - mutate(briques = sum(briques))",
+    "3 - summarize(briques = sum(briques))",
+    "4 - filter(chantier == 'ma maison')",
+    "5 - data mes_briques; set liste_chantier;",
+    "6 - run;"
+  ),
+  pass_if(
+    c(
+      "1 - liste_chantier",
+      "2 - filter(chantier == 'ma maison')",
+      "3 - summarize(briques = sum(briques))"
+    ),
+    message = "Bravo !! Allez donner le code à Pipo"
+  ),
+  fail_if(
+    function(x){"5 - data mes_briques; set liste_chantier;" %in% x},
+    message = "Alerte SASOR est parmi nous !!"
+  ),
+    fail_if(
+    function(x){"6 - run;" %in% x},
+    message = "Alerte SASOR est parmi nous !!"
+  ),
+  fail_if(
+    ~length(.) < 2,
+    message = "un seul verbe ne peut vous donner la solution"
+  ),
+  fail_if(
+    function(x){"print()" %in% x},
+    message = "vous n'avez pas besoin de print()"
+  ),
+  fail_if(
+    ~{.[1] != "liste_chantier"},
+    message = "Votre solution doit commencer par 'chantier'"
+  )
+)
+```
+
+  
