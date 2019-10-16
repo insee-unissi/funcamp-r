@@ -118,16 +118,16 @@ Le chemin du fichier doit préciser l'emplacement du document csv que vous cherc
 </p>
 
 
-Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/pontes.csv`. Il nous reste simplement à préciser le séparateur, qui est ici une virgule `,`. C'est parti :
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte est donc `https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/pontes.csv`. Il nous reste simplement à préciser le séparateur, qui est ici une virgule `,`. C'est parti :
 
 
 ```{r, collapse = TRUE}
-mon_fichier <- read.csv(file="E:/icaRius/data/pontes.csv", sep=",")
+mon_fichier <- read.csv(file="https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/pontes.csv", sep=",")
 ```
 
 <span style="color:#FF9999;font-size:16px">**A vous de jouer**</span> 
 
-Chargez vous-mêmes le fichier `pontes.csv` qui se trouve dans le répertoire `E:\icaRius\data` dans une table nommée `mon_fichier`
+Chargez vous-mêmes le fichier `pontes.csv` qui se trouve à l'adresse `https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/pontes.csv` dans une table nommée `mon_fichier`
 
 ```{r module2-question1,exercise=TRUE}
 # Charger le ficher pontes.csv
@@ -180,7 +180,7 @@ Il y a 28 enregistrements dans le registre (28 lignes dans le tableau de donnée
 Manipulez vous-même le fichier des pontes utilisés dans ce tutoriel.
 
 ```{r,  echo=FALSE}
-mon_fichier <- read.csv(file="E:/icaRius/data/pontes.csv", sep=",")
+mon_fichier <- read.csv(file="https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/pontes.csv", sep=",")
 ```
 
 ```{r module2-question2,exercise=TRUE}
@@ -246,7 +246,7 @@ Gagné ! Il y a 81 oeufs pondus selon le registre.
 
 ## A vous de calculer le nombre d'oeufs
 
-**Sauf que... toutes ces explications portaient sur un faux registre !** A vous désormais d'appliquer ces calculs sur le véritable registre, qui figure dans votre répertoire ici : `E:/icaRius/data/registre_pontes.csv`.
+**Sauf que... toutes ces explications portaient sur un faux registre !** A vous désormais d'appliquer ces calculs sur le véritable registre, qui figure ici : `https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/registre_pontes.csv`.
 
 <span style="color:#FF9999;font-size:16px">**Chargez le fichier 'registre_pontes.csv' et explorez son contenu**</span>
 
@@ -263,7 +263,7 @@ Gagné ! Il y a 81 oeufs pondus selon le registre.
  
 ```{r module2-question3-solution}
 # Charger le ficher 'registre_pontes.csv' dans un objet appelé 'registre'
-registre <- read.csv(file="E:/icaRius/data/registre_pontes.csv", sep=",")
+registre <- read.csv(file="https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/registre_pontes.csv", sep=",")
 # Connaitre le nom des variables
 names(registre)
 # Affichage des premières lignes
@@ -281,7 +281,7 @@ head(registre)
 <span style="color:#FF9999;font-size:16px">**Calculer le nombre total des pontes**</span> 
 
 ```{r,  echo=FALSE}
-registre <- read.csv(file="E:/icaRius/data/registre_pontes.csv", sep=",")
+registre <- read.csv(file="https://raw.githubusercontent.com/insee-unissi/funcamp-r/master/groupe-conception/groupe1/reunion_25_septembre/test_module2_avec_learnr_v2/data/registre_pontes.csv", sep=",")
 ```
 
 ```{r module2-question4,exercise=TRUE}
