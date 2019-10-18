@@ -10,11 +10,24 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 
+
+
+
 ## Habillage technique du grimoire
 
-C'est la solution `{learnr}` qui permet l'interactivité dans la console qui est envisagée. Pour le parcours A, on envisagera des options de type `{parsons}` (réordonner des bouts de code ou des bouts de réponse à la façon d'un puzzle), là où les parcours B seront amenés à taper du code dans la console, quitte à le faire sur des "textes à trous"
+C'est la solution `{learnr}` qui permet l'interactivité dans la console qui est envisagée. Pour le parcours A, on envisagera des options de type `{parsons}` (réordonner des bouts de code ou des bouts de réponse à la façon d'un puzzle), là où les parcours B seront amenés à taper du code dans la console, quitte à le faire sur des "textes à trous" parfois
 
-`{learnr}` permet également de poser des questions de type QCM 
+`{learnr}` permet également de poser des questions de type QCM
+
+Vous trouverez de la documentation très complète sur `{learnr}` à cette adresse : https://rstudio.github.io/learnr/index.html
+
+
+Si vous devez ajouter une image, déposez-là dans le répertoire `www` et faites pointer la balise d'image avec le chemin `www/image.png`: c'est une petite application Shiny et c'est là que sont classiquement stockées les fichiers de ce type. 
+
+Attention au noms donnés aux chunks, ils doivent être uniques et explicites. 
+
+
+Je ne l'ai pas toujours fait en explicitant le déroulé pédagogique ci-dessous mais pensez à expliciter les paramètres `fonction(parametre = ...)`
 
 Les modules ci-après sont décrits par objectifs pédagogiques (à habiller narrativement) et par un déroulé suggéré avec différentes modalités pédagogiques parfois scindées selon les parcours.
 
