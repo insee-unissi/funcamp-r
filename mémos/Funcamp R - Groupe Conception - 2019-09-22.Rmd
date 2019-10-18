@@ -1,0 +1,661 @@
+---
+title: "Funcamp R - Mémo du groupe de conception, réunion du 22 septembre 2019"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_depth: 2
+    toc_float: true
+  pdf_document:
+      default
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Participants :
+
+- DSI, Unissi : Arnaud Degorre, arnaud.degorre@insee.fr
+- SDES, Sylvie Didier-Perot, sylvie.didier-perot@developpement-durable.gouv.fr
+- SDES, DREAL Pays-de-la-Loire, Maël Theulière, mael.theuliere@developpement-durable.gouv.fr
+- DR Nouvelle Aquitaine, Laure Genebes, laure.genebes@insee.fr
+- DR PACA,  Pascal Eusébio, pascal.eusebio@insee.fr
+- DR Centre Val de Loire, Sébastien Terra, sebastien.terra@insee.fr
+- DR Hauts de France, Fabrice Danielou, fabrice.danielou@insee.fr
+- ThinkR - Diane Beldame, diane@thinkr.fr
+
+Absents :
+- DSI, projet Palettes : Jean-Luc Lipatz, jean-luc.lipatz@insee.fr
+- CEFIL, Julien Nicolas, julien.nicolas@insee.fr
+
+
+Destinataires pour information :
+
+- Olivier Lefebvre, Insee, Directeur du système d'information
+- Cédric Afsa, Coordonateur d'Insee 2025
+- Sylvain Moreau, chef du SDES
+- Lionel Janin,  sous-directeur Valorisation et stratégie de la donnée; 
+- Yvonne Pérot, directrice régionale Insee Centre-Val de Loire
+- Alberto Lopez, directeur régional Insee Paca
+- Fabienne Le Hellaye, directrice régionale Insee Nouvelle Aquitaine
+- Jean-Christophe Fanouillet, directeur régional Insee Hauts-de-France
+- Alain Malmartel, directeur du Cefil
+
+
+
+\pagebreak
+
+
+# 1. Validation des orientations retenues en réunion de lancement
+
+Les membres du groupe de conception valident le mémo de la réunion de lancement en date du 10 juillet 2019. Sont ainsi rappelées les orientations retenues pour l'élaboration puis la mise en place d'un évènement pédagogique et ludique autour de R, sous la forme d'un `funcamp`.
+
+Imaginé sur la durée d'une journée, un funcamp vise à proposer des parcours de découverte R pour un public de débutants, à suivre en équipe pour privilégier une dimension collaborative. 
+
+Une segmentation des publics a été réalisée :
+
+- public novice en R, sans pratique antérieure de SAS, en poste dans un environnement faiblement lié aux logiciels statistiques (par ex, fonctions administratives)
+- public novice en R, avec une pratique antérieure de SAS, a priori en poste dans des environnements utilisant des logiciels statistiques
+- public novice en R, sans pratique antérieure de SAS, a priori en poste dans des environnements utilisant des logiciels statistiques
+
+Autres acteurs concernés, ceux ayant un niveau d'appropriation plus élevé en R, en distinguant d'une part ceux ayant des fonctions de formateurs, et ceux qui, avec une maîtrise intermédiaire du domaine, pourraient jouer une fonction d'accompagnateurs ou de tuteurs à l'occasion du Funcamp, puis dans les activités locales assurées par les communautés.
+
+Enfin, les managers doivent également jouer une fonction particulière dans l'évènement : en amont, pour faciliter l'inscription des agents ; pendant le funcamp, étant susceptibles d'être eux-mêmes stagiaires pour mieux percevoir les apports de R (et prendre la mesure de l'effort d'apprentissage) ; en aval, à la fois pour veiller à ce que les stagiaires puissent poursuivre leur parcours de formation, et pour faire évoluer les processus de travail de telle façon que ces derniers puissent être réalisés avec R comme outil statistique. 
+
+S'agissant des parcours pédagogiques, ces derniers seront organisés sur des cas pratiques, pour avoir une manipulation effective de données et réaliser des traitements. L'on peut envisager qu'une équipe de stagiaires soit amenée à conduire une succession d'opérations, le module pédagogique amenant à construire un traitement statistique complet : chargement et appariement de données, exploration via quelques graphiques et statistiques descriptives, opérations de transformation, calcul d'indicateurs, représentations graphiques ou tabulées des résultats... Les modules pourraient aussi comporter des niveaux différenciés de difficulté, à la condition de pouvoir répartir les stagiaires selon leur niveau préalable. 
+
+L'utilisation d'un environnement assisté de programmation comme IgoR a été retenu comme l'un des axes d'apprentissage permettant aux stagiaires de facilement produire de premiers résultats. Un autre axe pourra aussi être développé en visant à apporter une première connaissance de la syntaxe en R. 
+
+Pour apporter la dimension ludique au funcamp, il est proposé d'adosser des énigmes aux modules pédagogiques. Deux modalités ont été envisagées lors de la réunion du 10 juillet :
+
+- modalité 1 : la succession des tâches réalisées par une équipe leur permet d'obtenir, in fine, un résultat spécifique (par exemple, un code). Chaque code permet de retourner une pièce d'un puzzle qui est, en début de journée, complètement caché, de sorte que si un nombre suffisant d'équipes atteint son objectif pédagogique, le puzzle fait apparaître la solution d'une énigme commune à l'ensemble des participants.
+- modalité 2 : le narratif du funcamp serait construit autour d'un "parcours de la donnée" dans une sorte de labyrinthe constitué de pièces. A chaque pièce correspond des fichiers différents qu'il faut traiter à tour de rôle pour collecter des "objets" et savoir dans quelle pièce aller ensuite. Le challenge est de collecter le bon jeu d'objets (il pourrait y avoir des fausses pistes, si elles conduisent rapidement à une impasse). 
+
+En amont de ces parcours ludiques, il est proposé de  présenter (i) le déroulé d'ensemble de la journée (ii) une offre de services sur R, tournée sur l'accompagnement local dans le site d'accueil (qui fait quoi dans ma région ? quelle communauté locale ? quels référents ?).
+
+En aval de ces parcours, la journée pourrait se clôturer par (i) la présentation des résultats de chaque équipe, avec un bref debriefing des apports/difficultés rencontrées (ii) l'évocation des prochaines formations ouvertes en R
+
+
+# 2. L'apport de ThinkR en assistance à maîtrise d'ouvrage
+
+
+Pour bénéficier d'une expertise complémentaire en méthode pédagogique sur R, une prestation d'assistance à maîtrise d'ouvrage a été engagée en appui au pilotage du projet de Funcamp. Cette prestation comprend quatre modules :
+
+**Module 1 - phase de conception.** Dans cette phase, le prestataire accompagnera le groupe de conception. Il prendra connaissance de l'existant pédagogique en matière d'apprentissage de R à l'Insee. En veillant à rester en cohérence avec ce patrimoine, le prestataire :
+
+  - présentera des expériences proches de celle visée par le funcamp pour avoir des points de comparaison et identifier les risques et cas-limites.
+  - aidera le groupe à définir le champ des acquis pédagogiques à couvrir au cours d'un funcamp 
+  - aidera le groupe à imaginer les différents formats pouvant être retenus dans un module pédagogique respectant les objectifs de travail en petite équipe et de découverte ludique propre au Funcamp 
+  - outillera les décisions retenues par le groupe et construira un kit d'élaboration des modules, utilisé dans la phase 2.
+
+**Module 2 - Réalisations.** Des volontaires parmi les directions et directions régionales de l'Insee, ainsi qu'au sein du réseau du SDES (Dreal), seront appelés à établir des modules pédagogiques élaborés à partir du kit fourni par le groupe de conception avec l'appui du prestataire. L'objectif est de mobiliser autant que possible les communautés R de l'Insee pour que ces dernières se saisissent de la réalisation d'un module pédagogique comme support à leur animation locale. Dans cette phase, le prestataire aura un temps d'aide à l'appropriation du kit de conception pour chacune des équipes contributrices. Cette aide à l'appropriation se traduira par :
+
+  - une présentation collective en présence de l'ensemble des équipes de conception
+  - une présentation individualisée auprès de chaque équipe
+  - une assistance pour répondre aux interrogations en cours de réalisation
+  - un travail de réception-contrôle des modules réalisés
+
+**Module 3 - Expérimentation.** Sur la base des modules pédagogiques réceptionnés, un travail de consolidation sera engagé pour établir des parcours de découverte. Ce travail visera à vérifier, en pratique, les modalités d'animation d'une journée Funcamp fondée sur ces matériaux et à établir un canevas des différents moments rythmant le funcamp (temps plénier d'introduction ou de restitution, temps à suivre des modules pédagogiques, éventuels temps complémentaires de présentations thématiques). Une "journée blanche", de petite échelle, sera organisée avec l'appui de testeurs volontaires. 
+
+Dans cette phase, le prestataire aura pour mission  :
+
+  - une assistance pour la consolidation des modules pédagogiques livrés à l'issue de la phase 2 et, le cas échéant, leur adaptation à des fins de meilleure articulation
+  - l'établissement d'une trame de Funcamp mobilisant ces matériaux
+  - l'appui pour dimensionner le niveau d'accompagnement des stagiaires (nombre de formateurs, de tuteurs, de facilitateurs, fonction de chaque acteurs)
+  - l'organisation d'une journée blanche servant de test
+  - l'identification des points à adapter à l'issue de la journée blanche
+
+**Module 4 - Déploiement.** A l'issue d'un plan de communication assuré conjointement par l'Insee et le SDES, un premier Funcamp sera organisé dans le courant du 1er trimestre 2020. Dans cette phase, le prestataire aura pour mission les éléments suivants :
+
+  - briefing préalable des équipes pédagogiques (formateurs, tuteurs, facilitateurs) en amont de la journée
+  - participation de deux experts pour l'aide à l'animation d'ensemble de la journée Funcamp
+  - aide à la capitalisation de l'évènement (observation du fonctionnement d'ensemble et identification des pistes d'amélioration).
+  - contribution à la réalisation d'un bilan et élaboration d'une feuille de route pour les prochains Funcamp.
+
+Cette prestation d'assistance à maîtrise d'ouvrage a été remportée par la société `ThinkR`, une entreprise
+spécialisée dans l’analyse des données résolument orientée open source. Elle a bâti son expertise statistique et technique autour de l’écosystème du langage R. Amenée à travailler dans de nombreux secteurs d’activités tels que la finance, les télécoms, le retail, l’agronomie ou encore la recherche clinique et médicale, ThinkR déploie son savoir-faire en 3 axes.
+
+- Conseil : accompagnement, développement et intégration de la brique technologique R dans le SI des entreprises et administrations
+- Etudes : appui théorique, statistique et technique à la conduite de projets d'études
+- Formations : sur-mesure, adaptées aux problématiques métiers.
+
+ThinkR a également une forte implication dans les communautés nationales R : il est co-organisateur et sponsor du meetup R Addicts (1400 adhérents)  (voir https://www.meetup.com/fr-FR/rparis/)
+
+ThinkR dispose des agréments de formation et a accompagné près de 700 stagiaires en 2018. La pédagogie R retenue se fonde en priorité sur la grammaire dplyr du tidyverse, comme un outillage accessible aux débutants. Les formations ThinkR vise à introduire dès que possible la notion de reproductibilité à travers Markdown.
+
+Pour une présentation complète de ThinkR, voir le diaporama joint (pj1-thinkr-presentation.pdf).
+
+# 3. restitution des travaux conduits en sous-groupe
+
+En clôture de la réunion de lancement, le groupe de conception s'était réparti en 3 sous-groupes pour travailler, sur la période de juillet à septembre, à la réalisation de premiers exemples d'exercices. Les sous-groupes sont composés de la façon suivante :
+
+- sous-groupe 1 : Arnaud, Maël et Laure
+- sous-groupe 2 : Fabrice, Sylvie et Pascal
+- sous-groupe 3 : Sébastien, Julien et Jean-Luc
+
+Les prototypes ou éléments d'analyse de chaque sous-groupe ont été présentés en séance. Cette présentation s'est complétée, dans la quinzaine qui a suivi la réunion, par la publication par chaque sous-groupe d'une proposition de trame pédagogique, disponible sur le GitHub du Funcamp : https://github.com/insee-unissi/funcamp-r/ . Une trame consolidée a ensuite été élaborée par ThinkR. Les éléments ici repris dans le mémo font référence à la fois aux prototypes et aux trames. 
+
+## Sous-groupe 2 : la clef du trésor
+
+La trame d'ensemble du prototype vise à résoudre une série de tutoriels et d'énigmes qui apportent les éléments d'un code secret, ce dernier permettant de décoder un fichier crypté qui, en l'occurrence, correspondant à l'emplacement d'un trésor au sein de l'établissement d'accueil (plus précisément : le fichier crypté indique dans quel pièce de l'établissement se trouveront les goodies offerts aux participants du funcamp).
+
+Le sous-groupe propose de segmenter le parcours en 2 blocs :
+
+- Programme de la matinée : importation de données et traitements statistiques correspondant à la grammaire usuelle de dplyr
+- Programme de l’après-midi : jointure de données et travaux autour de représentations graphiques
+
+La majeure partie des notions abordées dans les « exercices » proposés par le sous-groupe 2 sont associées à la syntaxe « dplyr » et plus largement au tidyverse. Pour autant, ces notions pourront être abordées de deux façons selon le niveau d’entrée des participants au Funcamp :
+
+- via un outil « presse bouton » et générateur de syntaxe (groupe A) ;
+- via un codage direct sous R-Studio ou dans un autre environnement (Jupyter par exemple) (groupe B).
+
+Le séquençage des opérations proposées suit la logique d’un traitement de données statistiques, depuis l’importation jusqu’au calcul de statistiques de bases et de représentations graphiques.
+
+**Bloc du matin**
+
+<img src="docs/bloc1.jpg" height=400px style="background:none; border:none; box-shadow:none;">
+
+<br>
+
+**Bloc de l'après-midi**
+
+<img src="docs/bloc2.jpg" height=400px style="background:none; border:none; box-shadow:none;">
+
+La présentation complète du sous-groupe 2 est disponible en pièce jointe (pj2-sous-groupe2-presentation)
+
+Post réunion, le sous-groupe 2 a proposé la trame pédagogique détaillée ci-dessous.
+
+**1. Importation d’un fichier de données**
+
+**Objectif pédagogique** : être en capacité de créer un objet de type dataframe à partir d’un fichier de données externe à l’environnement R
+→ Dans l’exemple, il est proposé de travailler sur un import simple de fichier csv à travers l’utilisation de la fonction **read.csv2**.
+
+	setwd(dir = "Z:/Funcamp R")
+	Starwars <- read.csv2("donnees.csv")
+
+**2. Examen préalable d’un dataframe**
+
+**Objectif pédagogique**  : savoir déterminer à travers des tests simples si l’importation de la table s’est bien passée
+→ Utilisation des fonctions **ncol()** et **count()** pour déterminer le nombre de lignes et de colonnes d’un dataframe. Possibilité d’utiliser directement la fonction **dim()**.
+
+	Starwars%>%ncol()
+	Starwars%>%count()
+
+**3. Sélection d’observations à travers un filtrage sur critères**
+
+**Objectif pédagogique**  : être en mesure de sélectionner une sous-population de mon dataframe et de stocker le résultat dans un nouveau dataframe
+
+→ Utilisation de la fonction **filter()** pour sélectionner la sous-population des humains.
+
+	#Sélectionner la sous-population des humains dans le dataframe starwars 
+
+	humain <- Starwars %>% filter(species == "Human") 
+
+→ Utilisation de la fonction **select()** et **slice()** pour extraire un individu
+
+	#Quelle est l’année de naissance associée au 3ème individu du fichier ? (réponse = 19)
+
+	humain %>%select(« birth_year ») %>%slice(3)
+
+
+**4. Détermination d’une première statistique : le minimum**
+
+**Objectif pédagogique**  : savoir appliquer une fonction mathématique à une variable d’un dataframe
+
+→ Utilisation de la fonction **summarise()**
+
+	#Quelle est la hauteur du personnage le plus petit ? (reponse=150)
+
+	humain %>% summarise(taille_mini = min(height))
+
+**5. Détermination d’une statistique un peu plus élaborée**
+
+Objectif pédagogique : sensiblement le même que précédemment avec une difficulté supplémentaire
+
+→ Utilisation des fonctions **mutate()**, **summarise()**
+
+	#Calculer le rapport taille/poids, quelle est la somme de ce rapport (réponse=10) 
+
+	humain %>%  mutate(imc = mass/height) %>%   summarise(somme = sum(imc, na.rm = TRUE))
+
+**6. Calcul de statistiques à des fins de comparaison**
+
+**Objectif pédagogique**  : être en capacité de comparer deux sous-populations selon un critère donné
+
+→ 1ère question : Utilisation de **group_by()**, de **summarise()** en intégrant la question des valeurs manquantes 
+
+→ 2ème question : Utilisation de **group_by()**, de **summarise()** et de **arrange()**. D’autres solutions sont possibles.
+
+	#Qui a l'age moyen le plus élevé ?: les femmes (2) ou les hommes (1) (réponse=les femmes) 
+
+	humain %>% group_by(gender) %>% summarise(age_moy = mean(birth_year, na.rm = TRUE))
+
+	#Quelle planete a les habitants les plus jeunes ?  (réponse= Corellia) 
+
+	humain %>% group_by(homeworld) %>% summarise(age_moy = mean(birth_year, na.rm = TRUE)) %>%
+	  arrange(age_moy) %>% slice(1)
+
+**7. Concaténation de tables**
+    
+**Objectif pédagogique**  : savoir empiler des données provenant de dataframe ayant une structure commune.
+
+→ Utilisation de la fonction **union()**
+
+	#Ajouter les Wookiees à la table humain, combien de lignes comporte cette table ? (réponse=33)
+
+	hw <- humain %>% union(Starwars%>%filter(species == "Wookiee") ) 
+
+	hw %>% count
+
+**8. Jointure de tables**
+
+**Objectif pédagogique**  : savoir mettre en relation au sein d’un même dataframe des informations venant de deux dataframe différents.
+
+→ Utilisation de la fonction **inner_join()**
+
+
+**9. Premiers cas de représentations graphiques**
+
+**Objectif pédagogique**  : être en mesure de faire une première représentation graphique simple.
+
+→ Utilisation du package ggformula (surcouche de ggplot2 mise en avant dans les formations R à l’Insee)
+
+→ 1ère question : utilisation de la fonction **gf_line()**
+
+→ 2ème question : utilisation de la fonction **gf_point()**
+
+	#Importer la table lettremystere.txt
+
+	#Représenter les valeurs de la variable y en fonction des valeurs de x. Quelle est la lettre mystère ? 
+	
+	(réponse=M)
+
+	library(ggformula)
+
+	lettrem=read.csv2("Z:/Funcamp R/exercice graphique/lettremystere.txt")
+
+	gf_line(data=lettrem,y~x)
+
+	#Les lettres affichées dans le graphique sont en désordre, retrouver le mot caché et l’afficher 
+	
+	(réponse = « Funcamp »)
+
+	library(ggformula)
+
+	gf_point(1:7~1:7,pch=c(112,99,109,117,97,110,70),size=4)
+
+
+## Sous-groupe 3 : l'uppercut
+
+Le sous-groupe propose un découpage du parcours pédagogique en étapes qui permettent à chaque stagiaire de faire l'acquisition de "badge de compétences", permettant de matérialiser l'appropriation de notions au fur et à mesure de la journée. Le contenu du parcours serait axé sur la manipulation de tables (chargement et traitement) et la visualisation des données (graphiques, éléments de synthèse). Le sous-groupe propose en particulier d'introduire un temps choc dans la journée, sous la forme d'un `uppercut` pour fortement marquer les esprits autour de la notion de reproductibilité. L'idée serait, à mi-parcours, de faire retentir une alerte dans la salle, ouvrant une situation de crise : les données sur lesquelles les stagiaires ont travaillé depuis le début du Funcamp sont verolées, et il faut tout reprendre à zéro ! Ouf : R permet d'organiser son code pour assurer une statistique reproductible, de telle façon que tout reprendre à zéro peut ne prendre qu'un clic, si les traitements ont été bien préparés. Une façon d'ouvrir sur la qualité du code, sa documentation, son organisation...
+
+Le sous-groupe a travaillé, de façon parallèle, sur deux exemples de contenu, construits à partir des données suivantes :
+
+- fichier des prénoms mis à disposition par l'Insee.
+- fichier des parrainages des candidats à l'élection présidentielle de 2017, fourni par le conseil constitutionnel.
+
+L'examen de ces deux parcours pédagogiques a révélé que la structure pédagogique était relativement similaire dans les deux cas.
+
+Post réunion, le sous-groupe 3 a proposé la trame pédagogique suivante :
+
+
+**1. Lecture de données, manipulations élémentaires de données**
+Notions pédagogiques : 
+
+- Lire un fichier dbf ou csv
+- Renommer des variables
+
+
+**2. Réaliser des statistiques descriptives basiques **
+Notions pédagogiques : 
+
+- Réaliser un tri à plat, et savoir effectuer un tri par effectif décroissant
+- Réaliser Calculer des effectifs cumulés
+
+
+**3. Réaliser des statistiques descriptives sur plusieurs variables**
+Notions pédagogiques :
+
+- Réaliser des tableaux croisés (nombre de parrainages par département et par candidat ; nombre de naissances par année)
+- Effectuer des analyses par groupe
+
+**4. Créer des nouvelles variables**
+Notions pédagogiques :
+
+- Changer le type d'une variable (caractère -> numérique)
+- Créer une nouvelle variable par calcul (exemple : proportion à partir d'effectifs)
+
+**5. Manipulation de tables**
+Notions pédagogiques :
+
+- Filtrer une table pour conserver des observations vérifiant une condition
+- Fusionner des tables avec une variable de jointure
+- Trier une table en fonction d'une (ou plusieurs) variables
+
+**6. Illustration graphique**
+Notion pédagogique :
+
+- Tracer une courbe (évolution du nombre de naissances)
+- Tracer un graphique en barres (parrainages par candidat)
+
+
+## Sous-groupe 1 : l'aventure d'icaRius
+
+Le sous-groupe 1 propose de construire le Funcamp autour d'une expérience vidéoludique, les stagiaires évoluant dans un jeu de rôle. Incarnant icaRius, un jeune héros qui doit sauver le royaume de Statis d'une terrible menace... Pour cela, il doit apprendre le langage des Runes - langage qui servira de métaphore à l'apprentissage de R tout au long du jeu. Le sous-groupe propose ainsi de développer un véritable jeu vidéo, qui sert d'habillage narratif au funcamp. Dans ce jeu vidéo, le personnage icaRius rencontre au fur et à mesure des énigmes à résoudre, qui à chaque fois lui permettent d'obtenir des récompenses : de nouveaux items (une épée, un bouclier...) ou de nouvelles compétences (nager...). Ces énigmes correspondent en fait à des tutoriels R, proposés au fur et à mesure de l'aventure. La proposition du sous-groupe 1 vise à alterner de courtes phases de jeux vidéo (par exemple par séquence de 15 min) et des phases d'apprentissage (par exemple par séquence de 30 min). Les phases d'apprentissage sont présentées comme les pages d'un grimoire, nommé IGoR dans le jeu vidéo pour faire un clin d'oeil à l'application éponyme développée dans le cadre du projet Palettes. Le grimoire IGoR est supposé apporter de nouveaux pouvoirs au héros : il ouvre en pratique sur chacun des tutoriels R du funcamp.
+
+Un prototype du jeu vidéo a été développé, à partir du moteur Solarus. Codé en lua, il reprend l'univers d'un jeu "à la Zelda"[^1], en visant à être le plus facile d'accès et inter-générationnel[^2]. 
+
+**Ecran d'accueil et vue du jeu icaRius, proposant un habillage vidéoludique au funcamp**
+<img src="docs/icaRius_00.png" style="background:none; border:none; box-shadow:none;">
+
+**Premiers pas dans le jeu, avec la découverte du grimoire IGoR**
+<img src="docs/icaRius_01.png" style="background:none; border:none; box-shadow:none;">
+
+[^1]: voir https://fr.wikipedia.org/wiki/The_Legend_of_Zelda
+[^2]: De premiers tests du jeu icaRius ont été conduits auprès de quelques collègues, débutants ou non en R : tous ont apprécié l'idée d'interfacer un jeu vidéo avec des tutoriels, et ont déjà formulé de premières améliorations pour l'ergonomie du jeu. Post réunion, un test approfondi a été conduit avec des membres du réseau LS2 (le 15 octobre), qui ont joué un mini funcamp R en condition réelle sur une durée de 2h30 sur la base du jeu icaRius : l'expérience a montré à quel point l'habillage vidéoludique renforce l'implication des participants - et leur apporte le sourire dans un moment qui, pourtant, reste dense en apprentissage.
+
+
+S'agissant de la  trame pédagogique, le sous-groupe propose un découpage en modules (les phases d'énigmes ou de tutoriel). Cela amène à 7 modules de 20 min chacun + un module récapitulatif de 30 min, soit 170 minutes. Il reste donc une heure environ pour des modules optionnels (si les premiers demandent plus de temps), chacun de ces modules pouvant demander de l'ordre de 30 min car un peu plus complexes.
+
+Socle :
+
+- 1. premiers contacts : créer un objet et le manipuler  
+- 2. comment intégrer des données : import de fichier 
+- 3. R, un langage fonctionnel - partie 1 : des fonctions intégrées 
+- 4. les packages pour enrichir son grimoire de fonctions ; présentation des packages tidyverse (sans les pratiques : c'est par contre le cas dans les items suivants)
+- 5. R, un langage fonctionnel - partie 2 : enchaîner des fonctions (ou mon premier pipeline)
+- 6. manipuler sens dessus dessous - partie 1 : trier, filtrer, créer des variables, agréger…  (en lien avec l'item précédent sur l'enchainement de fonctions)
+- 7. R, pour en mettre plein la vue - partie 1 - savoir réaliser un graphique en R, bien plus facilement que dans d'autres logiciels
+- 8. penseR Reproductible : un premier exemple (qui sert aussi de récapitulatif) 
+
+Options :
+
+- manipuler sens dessus dessous - partie 2 : les jointures
+- R, pour en mettre pleine la vue - partie 2 - une première carte
+
+Enfin, sur les bonnes pratiques R, il est proposé de l'inscrire sous forme de mini-conférence plénière en clôture, qui viserait à la fois à présenter R-studio et les bonnes pratiques pour structurer ses fichiers.
+
+
+# 4. Arbitrages et suite des travaux
+
+## Arbitrage dans les choix ludiques et pédagogiques
+
+Sur la base des éléments discutés, **le groupe de discussion valide le fait de prévoir deux parcours d'apprentissage qui permettent de couvrir des publics différents** :
+
+- parcours A : aucune entrée par le code, la plupart des manipulations sont réalisées via une assistance graphique. Le parcours vise à mettre en lumière ce que l'on peut faire en R (illustrer les fonctionnalités) mais pas à savoir le faire soi-même en R. 
+- parcours B : une entrée par le code. Les stagiaires sont invités à apprendre des éléments simplifiés de syntaxe. Le parcours vise à montrer que l'on peut, avec un investissement raisonnable, avoir déjà un premier niveau d'appropriation de ce langage dans une optique appliquée. 
+
+**L'organisation du Funcamp comprendra un système d'orientation**, pour que les stagiaires puissent choisir facilement entre les deux parcours. 
+
+**Le groupe de conception valide l'habillage vidéoludique via les aventures d'icaRius** (cf. sous-groupe 1. Le jeu vidéo se découpera en "mondes", qui seront reliées à des modules pédagogiques. La charge de développement d'un monde est estimée à 5 jours ETP sur la partie "jeu vidéo". 
+
+**Le groupe de conception retient l'idée d'introduire la notion de reproductibilité**. La faisabilité d'un *uppercut* sera prise en compte dans la trame pédagogique (cf. sous-groupe 3), pour faire prendre conscience aux stagiaires de l'importance de l'organisation de ses traitements. Cela pourrait se traduire, en cours de journée, par le fait de devoir "revenir en arrière" (y compris dans le jeu vidéo) et de découvrir que l'on peut très rapidement retracer le chemin parcouru dans une démarche de reproductibilité.
+
+**Le groupe de conception retient l'idée d'une salle aux trésors** (cf. sous-groupe 2), à découvrir en clôture du Funcamp, permettant aux participants d'avoir des goodies liées à l'aventure pédagogique qu'ils auront vécu. 
+
+
+## Synthèse de trame pédagogique proposée par ThinkR
+
+Post-réunion, ThinkR a établi une synthèse des trames pédagogiques. Cette dernière est retransmise en l'état dans le présent mémo. **Son examen sera conduit lors de la prochaine réunion plénière du groupe, avec de possibles amendements** (par exemple, dans le nombre de modules, dans leur contenu ou articulation). D'ici là, les membres des sous-groupes tenteront de développer à titre expérimental une partie des modules pour en éprouver la bonne adaptation (en durée de passation, en difficulté...).
+
+<div id="habillage-technique-du-grimoire" class="section level4">
+<h3>Habillage technique du grimoire</h3>
+<p>C’est la solution <code>{learnr}</code> qui permet l’interactivité dans la console qui est envisagée. Pour le parcours A, on envisagera des options de type <code>{parsons}</code> (réordonner des bouts de code ou des bouts de réponse à la façon d’un puzzle), là où les parcours B seront amenés à taper du code dans la console, quitte à le faire sur des “textes à trous”</p>
+<p><code>{learnr}</code> permet également de poser des questions de type QCM</p>
+<p>Les modules ci-après sont décrits par objectifs pédagogiques (à habiller narrativement) et par un déroulé suggéré avec différentes modalités pédagogiques parfois scindées selon les parcours.</p>
+</div>
+<div id="module-0-introduction" class="section level2">
+<h3>Module 0 : Introduction</h3>
+<p>Objectif pédagogique :</p>
+<ul>
+<li><p>comprendre ce qu’est R, à quoi ça sert</p></li>
+<li><p>être à l’aise avec la console et l’erreur</p></li>
+<li><p>comprendre ce que signifie “sensibilité à la casse”</p></li>
+</ul>
+<p>Déroulé :</p>
+<ul>
+<li><p>Description des objectifs du modules</p></li>
+<li><p>Présenter R (open source, multi-plateforme) et ses possibilités (graphiques, calculatoires, web, SIG…)</p></li>
+<li><p>Présenter la programmation avec R comme un dialogue avec la console</p></li>
+<li><p>Décrire la boîte de dialogue qui s’offre à eux</p></li>
+<li><p>Faire afficher un jeu de données (déjà chargé), si possible celui qui servira dans le prochain module</p></li>
+<li><p>Constater qu’écrire <code>Dataset</code> en lieu et place de <code>dataset</code> renverra une erreur (et la dédramatiser)</p></li>
+</ul>
+</div>
+<div id="module-1---visualiser" class="section level2">
+<h3>Module 1 - Visualiser</h3>
+<p>Objectifs pédagogiques :</p>
+<ul>
+<li><p>comprendre les notions de couches graphiques</p></li>
+<li><p>tracer un nuage de point</p></li>
+<li><p>tracer un diagramme en barre</p></li>
+<li><p>tracer un diagramme en barre empilé (parcours B ?)</p></li>
+</ul>
+<p>Déroulé :</p>
+<ul>
+<li><p>Rappel des acquis précedents (afficher un jeu de données)</p></li>
+<li><p>Description des objectifs du module : tracer des graphiques</p></li>
+<li><p>Rappeler ou expliquer que les graphiques servent à matérialiser des “relations” entre des variables</p></li>
+<li><p>Avant de faire tracer le premier graphique, faire réfléchir à la relation “attendue” entre 2 variables sur un jeu de données donné</p></li>
+<p>On propose ensuite un exercice où c’est aux participants de compléter ou de changer une valeur</p>
+<p>Itérer pour chacun des types de graphiques : 1. S’interroger sur la relation attendue a priori (et donc réfléchir aux <code>x</code> et <code>y</code>, à la “géométrie”) 2. Tracer 3. conclure 4. Présenter la géométrie qui correspond 5. Essayer avec de nouvelles valeurs, un nouveau jeu de données</p>
+<p>Parcours A == ggformula et Parcours B == ggplot2 ?</p>
+</div>
+<div id="module-2---decrire-et-comprendre" class="section level2">
+<h3>Module 2 - Décrire et comprendre</h3>
+<p>Objectif pédagogique :</p>
+<ul>
+<li><p>comprendre la notion de fonction (définie syntaxiquement par <code>()</code>)</p></li>
+<li><p>appliquer une fonction de description sur un jeu de données</p></li>
+<li><p>comprendre la notion de paramètre</p></li>
+<li><p>passer des paramètres à une fonction de description d’un jeu de données (parcours B seulement ?)</p></li>
+<li><p>comprendre comment enchaîner des fonctions avec le <code>%&gt;%</code></p></li>
+</ul>
+<p>Déroulé :</p>
+<ul>
+<li><p>Rappel des acquis précédents (afficher un jeu de données, tracer un graphique)</p></li>
+<li><p>Description des objectifs du modules</p></li>
+<li><p>Donner des clefs pour identifier les fonctions (syntaxe dans R avec <code>()</code>)</p></li>
+<li><p>Une fonction très utile pour décrire par exemple <code>summary(dataset)</code> à comparer avec <code>dataset</code></p></li>
+<li><p>Qu’est-ce qu’une fonction en fait ? - schéma d’une fonction- : des inputs (ou pas) et des outputs</p></li>
+<li><p>Utilisons une autre fonction avec un output différent <code>skimr::skim(donnee)</code></p></li>
+<li><p>Passons un paramètre <code>skimr::skim(donnees, unevariable)</code>, pointer l’existence de la <code>,</code></p></li>
+<li><p>Introduction du <code>%&gt;%</code>, notion de grammaire avec <code>verbe(sujet, complément)</code> devient <code>sujet %&gt;% verbe(complément)</code></p></li>
+</ul>
+<p>Sensibiliser aussi au fait que</p>
+<pre class="r"><code>sujet %&gt;% verbe(complément)</code></pre>
+<p>est strictement équivalent à :</p>
+<pre class="r"><code>sujet %&gt;%
+  verbe(complément)</code></pre>
+<p>On pourra reformuler l’idée avec <code>%&gt;%</code> avec “ensuite”</p>
+<pre class="r"><code>dataset %&gt;%
+  summary()</code></pre>
+<p>se lira :</p>
+<blockquote>
+<p>je prends un jeu de données et <em>ensuite</em>, je fais un résumé</p>
+</blockquote>
+<ul>
+<li><p>Tester l’application de la fonction <code>skim</code> sur un nouveau jeu de données</p></li>
+<li><p>Tester la bonne assimilation du pipe avec des “lectures”</p></li>
+</ul>
+<p>Exemple, donner un bloc de code et en proposer quelques interprétations avec du code vu :</p>
+<pre class="r"><code>dataset %&gt;%
+  ggplot()+
+  aes(x = abscisses, y = ordonnees)+
+  geom_bar()</code></pre>
+<p>Introduire l’enchaînement de pipes sur du pseudo code :</p>
+<pre class="r"><code>farine %&gt;%
+  ajouter(sucre, oeufs, lait) %&gt;% 
+  fouetter() %&gt;% 
+  cuire() %&gt;% 
+  manger(&quot;crêpes&quot;)</code></pre>
+<blockquote>
+<p>Je prends de la farine, <em>ensuite</em>, j’ajoute du sucre, des oeufs, du lait, <em>ensuite</em>, je fouette, <em>ensuite</em>, je cuis, <em>ensuite</em> je mange…des crêpes</p>
+</blockquote>
+</div>
+<div id="module-3---manipuler-et-transformer" class="section level2">
+<h3>Module 3 - Manipuler et transformer</h3>
+<p>Objectif pédagogique :</p>
+<ul>
+<li><p>savoir sélectionner une colonne</p></li>
+<li><p>découvrir les opérateurs <code>==</code>, <code>&amp;</code> et <code>|</code></p></li>
+<li><p>découvrir les opérateurs <code>!=</code>, <code>%in%</code>, <code>!</code> (parcours B)</p></li>
+<li><p>savoir filtrer un jeu de données</p></li>
+<li><p>savoir trier un jeu de données</p></li>
+</ul>
+<p>Déroulé :</p>
+<ul>
+<li><p>Rappel des acquis précédents (afficher un jeu de données, tracer un graphique, décrire avec une fonction, enchaîner des opérations)</p></li>
+<li><p>Décrire les objectifs du module (sélectionner, filtrer et trier)</p></li>
+<li><p>Décrire ce que signifie sélectionner (réduire le jeu de données en <em>largeur</em>), illustrer avec un schéma</p></li>
+<li><p>Décrire la syntaxe dans <code>select()</code>, insister sur la <code>,</code></p></li>
+<li><p>Experimenter la sélection de variables sur un exemple</p></li>
+<li><p>Tester en faisant s’enchaîner une selection de variable et un <code>skimr</code></p></li>
+</ul>
+<p>Leur faire réaliser que</p>
+<pre class="r"><code>donnees %&gt;% 
+  select(une_variable) %&gt;% 
+  skimr::skim()</code></pre>
+<p>est identique à :</p>
+<pre class="r"><code>donnees %&gt;% 
+  skimr::skim(une_variable)</code></pre>
+<ul>
+<li><p>Décrire ce que signifie trier (réduire le jeu de données en <em>hauteur</em>) - illustrer avec un schéma</p></li>
+<li><p>Introduire la notion de critère de tri, faire émerger le besoin d’outils pour ce faire</p></li>
+<li><p>Présenter ce qu’est un opérateur</p></li>
+<li><p>Présenter <code>==</code>, <code>&amp;</code> et <code>|</code></p></li>
+<li><p>Tester sur de menus exemple en dehors de <code>filter()</code></p></li>
+<li><p>Montrer la syntaxe dans <code>filter()</code> et y inscrire un premier critère</p></li>
+<li><p>Tester les opérateurs dans <code>filter()</code></p></li>
+<li><p>Idem pour les autres opérateurs</p></li>
+<li><p>Décrire ce que signifier trier (réordonner selon un critère, de façon croissante ou décroissante)</p></li>
+<li><p>Montrer la syntaxe de <code>arrange()</code> - y compris en combinant plusieurs critères (parcours B seulement ? )</p></li>
+<li><p>Tester la bonne application de la syntaxe sur un critère</p></li>
+<li><p>Finir avec un exercice qui combine <code>select()</code>, <code>filter()</code>, <code>arrange()</code> (+ plot pour les plus joueurs ? )</p></li>
+</ul>
+</div>
+<div id="module-3bis---manipuler-et-transformer-mutate-summarise-group_by-avec-les-helpers---optionnel" class="section level2">
+<h3>Module 3bis - Manipuler et transformer (mutate, summarise, group_by avec les helpers) - OPTIONNEL</h3>
+</div>
+<div id="module-3ter---manipuler-et-transformer-verbes-scopes-_if-_at-_all---optionnel" class="section level2">
+<h3>Module 3ter - Manipuler et transformer (verbes scopés _if, _at, _all) - OPTIONNEL</h3>
+</div>
+<div id="module-4---nettoyer-transposer---optionnel" class="section level2">
+<h3>Module 4 - Nettoyer (transposer) - OPTIONNEL</h3>
+</div>
+<div id="module-4bis---nettoyer-traiter-les-donnees-manquantes---optionnel" class="section level2">
+<h3>Module 4bis - Nettoyer (traiter les données manquantes) - OPTIONNEL</h3>
+</div>
+<div id="module-5---importer" class="section level2">
+<h3>Module 5 - Importer</h3>
+<p>Objectifs pédagogiques :</p>
+<ul>
+<li><p>comprendre la notion d’assignation (<code>&lt;-</code>)</p></li>
+<li><p>comprendre la notion de package</p></li>
+<li><p>savoir décrypter un fichier en entrée (séparateur de colonne, séparateur décimaux)</p></li>
+<li><p>savoir importer un fichier csv (parcours B)</p></li>
+<li><p>savoir importer un fichier excel, SAS (parcours B)</p></li>
+</ul>
+<p>Déroulé :</p>
+<ul>
+<li><p>Expliquer que les jeux de données ne seront pas toujours mis à disposition et que leur import nécessite des clefs de lecture</p></li>
+<li><p>Décrire la séparateur de colonne</p></li>
+<li><p>Décrire le séparateur décimal</p></li>
+<li><p>Expliquer comment les trouver dans un fichier csv</p></li>
+<li><p>Décrire la syntaxe (insister sur les guillemets)</p></li>
+</ul>
+<pre class="r"><code>read.csv(chemin_de_fichier, sep = &quot;;&quot;, dec = &quot;,&quot;)</code></pre>
+<ul>
+<li><p>Présenter la notion de package, illustrer par un schéma</p></li>
+<li><p>Expliquer que <code>library(package)</code> rend disponible des fonctionnalités (de packages déjà <em>installés</em>)</p></li>
+<li><p>Expliquer au moyen d’un schéma quelles fonctions appartiennent à quels packages et les faire charger les packages <code>{ggplot2}</code>, <code>{dplyr}</code> (les packages vus jusqu’ici)</p></li>
+<li><p>Tester la notion en les faisant charger <code>{readr}</code></p></li>
+<li><p>Leur faire importer un <code>.csv</code> avec <code>read_csv()</code> (et constater que ça passe sans paramètres)</p></li>
+<li><p>Expliquer les principes de l’assignation (faire vivre dans la mémoire, donner un <em>certificat de naissance</em> aux jeu de données) via le symbole d’assignation</p></li>
+<li><p>“Lire” le code comme une phrase</p></li>
+</ul>
+<pre class="r"><code>mon_jeu_de_donnees &lt;- read_csv(&quot;chemin_d'ordinateur/registre.csv&quot;)</code></pre>
+<blockquote>
+<p><code>mon_jeu_de_donnees</code> vaut le fichier <code>registre.csv</code> que l’on peut trouver à l’adresse <code>chemin_d'ordinateur</code> (Attention à bien jouer sur le <code>code</code> et le “français” visuellement parlant)</p>
+</blockquote>
+<ul>
+<li>Proposer de “lire” plusieurs “phrases”</li>
+</ul>
+<pre class="r"><code>ma_valeur &lt;- 6
+
+mon_tableau &lt;- un_tableau %&gt;% 
+  filter(une_variable &gt; ma_valeur)</code></pre>
+<ul>
+<li>Tester la bonne compréhension des phrases</li>
+</ul>
+<blockquote>
+<p><code>ma_valeur</code> vaut <code>6</code></p>
+</blockquote>
+<blockquote>
+<p><code>mon_tableau</code> vaut <code>un_tableau</code> filtré sur <code>une_variable</code> strictement supérieure à <code>ma_valeur</code> (qui vaut <code>6</code>)</p>
+</blockquote>
+<p>Idem pour les imports de fichiers Excel pour le parcours B ?</p>
+</div>
+<div id="module-5bis---importer-fusionner-des-jeux-de-donnees---optionnel" class="section level2">
+<h3>Module 5bis - Importer (Fusionner des jeux de données) - OPTIONNEL</h3>
+</div>
+<div id="module-6---uppercut-rejouer" class="section level2">
+<h3>Module 6 - Uppercut ! Rejouer</h3>
+<p>Objectifs pédagogiques :</p>
+<ul>
+<li><p>comprendre la notion de reproductibilité</p></li>
+<li><p>mobiliser toutes les connaissances acquises dans un ordre typique de l’analyse de données (importer, manipuler et transformer, tracer des graphiques, résumer et comprendre)</p></li>
+<li><p>savoir écrire des commentaires <code>#</code></p></li>
+</ul>
+<p>Déroulé</p>
+<ul>
+<li><p>Expliquer le lien entre la programmation et la reproductibilité</p></li>
+<li><p>Leur faire lire plusieurs blocs de code à la suite qui ressembleraient à un embryon d’analyse : importer, décrire, visualiser, transformer.</p></li>
+<li><p>Les faire changer le jeu de données en input de la chaîne de traitement</p></li>
+<li><p>Satisfaire leur souhait de vouloir commenter les résultats en introduisant la notion de commentaire avec le symbole <code>#</code></p></li>
+<li><p>Les inviter à saisir quelques commentaires</p></li>
+</ul>
+</div>
+<div id="module-7---communiquer" class="section level2">
+<h3>Module 7 - Communiquer</h3>
+<p>Objectifs pédagogiques :</p>
+<ul>
+<li><p>découvrir la programmation lettrée</p></li>
+<li><p>comprendre ce qu’est un RMarkdown</p></li>
+<li><p>savoir compiler un Rmardown pré-rempli (à remplir/compléter pour le parcours B ?)</p></li>
+</ul>
+<p>Déroulé :</p>
+<ul>
+<li><p>Faire intuiter que l’uppercut du module précédent donne envie d’ajouter des commentaires aux graphiques et tableau : c’est précisément ce que nous allons faire avec un outil spécial</p></li>
+<li><p>Présenter RStudio, à quoi ça sert</p></li>
+<li><p>Créer un nouveau projet RStudio</p></li>
+<li><p>Ouvrir un template RMarkdown (modèle ad hoc, pré-rempli, avec charte graphique ?)</p></li>
+<li><p>Expliquer comment RMarkdown peut répondre à ce besoin de commenter en “tissant” des liens étroits entre le code et la rédaction -illustrer par un schéma et/ou capture d’écran-</p></li>
+<li><p>Décrire les zones d’un fichier <code>.Rmd</code></p></li>
+<li><p>Les faire compiler (tricoter) un premier RMarkdown</p></li>
+<li><p>Indiquer où se situe le fichier de sortie.</p></li>
+</ul>
+<p>Remarque :</p>
+<ul>
+<li><p>ce module ne peut se faire que dans RStudio</p></li>
+<li><p>il y a la piste du package <code>{editR}</code> qui permet de modifier un RMarkdown en temps réel, mais le package nécessiterait une refonte totale pour une exploitation en production.</p></li>
+</ul>
+</div>
+
+
+## Prochains travaux
+
+La prochaine réunion plénière du groupe de conception est programmée au 22 novembre au SDES. D'ici là, chaque sous-groupe expérimentera la production d'un module pédagogique parmi la trame proposée par ThinkR, dans l'idée de l'éprouver par la pratique et d'identifier les adptations à apporter. Ce travail de production signifie plus précisément :
+
+- imaginer l'habillage narratif du tutoriel (l'histoire dans Icarius qui va avec ce tutoriel)
+- concevoir le contenu du tutoriel (apport de notions, mini-exercices learnr/pearsons) y compris les données qui sont si besoin utilisées
+- implémenter techniquement le tutoriel en Rmd.
+
+ThinkR élabore en octobre un template de tutoriel, sur l'un des modules, qui servira donc de modèle pour tous (y compris dans les styles de mise en page).
+
+Des travaux sont également programmés en novembre pour "dockeriser" ces tutoriels, ce qui permettra de les lancer via la future plateforme innovation ouverte aux SSM (des tests restent à conduire sur ce mode opératoire).
+
+Les différents travaux des sous-groupes pourront être publiés en cours d'avancement via le compte Github du funcamp (https://github.com/insee-unissi/funcamp-r)  ou sur le Rstudio Cloud du Funcamp (https://rstudio.cloud/project/470146 )
+
