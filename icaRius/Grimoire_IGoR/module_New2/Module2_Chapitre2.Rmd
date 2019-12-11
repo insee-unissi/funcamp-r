@@ -4,6 +4,7 @@ runtime: shiny_prerendered
 output: learnr::tutorial
 ---
 
+
 ```{r setup, include=FALSE}
 library(learnr)
 library(parsons)
@@ -11,7 +12,7 @@ library(dplyr)
 library(ggformula)
 library(readxl)
 #setwd("C:/Users/UN5CZU/Desktop/")
-setwd("C:/Users/W3FKCS/Desktop/funcamp 20191213")
+setwd("C:/Users/UN5CZU/Desktop/")
 base_individus <- tibble(poids = sort(rnorm(100, mean = 80, sd = 30)), taille = sort(rnorm(100, mean = 170, sd = 20)), nombre = rnorm(100, 100, 50), sexe = sample(c("H","F"),size = 100,replace = T), age = rep(c("20","40","60","80"), 25),numind=1:100)
 donnees_secretes <- read_excel("nbguerriers2.xlsx")
 
@@ -92,7 +93,9 @@ Il est également possible de donner de faire figurer des noms associés à chaq
 ```{r t4b, collapse = TRUE}
 
 base_individus %>%
-    gf_point(poids ~ taille, title = "Courbe de poids en fonction de la taille", color = ~ sexe, size = ~ nombre) %>% gf_text(poids ~ taille,label=~numind,color='black',size=3)
+    sample_n(10) %>% #permet de filtrer 10 lignes pour que le graphique soit lisible
+    gf_point(poids ~ taille, title = "Courbe de poids en fonction de la taille", color = ~ sexe, size = ~ nombre) %>%
+    gf_text(label = ~ numind, color='black', size=3)
 
 ```
 
@@ -108,9 +111,23 @@ A partir de ce fichier et des exemples présentés précédemment, aidez Icarius
 ```{r module2-etape1,exercise=TRUE}
 # Crée le graphique
 
-donnees_secretes%>%gf_point(Nb_canicule~dist_royaume,size=~nb_guerriers)%>%gf_text(Nb_canicule~dist_royaume,label=~royaume,size=2.5,check_overlap = TRUE)
+donnees_secretes %>% 
+  gf_point(Nb_canicule ~ dist_royaume,size = ~ nb_guerriers) %>% 
+  gf_text(label = ~ royaume)
 # Fin de l'exercice
 ``` 
 
+```{r question1,echo=FALSE}
+question("Alors, quel royaume faut-il attaquer? Ne reste plus qu'à cocher la bonne réponse...pour poursuivre l'aventure!",
+type="single",
+allow_retry = TRUE,
+incorrect="Retente ta chance",
+answer("Le pays du soleil éternel	"),
+answer("La terre d’Or"),
+answer("Le territoire des Hauts",correct=TRUE),
+answer("La bonne réponse n'est pas dans les propositions"),
+correct="Félicitations, tu as trouvé le bon royaume, l'aventure peut continuer!"
+)
+```   
 
 **Fin du chapitre 2  >>  reprenez la partie d'Icarius**
