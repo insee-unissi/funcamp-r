@@ -102,150 +102,74 @@ Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est don
 </div>
 
 
-
 <span style="color:#18AC3E;font-size:16px">**Tremblez, messieurs les tableurs **</span>
 
 
 Bon, il nous reste à ouvrir les autres fragments. Deux d'entre eux correspondent à des fichiers produits par des tableurs, comme Excel (extension .xls ou xlsx) et Calc (extension .ods). Pour les ouvrir... nous allons utiliser le même sortilège que précédemment. Et oui : le sortilège `import()` permet aussi d'ouvrir les documents des tableurs ! Magiques !
 
+Comme précédemment, il nous faut spécifier le chemin du fichier, et bien veiller à renseigner son extension (ce qui figure après le "."). Une astuce à ce sujet : dans l'explorateur Windows, l'extension d'un fichier est parfois masquée. Comment dans ce cas découvrir l'extension des fichiers `pontes_semaine2`, `pontes_semaine3` et `pontes_semaine4` dans l'exemple ci-dessous ? 
 
 
+Dans l'explorateur Windows, vous pouvez faire un clic-droit sur le nom du fichier que vous souhaitez consulter (par exemple `pontes_semaine2`) puis choisir dans la liste déroulante `Propriétés`. Sur l'onglet qui apparaît, une ligne donne le type de fichier et précise l'extension (ici, .xls).
 
+Nous avons donc deux fichiers issus de tableurs :
 
+- pontes_semaine2.xls (excel)
+- pontes_semaine3.ods (calc)
 
-La fonction `read.csv()` permet, comme son nom l'indique, de lire (*read*) un fichier CSV.
+Dans calc, nous pouvons les importer de la même façon.
 
-Nous l'avons vu au chapitre précédent : une fonction a des paramètres. Pour `read.csv`, il y a deux paramètres obligatoires : l’emplacement du fichier à lire et le type de séparateur du fichier.
-
-```{r, collapse = TRUE, eval=FALSE}
-ma_table<-read.csv(file="chemin_du_fichier", sep="separateur_du_fichier")
+```{r, echo=FALSE}
+livre_compte_2 <- import("../../data/pontes_semaine2.xls")
+livre_compte_3 <- import("../../data/pontes_semaine3.ods")
 ```
 
-Le chemin du fichier doit préciser l'emplacement du document csv que vous cherchez à ouvrir, sur votre poste de travail par exemple. Cherchons donc l'emplacement à partir  de l'explorateur dans windows. 
+```{r, collapse = FALSE}
+# Je charge le fichier pontes_semaine1.xls en indiquant son chemin
+livre_compte_2 <- import("E:/icaRius/data/pontes_semaine2.xls")
+# J'affiche le contenu de l'objet livre_compte_2
+livre_compte_2
+```
 
+```{r, collapse = FALSE}
+# Je charge le fichier pontes_semaine3.ods en indiquant son chemin
+livre_compte_3 <- import("E:/icaRius/data/pontes_semaine3.ods")
+# J'affiche le contenu de l'objet livre_compte_3
+livre_compte_3
+```
 
-
+Tiens tiens. Chaque semaine, la poule Kokot l'emporte haut les plumes côté pontes... Serait-ce la meilleure pondeuse de la ferme ?
 
 
 <span style="color:#18AC3E;font-size:16px">**Une histoire de séparateur**</span>
 
-
-
-Au fait, c'est quoi ? 
+Il nous reste un dernier fragment à ouvrir. Celui-ci se termine par l'extension `.csv`. Qu'est-ce donc qu'un fichier CSV ?
 
 CSV, c'est un format de fichier où chaque enregistrement apparaît sur sa propre ligne et dont les champs sont séparés par un caractère unique appelé “séparateur”. En l'occurrence, le séparateur est une virgule ou un point-virgule : c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (Comma = virgule en anglais). 
 
-<span style="color:#18AC3E;font-size:16px">**Un exemple de fichier CSV**</span>
-
-Revenons à nos poules. Bonne nouvelle : IcaRius a trouvé, dans le poulailler, un document CSV qui pourrait bien nous aider à reproduire le livre de compte. 
-
-<table style="width:400px">.
-<tbody>
-<tr>
-  <th width="45%">Fichier au format .csv</th>
-  <th width="10%"></th>
-  <th width="45%">Représentation tabulaire</th>
-</tr>
-<tr valign="top">
-  <td>
-    <pre>Poule,Oeufs
-Gertrude,22
-Madame Mim,20
-Poupoule,18
-Daisy,16
-Kokot,26
-Chickitta,12</pre>
-  </td>
-  <td></td>
-  <td>
-  <table style="width:180px ;border: 1px solid black; border-collapse:collapse; text-align:center;">
-    <tbody>
-      <tr>
-        <th scope="col">Poule</th>
-        <th scope="col">Pontes</th>
-      </tr>
-      <tr>
-        <td>Gertrude</td>
-        <td>22</td>
-      </tr>
-      <tr>
-        <td>Madame Mim</td>
-        <td>20</td>
-      </tr>    
-      <tr>
-        <td>Poupoule</td>
-        <td>18</td>
-      </tr>
-      <tr>
-        <td>Daisy</td>
-        <td>16</td>
-      </tr>
-      <tr>
-        <td>Kokot</td>
-        <td>26</td>
-      </tr>
-      <tr>
-        <td>Chickitta</td>
-        <td>12</td>
-      </tr>
-    </tbody>
-  </table>
-  </td>
-</tr>
-</tbody>
-</table>
-
-
-
-
-
-
-
-
-Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être utilisable aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
+Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être "interopérable", c'est à dire qu'il peut être lu et modifier aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
 
 ![](images/pontes_csv.png)
 
 
-## Chargeons le fichier
-
-Pour charger un fichier, nous allons utiliser une fonction prévue à cet effet dans R. La fonction `read.csv()` permet, comme son nom l'indique, de lire (*read*) un fichier CSV.
-
-Nous l'avons vu au chapitre précédent : une fonction a des paramètres. Pour `read.csv`, il y a deux paramètres obligatoires : l’emplacement du fichier à lire et le type de séparateur du fichier.
-
-```{r, collapse = TRUE, eval=FALSE}
-ma_table<-read.csv(file="chemin_du_fichier", sep="separateur_du_fichier")
-```
-
-Le chemin du fichier doit préciser l'emplacement du document csv que vous cherchez à ouvrir, sur votre poste de travail par exemple. Cherchons donc l'emplacement à partir  de l'explorateur dans windows. 
-
-![](images/pontes_chemin.png)
-
-<p style="border:1px; border-style:solid; border-color:#000000; padding: 1em;">
-**Attention :** pour spécifier le chemin d’un fichier, il va falloir jongler avec les signes cabalistiques que sont les `/` et les `\` (ça ne s'appelle pas le langage des Runes pour rien). Contrairement à Windows (ou SAS) où le backslash `\` est utilisé pour écrire un chemin, en R il faut écrire avec un slash `/`. Pensez donc à modifier le chemin du répertoire lors d'un copier coller de ce dernier depuis l’explorateur. Enfin, n'oubliez pas d'ajouter à la fin le nom du fichier (pontes) avec son extension (.csv). 
-</p>
-
-
-Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/pontes.csv`. Il nous reste à préciser le séparateur, qui est ici une virgule `,`. C'est parti :
+D'après-vous, comment allons-nous charger ce fichier csv dans R ? Eh oui: toujours avec le même sortilège `import()` ! Vous savez désormais comment procéder : à vous de charger le fichier `pontes_semaine3.csv` dans la console R, en la sauvegardant dans l'objet nommé `livre_compte_4` 
 
 
 ```{r, collapse = TRUE}
-mon_fichier <- read.csv(file="E:/icaRius/data/pontes.csv", sep=",")
+livre_compte_4 <- import("E:/icaRius/data/pontes_semaine3.csv")
 ```
 
-<span style="color:#18AC3E;font-size:16px">**A vous de jouer**</span> 
 
-Chargez vous-mêmes le fichier `pontes.csv` qui se trouve dans le répertoire `E:\icaRius\data` dans une table nommée `mon_fichier`
+```{r module2-question2,exercise=TRUE}
+# Chargez le fichier pontes_semaine4.csv en indiquant son chemin
 
-```{r module2-question11,exercise=TRUE}
-# Charger le ficher pontes.csv
 
+# Affichez le contenu de l'objet livre_compte_4
+
+
+# C'est fini !
 ``` 
  
-<div id="module2-question11-hint">
-**Aide 1:** Utiliser la fonction read.csv(file=,sep=). Veillez à indiquer le bon chemin (file=) vers le fichier et son séparateur (sep=) qui est une virgule (,)
-</div>
-
 
 
 ## Découvrons le contenu du fichier
