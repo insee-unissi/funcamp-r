@@ -24,8 +24,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Le livre de compte, un ensemble de données
-
 Vous venez de rencontrer la fermière du village Kokoro, désespérée d'avoir perdu le livre de compte où, chaque jour, elle note consciencieusement le nombre de pontes. 
 
 Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, éclatée dans plusieurs fragments par le redoutable sorcier SaSSoS ! Il y a ainsi un document par semaine de pontes, et il faut lire les 4 semaines de pontes pour recomposer le livre de compte.
@@ -34,7 +32,7 @@ Pour le corser le tout, chaque fragment a été ensorcelé et semble indéchiffr
 
 Aie aie aie. 
 
-<span style="color:#18AC3E;font-size:16px">**Un Sasseur sait bien sasser... sur R ?**</span>
+## Un Sasseur sait bien sasser... sur R ?
 
 Commençons par le format SAS - qui rappellera peut-être quelques souvenirs aux aventuriers les plus aguerris. Nous allons donc apprendre, en R, à lire un fichier SAS. 
 
@@ -102,15 +100,19 @@ Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est don
 </div>
 
 
-<span style="color:#18AC3E;font-size:16px">**Tremblez, messieurs les tableurs **</span>
+## Tremblez, messieurs les tableurs
 
 
 Bon, il nous reste à ouvrir les autres fragments. Deux d'entre eux correspondent à des fichiers produits par des tableurs, comme Excel (extension .xls ou xlsx) et Calc (extension .ods). Pour les ouvrir... nous allons utiliser le même sortilège que précédemment. Et oui : le sortilège `import()` permet aussi d'ouvrir les documents des tableurs ! Magiques !
 
 Comme précédemment, il nous faut spécifier le chemin du fichier, et bien veiller à renseigner son extension (ce qui figure après le "."). Une astuce à ce sujet : dans l'explorateur Windows, l'extension d'un fichier est parfois masquée. Comment dans ce cas découvrir l'extension des fichiers `pontes_semaine2`, `pontes_semaine3` et `pontes_semaine4` dans l'exemple ci-dessous ? 
 
+![](images/pontes_chemin_extensions.png)
 
 Dans l'explorateur Windows, vous pouvez faire un clic-droit sur le nom du fichier que vous souhaitez consulter (par exemple `pontes_semaine2`) puis choisir dans la liste déroulante `Propriétés`. Sur l'onglet qui apparaît, une ligne donne le type de fichier et précise l'extension (ici, .xls).
+
+![](images/pontes_chemin_extensions_steps.png)
+
 
 Nous avons donc deux fichiers issus de tableurs :
 
@@ -119,21 +121,21 @@ Nous avons donc deux fichiers issus de tableurs :
 
 Dans calc, nous pouvons les importer de la même façon.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message = FALSE}
 livre_compte_2 <- import("../../data/pontes_semaine2.xls")
 livre_compte_3 <- import("../../data/pontes_semaine3.ods")
 ```
 
-```{r, collapse = FALSE}
-# Je charge le fichier pontes_semaine1.xls en indiquant son chemin
+```{r, eval=FALSE}
+# Je charge le fichier pontes_semaine2.xls en indiquant son chemin
 livre_compte_2 <- import("E:/icaRius/data/pontes_semaine2.xls")
-# J'affiche le contenu de l'objet livre_compte_2
-livre_compte_2
-```
-
-```{r, collapse = FALSE}
 # Je charge le fichier pontes_semaine3.ods en indiquant son chemin
 livre_compte_3 <- import("E:/icaRius/data/pontes_semaine3.ods")
+```
+
+```{r}
+# J'affiche le contenu de l'objet livre_compte_2
+livre_compte_2
 # J'affiche le contenu de l'objet livre_compte_3
 livre_compte_3
 ```
@@ -141,7 +143,7 @@ livre_compte_3
 Tiens tiens. Chaque semaine, la poule Kokot l'emporte haut les plumes côté pontes... Serait-ce la meilleure pondeuse de la ferme ?
 
 
-<span style="color:#18AC3E;font-size:16px">**Une histoire de séparateur**</span>
+## Une histoire de séparateur
 
 Il nous reste un dernier fragment à ouvrir. Celui-ci se termine par l'extension `.csv`. Qu'est-ce donc qu'un fichier CSV ?
 
@@ -152,12 +154,7 @@ Un fichier CSV peut être produit de multiples manières, et a l'avantage d'êtr
 ![](images/pontes_csv.png)
 
 
-D'après-vous, comment allons-nous charger ce fichier csv dans R ? Eh oui: toujours avec le même sortilège `import()` ! Vous savez désormais comment procéder : à vous de charger le fichier `pontes_semaine3.csv` dans la console R, en la sauvegardant dans l'objet nommé `livre_compte_4` 
-
-
-```{r, collapse = TRUE}
-livre_compte_4 <- import("E:/icaRius/data/pontes_semaine3.csv")
-```
+D'après-vous, comment allons-nous charger ce fichier csv dans R ? Eh oui: toujours avec le même sortilège `import()` ! Vous savez désormais comment procéder : à vous de charger le fichier `pontes_semaine4.csv` dans la console R, en la sauvegardant dans l'objet nommé `livre_compte_4` 
 
 
 ```{r module2-question2,exercise=TRUE}
