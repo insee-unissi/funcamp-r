@@ -17,19 +17,121 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 rm(list=ls())
+library(rio)
 library(learnr)
 library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Le livre de compte, un fichier de données
+## Le livre de compte, un ensemble de données
 
 Vous venez de rencontrer la fermière du village Kokoro, désespérée d'avoir perdu le livre de compte où, chaque jour, elle note consciencieusement le nombre de pontes. 
 
+Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, éclatée dans plusieurs fragments par le redoutable sorcier SaSSoS ! Il y a ainsi un document par semaine de pontes, et il faut lire les 4 semaines de pontes pour recomposer le livre de compte.
+
+Pour le corser le tout, chaque fragment a été ensorcelé et semble indéchiffrable... Ils sont en effet chacun dans d'étranges formats : SAS, Excel, Calc et Csv...
+
+Aie aie aie. 
+
+<span style="color:#18AC3E;font-size:16px">**Un Sasseur sait bien sasser... sur R ?**</span>
+
+Commençons par le format SAS - qui rappellera peut-être quelques souvenirs aux aventuriers les plus aguerris. Nous allons donc apprendre, en R, à lire un fichier SAS. 
+
+Le contenu de ce fichier - que seul le terrible SaSSoS est normalement capable de lire, est le suivant :
+
+![](images/pontes_sas.png)
+
+Pour charger un fichier, nous allons utiliser un sortilège prévu à cet effet dans R. Dans le monde des Runes, un sortilège est identifié par **son nom suivi de parenthèses** :`nomsortilege()`. A l'intérieur des parenthèses, sont précisés les ingrédients utiles à la confection du sortilège. Pas d'inquiétude, une aide intégrée dans R permet de connaître la liste des ingrédients que l'on peut renseigner pour chaque sortilège. Si plusieurs ingrédients sont nécessaires, ces derniers sont séparés par une virgule:
+
+```{r, collapse = TRUE, eval=FALSE}
+# Application d'un sortilège   
+nomsortilege(ingredient1, ingredient2,...,ingredientN)
+
+```
+
+Pour lire un fichier SAS, nous allons utiliser le sortilège `import()` qui permet, comme son nom l'indique, d'importer (*import*) un fichier dans R. Pour utiliser `import()`, il y a un ingrédient à préciser : l’emplacement du fichier à lire.
+
+```{r, collapse = TRUE, eval=FALSE}
+# J'importe le fichier
+import("chemin_du_fichier")
+```
+
+Pour s'y retrouver, autant tout de suite ranger ce que l'on est en train d'importer dans R. Pour cela, on assigne à un nouvel objet le contenu du fichier lu, en choisissant le nom de cet objet. Par exemple, appelons `livre_compte_1` ce qui sera importé dans R en lisant le fichier SAS. 
+
+```{r, collapse = TRUE, eval=FALSE}
+# J'importe le fichier et je l'assigne à l'objet livre_compte_1
+livre_compte_1 <- import("chemin_du_fichier")
+```
+
+De cette façon, en appelant l'objet `livre_compte_1` dans la console R, il est aisé d'en consulter le contenu. En l'occurence :
+
+```{r, echo=FALSE}
+livre_compte_1 <- import("../../data/pontes_semaine1.sas7bdat")
+```
+
+```{r, collapse = FALSE}
+# J'affiche le contenu de l'objet livre_compte_1
+livre_compte_1
+```
+
+Et voilà, c'est fini pour le premier fichier ! Ce dernier comporte deux types d'information : le nom de la poule (colonne `Poule`) et le nombre d'oeufs pondus (colonne `Oeufs`). Il y a 6 enregistrements, un par poule. Par exemple, la poule Kokot a pondu 26 oeufs - c'est d'ailleurs la meilleure pondeuse de la semaine !
+
+Et si vous pratiquiez vous-même ? Pour cela, il faut d'abord trouver l’emplacement du fichier à lire, sur votre poste de travail par exemple. En l'occurrence, le fichier est présent sur la clé USB qui vous a été remise en début de partie. Cherchons donc l'emplacement à partir  de l'explorateur dans windows. 
+
+![](images/pontes_chemin.png)
+
+<p style="border:1px; border-style:solid; border-color:#000000; padding: 1em;">
+**Attention :** pour spécifier le chemin d’un fichier, il va falloir jongler avec les signes cabalistiques que sont les `/` et les `\` (ça ne s'appelle pas le langage des Runes pour rien). Contrairement à Windows où le backslash `\` est utilisé pour écrire un chemin, en R il faut écrire avec un slash `/`. Pensez donc à modifier le chemin du répertoire lors d'un copier coller de ce dernier depuis l’explorateur. Enfin, n'oubliez pas d'ajouter à la fin le nom du fichier (pontes_semaine1) avec son extension (.sas7bdat). 
+</p>
+
+
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/pontes_semaine1.sas7bdat`. Chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
+
+```{r module2-question1,exercise=TRUE}
+# Charger le fichier pontes_semaine1.sas7bdat en indiquant son chemin
+# et assigner le résultat à l'objet nommé livre_compte_1
+
+
+# Afficher le contenu de l'objet livre_compte_1
+
+``` 
+
+<div id="module2-question1-hint">
+**Aide 1:** Utiliser la fonction import(). Veillez à indiquer le bon chemin entre parenthèses
+</div>
+
+
+
+<span style="color:#18AC3E;font-size:16px">**Tremblez, messieurs les tableurs **</span>
+
+
+Bon, il nous reste à ouvrir les autres fragments. Deux d'entre eux correspondent à des fichiers produits par des tableurs, comme Excel (extension .xls ou xlsx) et Calc (extension .ods). Pour les ouvrir... nous allons utiliser le même sortilège que précédemment. Et oui : le sortilège `import()` permet aussi d'ouvrir les documents des tableurs ! Magiques !
+
+
+
+
+
+
+La fonction `read.csv()` permet, comme son nom l'indique, de lire (*read*) un fichier CSV.
+
+Nous l'avons vu au chapitre précédent : une fonction a des paramètres. Pour `read.csv`, il y a deux paramètres obligatoires : l’emplacement du fichier à lire et le type de séparateur du fichier.
+
+```{r, collapse = TRUE, eval=FALSE}
+ma_table<-read.csv(file="chemin_du_fichier", sep="separateur_du_fichier")
+```
+
+Le chemin du fichier doit préciser l'emplacement du document csv que vous cherchez à ouvrir, sur votre poste de travail par exemple. Cherchons donc l'emplacement à partir  de l'explorateur dans windows. 
+
+
+
+
+
 <span style="color:#18AC3E;font-size:16px">**Une histoire de séparateur**</span>
 
-Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, dans un format ancestral que les habitants de Kokoro ont visiblement oublié, depuis que les Runes ont été dérobées par SaSSoS : le format CSV. Nous allons donc apprendre, en R, à lire un fichier CSV. Au fait, c'est quoi ? 
+
+
+Au fait, c'est quoi ? 
 
 CSV, c'est un format de fichier où chaque enregistrement apparaît sur sa propre ligne et dont les champs sont séparés par un caractère unique appelé “séparateur”. En l'occurrence, le séparateur est une virgule ou un point-virgule : c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (Comma = virgule en anglais). 
 
@@ -46,40 +148,45 @@ Revenons à nos poules. Bonne nouvelle : IcaRius a trouvé, dans le poulailler, 
 </tr>
 <tr valign="top">
   <td>
-    <pre>Jour,Poule,Pontes
-Lundi,Kokot,2
-Lundi,Madame Mim,3
-Lundi,Chickitta,2
-Lundi,Clara Cluck,4</pre>
+    <pre>Poule,Oeufs
+Gertrude,22
+Madame Mim,20
+Poupoule,18
+Daisy,16
+Kokot,26
+Chickitta,12</pre>
   </td>
   <td></td>
   <td>
   <table style="width:180px ;border: 1px solid black; border-collapse:collapse; text-align:center;">
     <tbody>
       <tr>
-        <th scope="col">Jour</th>
         <th scope="col">Poule</th>
         <th scope="col">Pontes</th>
       </tr>
       <tr>
-        <td>Lundi</td>
-        <td>Kokot</td>
-        <td>3</td>
+        <td>Gertrude</td>
+        <td>22</td>
       </tr>
       <tr>
-        <td>Lundi</td>
         <td>Madame Mim</td>
-        <td>4</td>
+        <td>20</td>
       </tr>    
       <tr>
-        <td>Lundi</td>
-        <td>Chickitta</td>
-        <td>2</td>
+        <td>Poupoule</td>
+        <td>18</td>
       </tr>
       <tr>
-        <td>Lundi</td>
-        <td>Clara Cluck</td>
-        <td>4</td>
+        <td>Daisy</td>
+        <td>16</td>
+      </tr>
+      <tr>
+        <td>Kokot</td>
+        <td>26</td>
+      </tr>
+      <tr>
+        <td>Chickitta</td>
+        <td>12</td>
       </tr>
     </tbody>
   </table>
@@ -87,6 +194,13 @@ Lundi,Clara Cluck,4</pre>
 </tr>
 </tbody>
 </table>
+
+
+
+
+
+
+
 
 Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être utilisable aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
 
@@ -123,12 +237,12 @@ mon_fichier <- read.csv(file="E:/icaRius/data/pontes.csv", sep=",")
 
 Chargez vous-mêmes le fichier `pontes.csv` qui se trouve dans le répertoire `E:\icaRius\data` dans une table nommée `mon_fichier`
 
-```{r module2-question1,exercise=TRUE}
+```{r module2-question11,exercise=TRUE}
 # Charger le ficher pontes.csv
 
 ``` 
  
-<div id="module2-question1-hint">
+<div id="module2-question11-hint">
 **Aide 1:** Utiliser la fonction read.csv(file=,sep=). Veillez à indiquer le bon chemin (file=) vers le fichier et son séparateur (sep=) qui est une virgule (,)
 </div>
 
