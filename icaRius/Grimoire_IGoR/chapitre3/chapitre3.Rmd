@@ -1,5 +1,5 @@
 ---
-title: "Chapitre 3 - le labyrinthe"
+title: "Chapitre 3 - des sortilèges statistiques pour bien cultiver la Mandragore "
 output: 
   html_document:
     theme: cerulean
@@ -18,346 +18,189 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(knitr)
+library(readODS)
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
 
-# Que le vecteur soit avec toi
-
-Vous venez de rencontrer le mage Delagarde, à l'entrée d'un labyrinthe. Comment icaRius échappera-t-il à cet ensemble tortueux de chemins et de directions ? 
-
-Pour le guider, il vous faudra au cours de ce chapitre apprendre à manipuler les briques élémentaires du langage des Runes que sont les vecteurs. Le mage Delagarde a en effet caché les directions à suivre dans un vecteur !!! Avec cet indice sibyllin : *“quelle que soit la direction que tu regardes, la sortie se trouve au delà de Pi”.*
-
-Au fait : outre le fait de vous guider dans le labyrinthe, savoir utiliser un vecteur vous sera d'une aide précieuse pour des opérations portant sur les tables de données, comme la sélection d’observations et de variables.
 
 
+## Le sortilège: un outil précieux au service d'Icarius
 
-## Créer un vecteur
+Pour avancer dans son aventure, Icarius dispose de son précieux grimoire, qu'il a pu alimenter au fur et à mesure de ses rencontres avec des mages dans les villages précédents. Ce grimoire renferme une multitude de sortilèges - appelés **fonctions** dans le langage des Runes- permettant chacun d'accomplir une tâche bien spécifique. Nous avons, dans le chapitre précédent, fait la découverte d'un premier sortilège, `import()`, pour charger des données dans R. 
 
-Un vecteur est un objet regroupant un ensemble de valeurs, comme une colonne dans un tableau. Chaque valeur est associée à une position dans le colonne (comme la position d'une cellule dans la colonne d'un tableau). Par exemple, l'ensemble de valeurs (3,24) est un vecteur avec deux éléments, dans lequel le chiffre 24 correspond à la valeur du deuxième élément du vecteur. 
+Ces sortilèges seront d'un grand secours pour mener à bien les différentes missions qui attendent icaRius durant son périple... Nous allons, dans ce chapitre, un découvrir un peu plus sur les sortilèges, et tant que nous y sommes, produire des statistiques grâce à cette magie !
 
-Le symbole `c()` permet de créer des vecteurs : entre les parenthèses, sont renseignées les valeurs de chaque élément du vecteur, séparées à chaque fois par une virgule
+Dans le monde des Runes, un sortilège est identifié par **son nom suivi de parenthèses** :`nomsortilege()`. A l'intérieur des parenthèses, sont précisés les ingrédients utiles à la confection du sortilège. Pas d'inquiétude, une aide intégrée dans R permet de connaître la liste des ingrédients que l'on peut renseigner pour chaque sortilège.
 
-```{r, results='hide'}
-# Création d'un vecteur avec c()
-c(3,24)
-```
+Si plusieurs ingrédients sont nécessaires, ces derniers sont séparés par une virgule:
 
-Un vecteur peut aussi comprendre du texte (des chaînes de caractère).
-
-```{r, results='hide'}
-# Création d'un vecteur avec un contenu textuel
-c("Daisy","Gertrude","Madame Mim","Poupoule")
-```
-
-*A noter :* on ne peut pas mélanger deux types de valeur dans un même vecteur (soit uniquement du numérique, soit uniquement du texte).
-
-Pour associer un vecteur à un nom d'objet, il faut utiliser l'opérateur d'assignation `<-`. Cette façon de procéder est identique à celle suivie lorsque l'on crée un objet qui ne contient qu'une seule valeur.
-
-```{r}
-# Assignation d'un vecteur à un nom
-mon_vecteur_icarius <- c(3,24)
-mon_vecteur_poulettes <- c("Daisy","Gertrude","Madame Mim","Poupoule")
-```
-
-La fonction `c()` permet également de créer un vecteur à partir de plusieurs autres
-
-```{r, collapse = TRUE}
-# Création des vecteurs de type caractère
-mon_vecteur_poulettes_1 <- c("Kokot","Chickitta")
-mon_vecteur_poulettes_2 <- c("Clara Cluck","Mimi")
-
-# regroupement avec le symbole c()
-c(mon_vecteur_poulettes_1,mon_vecteur_poulettes_2)
-```
-
-
-Il est également possible de créer des vecteurs dont chaque élément est nommé : 
-```{r, collapse = TRUE}
-# Création du vecteur mon_vecteur_icarius
-mon_vecteur_icarius <- c("coeurs" = 3, "âge" = 24)
-mon_vecteur_icarius
-```
-
-Le vecteur comprends deux éléments, ayant chacun un nom et une valeur. L'élément nommmé "coeurs" a pour valeur 3 ; l'élément nommmé "âge" a pour valeur 24.
-
-
----------------------
-
-**Pour aller plus loin** : 
-
-- Quand on souhaite créer un vecteur de longueur 1, la fonction `c()` est inutile. C'est ce qui a été fait pendant le chapitre 1 de la formation.
-```{r, collapse = TRUE}
-# Création d'un vecteur de longueur 1 : les deux façons d'écrire sont identiques
-nb_heart <- 3
-nb_heart <- c(3)
+```{r, collapse = TRUE, eval=FALSE}
+# Application d'un sortilège   
+nomsortilege(ingredient1, ingredient2,...,ingredientN)
 
 ```
 
------------------------
 
-Un vecteur possède plusieurs caractéristiques essentielles, que l’on qualifie d’attributs :
+## Des statistiques descriptives grâce au sortilège "skim"
 
-- son type : les types les plus courants correspondent au type numérique et au type caractère  ;
-- sa longueur : le nombre d’éléments qui le composent.
+Parmi les sortilèges utiles, on retrouve `skim()` qui est dédié aux statistiques descriptives. 
 
-Il est possible d’afficher ces attributs avec les fonctions `mode()` (type) et `length()` (longueur en anglais).
+Il permet de visualiser en sortie (**output**) des statistiques fondamentales (moyenne, médiane...) sur l'ensemble des variables d'un fichier de données. Mais également le nombre de valeurs manquantes, le nombre de valeur unique... et même un mini histogramme qui symbolise la distribution de la variable.  
+Il a d'autres avantages encore, que vous découvrirez sans doute un jour dans votre quête...
 
-```{r, collapse = TRUE}
-# Attributs de mon_vecteur_icarius
-mode(mon_vecteur_icarius)
-length(mon_vecteur_icarius)
+Essayons sur un fichier factice appelé `mon_fichier`, qui se compose de deux variables `ma_variable_1` et `ma_variable_2`. 
 
-# Attributs de mon_vecteur_poulettes
-mode(mon_vecteur_poulettes)
-length(mon_vecteur_poulettes)
+```{r,  echo=FALSE}
+mon_fichier <- data.frame("ma_variable_1" = c(10,9,13,18,7,12), "ma_variable_2" = c(35,29,43,26,34,31))
 ```
 
-## A vous de jouer
 
-<span style="color:#18AC3E;font-size:16px">**Explorons les vecteurs du Mage Delagarde**</span> 
-
-Le Mage Delagarde a caché dans des vecteurs les indications pour franchir sans encombre le labyrinthe. Il vous remet deux vecteurs, intitulés `vecteur_choix` et `vecteur_seuil`. Commencez par explorer le contenu de ces deux vecteurs.
-
-```{r, echo=FALSE}
-vecteur_choix <- c("Droite","Gauche","Gauche","Droite","Droite",
-"Gauche","Droite","Gauche","Gauche","Droite",
-"Droite","Gauche","Droite","Gauche","Gauche",
-"Droite","Droite","Gauche","Gauche","Droite")
-
-vecteur_seuil <- rep(pi,20)
-vecteur_ajust <- rep(-1,20)
-vecteur_ajust[c(6,10,12,19)]<-1
-vecteur_seuil <- vecteur_seuil + runif(20)*vecteur_ajust
-
+```{r, collapse = TRUE, echo=FALSE,eval=T, message = FALSE}
+# Ouverture du chapitre skimr
+library(skimr)
 ```
 
-```{r module3-question1,exercise=TRUE}
-# Les deux vecteurs sont déjà chargés sous les noms
-# vecteur_choix et vecteur_seuil
-# Déterminer le type d'information dans vecteur_choix
-# Combien d'éléments comprend ce vecteur ?
-# Afficher l'ensemble des éléments du vecteur
+Appliquons le sortilège `skim()` au fichier :
+```{r, collapse = FALSE}
+# Appel du sortilège skimr() sur le fichier mon_fichier   
+skim(mon_fichier)
+```
+
+Les résultats du sortilège se présentent de telle façon que les statistiques essentielles sont regroupées sur une même ligne pour chaque variable. On y retrouve :
+
+- la moyenne (*Mean*), la valeur minimale (*p0*) et la valeur maximale (*p100*)
+- la médiane (*p100*), qui détermine le seuil séparant les valeurs en deux parties égales, une moitié des valeurs qui sont toutes inférieures ou égales à la médiane et l'autre moitié des valeurs, qui sont toutes supérieures ou égales à la médiane
+- le premier quartile (*p25*) et le troisième quartile (*p75*). Le premier quartile est le seuil pour lequel 25% des valeurs de la variable sont inférieures ou égales à ce seuil. Le troisième quartile est le seuil pour lequel 25% des valeurs de la variable sont supérieures ou égales à ce seuil.  
+
+Tout ceci parce que ces termes font référence à des "moments" d'une distribution, aussi appelés des percentiles (d'où la lettre p). La médiane est donc le 50e percentile, le 1er quartile est le 25e percentile, etc. 
 
 
-
-# Mêmes questions avec vecteur_seuil
-
+Le sortilège `skim()` dispose d'un paramètre complémentaire, assez pratique : il permet de choisir facilement sur quelle(s) variable(s) l'on souhaite calculer les statistiques - et pas nécessairement sur toutes les variables d'un fichier. Il suffit pour cela de préciser le nom de la (ou des) variable(s) qui vous intéresse, comme un ingrédient particulier du sortilège :
 
 
-# (à chaque opération, appuyer sur le bouton "Run code")
+```{r, collapse = FALSE}
+# Appel du sortilège skimr() sur le fichier mon_fichier et la variable ma_variable_1  
+skim(mon_fichier,ma_variable_1)
+``` 
+
+
+## A vous de jouer : l'exploitation du fermier Tellus
+
+Au sein du village de GrissGrass, les deux fermiers Galia et Tellus cultivent la mandragore, une plante dont le jus a des pouvoirs magiques... Le fermier Galia, petit homme frêle et fort âgé, ou le fermier Tellus, robuste gaillard qui joue les gros bras : lequel des deux obtient le meilleur rendement en jus de mandragore ? Qui des deux sait réellement cultiver cette plante ? <p>
+
+Le chef du village remet à icaRius les livres de récolte de chacun des fermiers...Les chiffres vont bientôt parler! Et si icaRius trouve la bonne réponse, il gagnera un filtre de Mandragore, un élément essentiel pour la suite de sa quête.
+
+Voici l'énigme à résoudre : <span style="color:#18AC3E;font-size:16px">**"En moyenne, sur les 10 dernières années, quelle exploitation a donné le plus de jus de Mandragore ?"**</span>.
+
+
+```{r,  echo=FALSE, message = FALSE}
+fichier_tellus<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Tellus.ods")
+fichier_galia<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Galia.ods")
+```
+
+**Commençons par exploiter le fichier du fermier Tellus:** 
+```{r ex1,exercise=TRUE}
+# Le livre de récolte est déjà chargé, avec le nom : fichier_tellus
+# Afficher le contenu du fichier dans R en tapant son nom.
+
+
+# Fin de l'exercice
 ``` 
  
-```{r module3-question1-solution}
-# Les deux vecteurs sont déjà chargés sous les noms
-# vecteur_choix et vecteur_seuil
-# Déterminer le type d'information dans vecteur_choix
-# Combien d'éléments comprend ce vecteur ?
-mode(vecteur_choix)
-length(vecteur_choix)
-vecteur_choix
-# Afficher l'ensemble des éléments du vecteur
-# Afficher l'élément en 6ème position
-mode(vecteur_seuil)
-length(vecteur_seuil)
-vecteur_seuil
 
-# (à chaque opération, appuyer sur le bouton "Run code")
+```{r ex1-solution}
+# Le livre de récolte est déjà chargé, avec le nom : fichier_tellus
+# Afficher le contenu du fichier dans R en tapant son nom.
+fichier_tellus
+
+# Fin de l'exercice
 ``` 
 
-Voilà des objets bien mystérieux : Le mage Delagarde a, semble-t-il, caché dans le `vecteur_choix` une liste de directions, à gauche ou à droite. Le `vecteur_seuil` se compose quant à lui d'une suite de valeurs numériques. Bizarre bizarre... Continuons notre exploration pour en savoir plus...
+Le livre de récolte comprend cinq variables : le nom de l'exploitation (répété sur chaque ligne, ici 'Tellus'), l'année de la récolte (variable `An`), le nombre de plants de Mandragore cultivés (variable `Plants`), le nombre de feuilles de Mandragore collectées (variable `Feuilles`) et enfin le nombre de litres de jus de Mandragore (variable `Litres`). Chaque ligne du fichier représente une année de collecte ; il y a au total 10 lignes pour 10 années de récolte. Par exemple, en l'an 1013, l'exploitation de Tellus comptait 51 plants et a collecté 510 feuilles, produisant in fine 36 litres de jus de Mandragore. 
 
-## Manipuler les vecteurs
+Utilisons maintenant notre sortilège `skim()` pour calculer la production moyenne de jus de Mandragore sur les 10 années allant de l'an 1011 à l'an 1020.
 
-Pour sélectionner un élément dans un vecteur, il faut soit le désigner par sa position dans le vecteur, soit par nom. Ainsi, l'opérateur d'extraction `[]` permet de sélectionner des éléments en utilisant leur **position dans le vecteur** :
-```{r, collapse = TRUE}
-mon_vecteur_poulettes <- c("Daisy","Gertrude","Madame Mim","Poupoule")
-# Sélection de l'élément en position 2
-mon_vecteur_poulettes[2]
-# Sélection de l'élément en position 4
-mon_vecteur_poulettes[4]
-```
-
-Pour extraire plus d'une valeur à la fois, il faut utiliser l'opérateur `[]` avec l'ensemble des positions souhaitées : 
-```{r, collapse = TRUE}
-# Sélection des éléments en position 2 et 4
-mon_vecteur_poulettes[c(2,4)]
-```
-
-Notez que dans l'exemple précédent, l'ensemble des positions souhaitées s'écrit... comme un vecteur ! En effet, `c(2,4)` est aussi un vecteur, de deux éléments avec pour valeur respective 2 et 4. Autrement dit, vous pouvez utiliser des vecteurs pour manipuler d'autres vecteurs...
-
-Pour sélectionner **toutes les valeurs sauf certaines**, il faut indiquer leur **position précédée du signe `-`** (comme de soustraire l'élément)
-```{r, collapse = TRUE}
-mon_vecteur_poulettes <- c("Daisy","Gertrude","Madame Mim","Poupoule")
-# Sélection de tous les éléments SAUF celui en position 2
-mon_vecteur_poulettes[-2]
-# Sélection de tous les éléments SAUF ceux en position 2 et 4
-mon_vecteur_poulettes[-c(2,4)]
-```
-
-\ 
-
-Lorsque le vecteur comprend des éléments nommés, ces derniers peuvent être sélectionnés par leur nom :
-```{r, collapse = TRUE}
-# Création du vecteur mon_vecteur_icarius
-mon_vecteur_icarius <- c("coeurs" = 3, "âge" = 24)
-# Sélection de l'élément nommé "coeurs"
-mon_vecteur_icarius["âge"]
-```
-
-Il est possible d'**afficher les noms** associés à un vecteur en utilisant la fonction `names()` - cette même fonction que celle utilisée pour trouver les noms des colonnes dans un fichier (voir chapitre 2).
-
-```{r, collapse = TRUE}
-# Affichage des noms associés au vecteur c2
-names(mon_vecteur_icarius)
-
-```
-
-A vous de pratiquer !
-
-```{r module3-question2,exercise=TRUE}
-# Les deux vecteurs sont déjà chargés sous les noms
-# vecteur_choix et vecteur_seuil
-# Afficher l'élément en 6ème position dans vecteur_choix
+```{r ex2,exercise=TRUE}
+# Le livre de récolte est déjà chargé, avec le nom : fichier_tellus
+# Calculer les statistiques descriptives sur le fichier 
+# en utilisant le sortilège skim() 
 
 
-# Afficher l'élément en 6ème position dans vecteur_seuil
-
-
-# (à chaque opération, appuyer sur le bouton "Run code")
+# fin de l'exercice
 ``` 
  
-```{r module3-question2-solution}
-# Les deux vecteurs sont déjà chargés sous les noms
-# vecteur_choix et vecteur_seuil
-# Afficher l'élément en 6ème position dans vecteur_choix
-vecteur_choix[6]
 
-# Afficher l'élément en 6ème position dans vecteur_seuil
-vecteur_seuil[6]
+```{r ex2-solution}
+# Le livre de récolte est déjà chargé, avec le nom : fichier_tellus
+# Calculer les statistiques descriptives sur le fichier 
+# en utilisant le sortilège skim() 
+skim(fichier_tellus)
 
-# (à chaque opération, appuyer sur le bouton "Run code")
+# fin de l'exercice
 ``` 
 
-Vous venez d'afficher la valeur de l'élément en 6ème position du vecteur_choix, et de même pour vecteur_seuil. Hum, hum : tout ceci reste abscons. Continuons donc notre apprentissage.
+## A vous de jouer : l'exploitation du fermier Galia
+
+Utilisons ce même sortilège `skim()` pour étudier le livre de récolte du fermier Galia.
+
+```{r ex3,exercise=TRUE}
+# Le livre de récolte est déjà chargé, avec le nom : fichier_galia
+# Afficher le contenu du fichier dans R
 
 
-## Du calcul sur les vecteurs
-
-Armés de nos vecteurs comme d'une épée vorpale, nous voici en mesure d'affronter les plus grands dangers... comme le *calcul vectoriel* ! R permet de réaliser des opérations mathématiques sur les vecteurs, à commencer par de l'arithmétique : addition, soustraction, multiplication...
-
-Les opérations arithmétiques sont appliquées sur chaque élément numérique d'un vecteur :
-```{r, collapse = TRUE}
-# Opérations arithmétiques
-mon_vecteur_icarius <- c("coeurs" = 3, "âge" = 24)
-mon_vecteur_icarius*2
-mon_vecteur_icarius/3
-```
-
-Des calculs peuvent être conduits sur plusieurs vecteurs entre eux. Dans ce cas, les calculs sont appliqués termes à termes :
-
-```{r, collapse = TRUE}
-# Opérations arithmétiques
-mon_vecteur_icarius <- c("coeurs" = 3, "âge" = 24)
-mon_vecteur_statia <- c("coeurs" = 2, "âge" = 16)
-
-mon_vecteur_icarius+mon_vecteur_statia
-mon_vecteur_icarius-mon_vecteur_statia
-```
-
-Découvrons ensemble une dernière manipulation : la sélection d'un sous-ensemble du vecteur selon des conditions. Voyons d'abord comment rédiger une condition dans R :
-
-**Code R**    | **Traduction** 
-------------- | ------------- 
-`a == 1`      | a égal à 1
-`a != 1`      | a différent de 1
-`a < 1`       | a strictement inférieur à 1
-`a <= 1`      | a inférieur ou égal à 1
-`a > 1`       | a strictement supérieur à 1
-`a >= 1`      | a supérieur ou égal à 1
-
-**Attention :** dans R, l'égalité s'écrit avec un double signe `==`. 
-
-Ces conditions peuvent s'appliquer à un élément unitaire (comme `a` dans le tableau) ou à l'ensemble des éléments d'un vecteur. Pour cela, la fonction `which()` (lequel en anglais) permet de savoir quels sont les éléments d'un vecteur qui répondent au critère de sélection que je souhaite appliquer. La syntaxe est alors du type : `which(ma_condition)`.
-
-
-Par exemple :
-
-```{r, collapse = TRUE}
-# Où se trouve l'élément de mon_vecteur_poulettes 
-# dont la valeur est Gertrude ?
-mon_vecteur_poulettes <- c("Daisy","Gertrude","Madame Mim","Poupoule")
-which(mon_vecteur_poulettes== "Gertrude")
-#La réponse donne la position de l'élément dans le vecteur
-# ici la position n°2
-```
-
-Cette façon d'identifier la position des éléments vaut aussi pour des vecteurs numériques.
-
-
-```{r, collapse = TRUE}
-# Où se trouve l'élément supérieur à 20
-# dans le vecteur mon_vecteur_icarius ?
-mon_vecteur_icarius <- c("coeurs" = 3, "âge" = 24)
-which(mon_vecteur_icarius > 20)
-# Il est en position n°2
-
-```
-
-
-
-## Trouvons la bonne direction !
-
-Nous l'avons vu dans l'exercice précédent : le mage Delagarde a caché dans le `vecteur_choix` une liste de directions, à gauche ou à droite. Le `vecteur_seuil` se compose quant à lui d'une suite de valeurs numériques. Il nous faut interpréter l'énigme posée par le mage Delagarde : *"quelle que soit la direction vers laquelle tu regardes, la sortie se trouve au delà de Pi".* Après de longues réflexions, IcaRius a trouvé ! Certains éléments du `vecteur_seuil` ont une valeur au dessus de Pi. Par exemple, le 6ème élèment de `vecteur_seuil` vaut plus que Pi (valeur de Pi = 3,14). La place de ces éléments indique la valeur des bonnes directions à prendre, dans le `vecteur_choix`. Ainsi, le 6ème élément de `vecteur_choix` indique la direction à suivre pour se rapprocher de la sortie. 
-
-Ah, ces statisiens, quels esprits alambiqués !
-
-Il nous faut donc :
-
-- rechercher la position des éléments dans `vecteur_seuil` dont la valeur est supérieure à Pi
-- sélectionner dans `vecteur_choix` les éléments qui occupent ces mêmes positions
-- puis, une fois dans le labyrinthe, suivre dans l'ordre cette succession de direction à chaque fois qu'il faut choisir entre gauche et droite...
-
-Allons-y... dans R !
-
-```{r module3-question3,exercise=TRUE}
-# Les deux vecteurs sont déjà chargés sous les noms
-# vecteur_choix et vecteur_seuil
-
-# Tâche n°1 : chercher les éléments de  vecteur_seuil dont la valeur est supérieure à pi
-# et sauvegarder cet ensemnble de position dans un vecteur appelé vecteur_position
-
-
-# Tâche n°2 : extraire de vecteur_choix les éléments qui sont dans les emplacements 
-# de vecteur_position et afficher cet ensemble de directions
-
-
-# L'ordre des directions qui apparaissent correspond
-# à la succession des directions à prendre dans le labyrinthe !
+# Fin de l'exercice
 ``` 
  
-```{r module3-question3-solution}
-# Les deux vecteurs sont déjà chargés sous les noms
-# vecteur_choix et vecteur_seuil
 
-# Tâche n°1 : chercher les éléments de  vecteur_seuil dont la valeur est supérieure à pi
-# et sauvegarder cet ensemnble de position dans un vecteur appelé vecteur_position
-vecteur_position <- which(vecteur_seuil>pi)
+```{r ex3-solution}
+# Le livre de récolte est déjà chargé, avec le nom : fichier_galia
+# Afficher le contenu du fichier dans R
+fichier_galia
 
-# Tâche n°2 : extraire de vecteur_choix les éléments qui sont dans les emplacements 
-# de vecteur_position et afficher cet ensemble de directions
-vecteur_choix[vecteur_position]
-
-# L'ordre des directions qui apparaissent correspond
-# à la succession des directions à prendre dans le labyrinthe !
+# Fin de l'exercice
 ``` 
 
-<div id="module3-question2-hint">
-**Aide 1:** il suffit de taper pi dans R pour indiquer sa valeur
-**Aide 2:** which(mon_vecteur > X) donne la position des éléments > X
-**Aide 3:** mon_vecteur[c(2,4)] extrait les éléments de mon_vecteur en position 2 et 4
-</div>
+Le livre de récolte du fermier Galia est tenu tout comme celui du fermier Tellus : mêmes variables, même nombre d'enregistrements.  
+Puisque nous nous intéressons précisément à la production moyenne en litres de filtre de Mandragore, sélectionnons de suite la variable `Litres` en lui appliquant le sortilège `skim()`
 
-Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius** pour reprendre la partie...
+```{r ex4,exercise=TRUE}
+# Le livre de bilan est déjà chargé, avec le nom : fichier_galia
+# Calculer les statistiques descriptives pour la variable 'Litres' du fichier 
 
-**Fin du chapitre 3 >> reprenez la partie d'Icarius !!!** 
+
+# fin de l'exercice
+``` 
+ 
+
+```{r ex4-solution}
+# Le livre de bilan est déjà chargé, avec le nom : fichier_galia
+# Calculer les statistiques descriptives pour la variable 'Litres' du fichier 
+skim(fichier_galia,Litres)
+
+# fin de l'exercice
+``` 
+
+
+
+## La ferme la plus productive en Mandragore ?
+
+Au fait, revenons à la question posée par le chef du village : "En moyenne, sur les 10 dernières années, quelle exploitation a donné le plus de jus de Mandragore ?" Reprenez les résultats obtenus avec votre sortilège `skim()` pour comparer les moyennes des deux exploitations...
+
+
+```{r question1,echo=FALSE}
+question("La production moyenne de Tellus et de Galia sont, respectivement, de :",
+type="single",
+allow_retry = TRUE,
+incorrect="Retente ta chance",
+answer("34 et 41"),
+answer("36 et 36,5",correct=TRUE),
+answer("41 et 33"),
+correct="Félicitations, la réponse à donner au chef du village est donc : Galia (avec G majuscule)"
+)
+
+```   
+ 
+Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius** 
+

@@ -40,22 +40,16 @@ Le contenu de ce fichier - que seul le terrible SaSSoS est normalement capable d
 
 ![](images/pontes_sas.png)
 
-Pour charger un fichier, nous allons utiliser un sortilège prévu à cet effet dans R. Dans le monde des Runes, un sortilège est identifié par **son nom suivi de parenthèses** :`nomsortilege()`. A l'intérieur des parenthèses, sont précisés les ingrédients utiles à la confection du sortilège. Pas d'inquiétude, une aide intégrée dans R permet de connaître la liste des ingrédients que l'on peut renseigner pour chaque sortilège. Si plusieurs ingrédients sont nécessaires, ces derniers sont séparés par une virgule:
+Pour charger un fichier, nous allons utiliser un sortilège prévu à cet effet dans R. Dans le monde des Runes, un sortilège est identifié par **son nom suivi de parenthèses** :`nomsortilege()`. Nous en parlerons davantage dans un prochain chapitre. 
 
-```{r, collapse = TRUE, eval=FALSE}
-# Application d'un sortilège   
-nomsortilege(ingredient1, ingredient2,...,ingredientN)
-
-```
-
-Pour lire un fichier SAS, nous allons utiliser le sortilège `import()` qui permet, comme son nom l'indique, d'importer (*import*) un fichier dans R. Pour utiliser `import()`, il y a un ingrédient à préciser : l’emplacement du fichier à lire.
+Pour lors, nous allons découvrir un premier sortilège, dénommé `import()`, qui permet, comme son nom l'indique, d'importer (*import*) un fichier dans R. Pour utiliser `import()`, il y a un ingrédient à préciser : l’emplacement du fichier à lire.
 
 ```{r, collapse = TRUE, eval=FALSE}
 # J'importe le fichier
 import("chemin_du_fichier")
 ```
 
-Pour s'y retrouver, autant tout de suite ranger ce que l'on est en train d'importer dans R. Pour cela, on assigne à un nouvel objet le contenu du fichier lu, en choisissant le nom de cet objet. Par exemple, appelons `livre_compte_1` ce qui sera importé dans R en lisant le fichier SAS. 
+Pour s'y retrouver, autant tout de suite ranger ce que l'on est en train d'importer dans R. Pour cela, on assigne à un nouvel objet le contenu du fichier importé, en choisissant le nom de cet objet. Par exemple, appelons `livre_compte_1` ce qui sera importé dans R en lisant le fichier SAS. 
 
 ```{r, collapse = TRUE, eval=FALSE}
 # J'importe le fichier et je l'assigne à l'objet livre_compte_1
