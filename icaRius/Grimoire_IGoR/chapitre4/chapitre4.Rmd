@@ -1,5 +1,5 @@
 ---
-title: "Chapitre 7 - Conjuguer pour mieux cultiver - ou plutôt, pour mieux calculer..."
+title: "Chapitre 4 - Conjuguer pour mieux cultiver - ou plutôt, pour mieux calculer..."
 output: 
   html_document:
     theme: cerulean
@@ -35,27 +35,28 @@ knitr::include_graphics("images/symbole_pipe.png")
 
 **Le pipe** est un opérateur qui facilite l'enchainement de sortilèges sur un fichier de données. Le signe **%>%** peut être lu comme **"ensuite".**  Ainsi, si on utilise cet opérateur:
 
-```{r, collapse = TRUE, eval=FALSE}
-summary(mon_fichier)
+```{r, collapse = TRUE, eval=FALSE, echo=TRUE}
+skim(mon_fichier)
 # EST EQUIVALENT A :
-mon_fichier %>% summary()
+mon_fichier %>% skim()
 ```
 
 Le sortilège se trouvant immédiatement à la droite du %>% utilise comme objet en entrée l'élement se trouvant à la gauche du %>%. En langue vernaculaire, cela donne: **"Je prends mon fichier de données et ensuite je calcule les indicateurs statistiques sur l'ensemble des variables de ce fichier"**
 <p>
 <p>
-De la même façon :
-```{r, collapse = TRUE, eval=FALSE}
-skim(mon_fichier,nom_de_la_variable)
+On peut également choisir de ne s'intéresser qu'à une seule des variables du fichier :
+
+```{r, collapse = TRUE, eval=FALSE, echo=TRUE}
+skim(mon_fichier,nom_variable)
 # EST EQUIVALENT A :
-mon_fichier %>% skim(nom_de_la_variable)
+mon_fichier %>% skim(nom_variable)
 ```
 
 Si on traduit, cela donne: **"Je prends mon fichier de données et ensuite je calcule les indicateurs statistiques sur la variable selectionnée dans ce fichier"**
 
 ## Un peu de pratique...
  
-Continuons avec l'exploitation du fichier des fermiers Tellus et Galia, d'abord avec le sortilège `summary()`
+Continuons avec l'exploitation du fichier des fermiers Tellus et Galia, avec le sortilège `skim()`
 
 ```{r,  echo=FALSE, message = FALSE}
 fichier_tellus<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Tellus.ods")
@@ -65,7 +66,7 @@ fichier_galia<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Galia.
 ```{r mod2-tutoriel1-ex5,exercise=TRUE}
 # Le livre de récolte est déjà chargé, avec le nom fichier_tellus
 
-# En utilisant le %>% et le sortilège summary(), 
+# En utilisant le %>% et le sortilège skim(), 
 # calculer les statistiques descriptives sur toutes les variables 
 # pour le fichier
 
@@ -76,15 +77,15 @@ fichier_galia<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Galia.
 ```{r mod2-tutoriel1-ex5-solution}
 # Le livre de récolte est déjà chargé, avec le nom fichier_tellus
 
-# En utilisant le %>% et le sortilège summary(), 
+# En utilisant le %>% et le sortilège skim(), 
 # calculer les statistiques descriptives sur toutes les variables 
 # sur fichier_tellus
-fichier_tellus %>% summary()
+fichier_tellus %>% skim()
 
 # fin de l'exercice
 ``` 
 
-Et maintenant avec le sortilège `skim()`
+Et maintenant passons au fichier du fermier Galia :
 
 ```{r mod2-tutoriel1-ex6,exercise=TRUE}
 # Le livre de récolte est déjà chargé, avec le nom fichier_galia
@@ -138,9 +139,9 @@ farine %>%
 
 Vous avez compris la magie du pipe ? A vous de jouer !
 
-Tellus a bien fourni son sortilège, mais dans le désordre. Recomposons les étapes comme il convient. Voici quelques indices :
+Tellus a bien fourni son secret, mais dans le désordre. Recomposons les étapes comme il convient. Voici quelques indices :
 
-- Une conjugaison de sortilège doit d'abord commencer par l'objet sur lequel débute l'enchainement de sortilèges. Ici, l'objet par tout commence, c'est le champ...
+- Une conjugaison de sortilèges doit d'abord commencer par l'objet sur lequel débute l'enchainement de sortilèges. Ici, l'objet par tout commence, c'est le champ dans lequel on cultive la Mandragore...
 - N'oubliez pas : Galia n'utilise pas de magie noire, donc pas de biotues (et pas de pesticide non plus !)
 - Ne vous laissez pas embrouiller par le terrible SaSSoS et sa langue serpentine - pas de `set` ou de `run` dans la langue des Runes.
 - Le meilleur moment pour arroser une terre, c'est quand elle vient d'être labourée puis semée.
@@ -200,4 +201,4 @@ question_parsons(
 )
 ```
 
- 
+ Vous avez trouvé ? L'exercice ci-dessus vous apportera **la réponse à reporter dans le jeu Icarius** 
