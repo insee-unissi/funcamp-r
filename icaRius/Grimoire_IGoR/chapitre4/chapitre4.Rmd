@@ -124,7 +124,7 @@ Imaginez Sylvain, un cuisinier du dimanche qui veut faire du pain, voilà la rec
 
 En langage des Runes, la même recette s'écrira de la façon suivante :
 
-```{r,eval = F}
+```{r,eval = F, echo=TRUE}
 farine %>% 
   ajouter(sel) %>% 
   ajouter(levure) %>% 

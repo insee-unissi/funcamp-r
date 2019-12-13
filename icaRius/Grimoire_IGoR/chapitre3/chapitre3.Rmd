@@ -71,7 +71,7 @@ skim(mon_fichier)
 Les résultats du sortilège se présentent de telle façon que les statistiques essentielles sont regroupées sur une même ligne pour chaque variable. On y retrouve :
 
 - la moyenne (*Mean*), la valeur minimale (*p0*) et la valeur maximale (*p100*)
-- la médiane (*p100*), qui détermine le seuil séparant les valeurs en deux parties égales, une moitié des valeurs qui sont toutes inférieures ou égales à la médiane et l'autre moitié des valeurs, qui sont toutes supérieures ou égales à la médiane
+- la médiane (*p50*), qui détermine le seuil séparant les valeurs en deux parties égales, une moitié des valeurs qui sont toutes inférieures ou égales à la médiane et l'autre moitié des valeurs, qui sont toutes supérieures ou égales à la médiane
 - le premier quartile (*p25*) et le troisième quartile (*p75*). Le premier quartile est le seuil pour lequel 25% des valeurs de la variable sont inférieures ou égales à ce seuil. Le troisième quartile est le seuil pour lequel 25% des valeurs de la variable sont supérieures ou égales à ce seuil.  
 
 Tout ceci parce que ces termes font référence à des "moments" d'une distribution, aussi appelés des percentiles (d'où la lettre p). La médiane est donc le 50e percentile, le 1er quartile est le 25e percentile, etc. 

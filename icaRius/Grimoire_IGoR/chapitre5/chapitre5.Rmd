@@ -51,7 +51,7 @@ Tous les sortilèges des graphiques commencent par le nom de code `gf_`.
 Par exemples,    
  - pour faire un graphique de points, le sortilège est `gf_point`,   
  - pour faire une courbe il y a `gf_line`    
- - pour faire un histogramme ce sera `gf_bar`.  
+ - pour faire un diagramme en barre ce sera `gf_bar`.  
   Il y a pleins d'autres sortillèges sur les graphiques que tu peux voir dans l'aide du package ggformula.
 
  
@@ -97,7 +97,7 @@ base_individus %>%
 ```
 
  
-Si je veux tracer un histogramme représentant le nombre de personnes selon le sexe:
+Si je veux tracer un diagramme en barre représentant le nombre de personnes selon le sexe:
 
 ```{r t3, collapse = TRUE}
 
