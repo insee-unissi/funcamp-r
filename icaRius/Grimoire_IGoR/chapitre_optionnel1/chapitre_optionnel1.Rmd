@@ -1,5 +1,5 @@
 ---
-title: "Chapitre 3 - le labyrinthe"
+title: "Chapitre optionnel 1 - le labyrinthe"
 output: 
   html_document:
     theme: cerulean

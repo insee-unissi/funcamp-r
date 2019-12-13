@@ -1,5 +1,5 @@
 ---
-title: "Module 5 - do you dplyr ?"
+title: "Chapitre 8 - do you dplyr ?"
 output: 
   html_document:
     theme: cerulean
@@ -61,7 +61,7 @@ filter(naissances, Village == "Kokoro")
 Plusieurs conditions peuvent être combinées, en utilisant le caractère `&` entre chaque condition. Par exemple, pour n'afficher que les données relatives au village de Kokoro et à l'année 1212 :
 
 ```{r, collapse = TRUE}
-filter(naissances, Village == "Kokoro" & An == "1212")
+filter(naissances, Village == "Kokoro", An == "1212")
 ```
 
 
@@ -97,7 +97,7 @@ A vous de prendre la plume !
 ```{r chapitre5-ex1-solution}
 # Filtrer le registre des naissances pour avoir les naissances
 # de l'année 1213 dans le village de Kokoro
-filter(naissances, An == 1213 & Village == "Kokoro")
+filter(naissances, An == 1213, Village == "Kokoro")
 
 
 # fin de l'exercice
@@ -205,4 +205,4 @@ correct="Félicitations, la réponse à donner à Mam' Grouxi est donc : Hylia (
 
 Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius** pour reprendre la partie...
 
-**Fin du module 5 >> reprenez la partie d'Icarius !!!** 
+**Fin du chapitre 8 >> reprenez la partie d'Icarius !!!** 

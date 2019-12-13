@@ -1,5 +1,5 @@
 ---
-title: "Chapitre 4 - la plume d'IGoR"
+title: "Chapitre 7 - la plume d'IGoR"
 output: 
   html_document:
     theme: cerulean
@@ -147,4 +147,4 @@ Vous voilà désormais en capacité d'invoquer les extensions du tidyverse, dont
 De quoi acquérir une force statistique herculéenne ! Voyons d'ailleurs comment icaRius soulève les obstacles rencontrés, maintenant qu'ils deviennent légers comme une plume...
 
 
-**Fin du chapitre 4 >> reprenez la partie d'Icarius !!!** 
+**Fin du chapitre 7 >> reprenez la partie d'Icarius !!!** 
