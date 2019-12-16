@@ -138,9 +138,8 @@ Quelques indices :
 ```{r chapitre6-ex1-solution}
 # Crée le graphique
 
-donnees_secretes %>% 
-  gf_point(Nb_canicule ~ dist_royaume,size = ~ nb_guerriers) %>% 
-  gf_text(label = ~ royaume)
+donnees_secretes%>%gf_point(Nb_canicule~dist_royaume,size=~nb_guerriers)%>%gf_text(Nb_canicule~dist_royaume,label=~royaume,size=2.5,check_overlap = TRUE)
+
 # Fin de l'exercice
 ``` 
 
