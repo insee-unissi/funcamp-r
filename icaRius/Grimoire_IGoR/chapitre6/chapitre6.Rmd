@@ -23,12 +23,14 @@ library(dplyr)
 library(ggformula)
 library(readxl)
 base_individus <- tibble(poids = sort(rnorm(100, mean = 80, sd = 30)), taille = sort(rnorm(100, mean = 170, sd = 20)), nombre = rnorm(100, 100, 50), sexe = sample(c("H","F"),size = 100,replace = T), age = rep(c("20","40","60","80"), 25),numind=1:100)
-donnees_secretes <- read_excel("../../data/nbguerriers2.xlsx")
+donnees_secretes <- read_excel("../../data/nbguerriers.xlsx")
+
 ```
 
-## Vérifions tes connaissances avant de continuer
+## Le sortilège gf_point
+gf_point est un sortilège permettant de représenter des nuages de points. Il faut introduire a minima,deux ingrédients dans la recette du sortilège: l'abcisse x des points et leur ordonnée y. Cela se traduit en langage des Runes par : gf_point(y~x).
 
-Quel est le code pour faire un nuage de point (sortilège `gf_point()`) à partir de la table *base_individus* pour représenter le poids (variable `poids`) en fonction (signe `~`) de la taille (variable `taille`) ?
+A partir, de ce qui précèdre, quel est le code pour faire un nuage de points à partir de la table *base_individus* en représentant le poids (variable `poids`) en ordonnées et la taille (variable `taille`) en abcisse ?
 
 ```{r module2-etape2,exercise=TRUE}
 # Crée le graphique
@@ -45,12 +47,12 @@ base_individus %>%
 ``` 
 
 
-Bravo, tu maîtrises parfaitement les fondamentaux des graphiques ! Mais, entre nous, le résultat n'est pas très esthétique pour l'instant. Et si nous apprenions, avec le langage runique, à produire des graphiques chatoyants ?
+Bravo, tu maîtrises parfaitement les fondamentaux pour tracer un nuage de points ! Mais, entre nous, le résultat n'est pas très esthétique pour l'instant. Et si nous apprenions, avec le langage runique, à produire des graphiques chatoyants ?
 
 
 ##  Oh les jolis graphiques
 
-A partir du graphique précédent, 
+À partir du graphique précédent, 
 
 ```{r t1, eval = FALSE}
 
@@ -59,11 +61,10 @@ base_individus %>%
   gf_point(poids ~ taille)
 
 ```
+###  Assez de la grisaille ? On passe à la couleur
 
 Comment faire pour différencier sur le même graphique les points concernant les femmes, des hommes ?
-Il s'agirait de changer la couleur ("qui est fixe") par une couleur qui varie `en fonction de` la variable sexe.  
-Je suis sûr que tu as compris, il faut utiliser l'operateur `~`.
-L'ingrédient **color** sera donc égal à ~ sexe.
+On peut le faire en utilisant l'ingrédient **color** pour changer la couleur ("qui est fixe par défaut") `en fonction de` la variable sexe.  Tu as compris qu'il faut aussi utiliser l'operateur `~`. L'ingrédient **color** sera donc égal à ~ sexe.
 
 Et voilà :
 
@@ -75,53 +76,53 @@ base_individus %>%
 
 ```
 
+###  Des points qui changent de taille, dites-vous ? Hips.
 
-Puisqu'on y est, si je veux faire varier la taille des ronds du nuage de points en fonction de la variable nombre...   
-
-Oui c'est encore l'operateur `~`. Cette fois, il faut utiliser l'ingrédient **size** et lui donner la valeur ~ nombre. 
+Puisqu'on y est, si je veux faire varier la taille des ronds d'un nuage de points en fonction de la valeur d'une variable dénommeée nombre, j'utilise l'ingrédient **size** et lui donne la valeur ~ nombre : size = ~nombre. Dans l'exemple qui suit, je vais ainsi représenter sur un nuage de points le nombre d'habitants des royaumes selon le nombre de guerriers et faire varier la taille des ronds proportionnellement au nombre de chevaux de chaque royaume. L'ensemble des informations se trouve dans le fichier donnees_secretes.
 
 ```{r t3, collapse = TRUE}
 
-base_individus %>%
+donnees_secretes %>%
   
-  gf_point(poids ~ taille, title = "Courbe de poids en fonction de la taille", color = ~ sexe, size = ~ nombre)
+  gf_point(nb_habitants ~ nb_guerriers, title = "Les royaumes, selon le nombre d'habitants, de guerriers et de chevaux", size = ~ nb_chevaux)
 
 ```
 
-Au risque de rendre le graphique très difficile à lire, tu peux aussi changer la forme des points du nuage de points en changeant la valeur de l'ingrédient **shape** (forme en anglais). Soit en lui affectant une valeur fixe shape = 1 (un chiffre entre 0 et 25) par exemple ou en lui affectant une valeur qui varie comme cela shape = ~ variable.
+###  Des points qui ne sont plus des points ? 
+
+Au risque de rendre le graphique plus difficile à lire, je peux aussi changer la forme des points du nuage de points en attribuant une valeur à l'ingrédient **shape** (forme en anglais). Par exemple, en lui affectant une valeur fixe shape = 1 (un chiffre entre 0 et 25)  ou en lui affectant une valeur qui varie comme cela shape = ~ variable. Dans notre cas, on va attribuer une forme dépendant de la position des royaumes par rapport au royaume d'ICarius. 
 
 ```{r t4, collapse = TRUE}
 
-base_individus %>%
+donnees_secretes %>%
   
-  gf_point(poids ~ taille, title = "Courbe de poids en fonction de la taille", color = ~ sexe, size = ~ nombre, shape = ~ age)
+  gf_point(nb_habitants ~ nb_guerriers, title = "Les royaumes, selon le nombre d'habitants, de guerriers et de chevaux", size = ~ nb_chevaux,shape = ~situation)
 
 ```
 
+###  Des points qui ont des petits noms 
 
-
-Il est également possible de donner de faire figurer des noms associés à chaque point représenté :
+Il est également possible de faire figurer des noms associés à chaque point représenté. Dans notre exemple, nous allons attribuer à chaque point le nom du royaume correspondant. Pour cela, il faut combiner le sortilège gf_point avec un autre sortilège : gf_text. Le sortilège gf_text a lui aussi besoin d'ingrédients. Dans notre cas, on va se limiter au **label** qui permet d'indiquer le nom de la variable que l'on veut voir apparaitre (ici la variable royaume), puis **color** et **size** pour la couleur et la taille de la police. On va juste ajouter un peu de glutamate avec l'ingrédient **check_overlap** qui permet de s'assurer que les textes affichés ne se superposent pas, si sa valeur est définie à TRUE. 
+Attention à ne pas oublier le symbole ~ dans l'utilisation de l'ingrédient **label**.
 
 ```{r t4b, collapse = TRUE}
 
-base_individus %>%
-    sample_n(10) %>% #permet de filtrer 10 lignes pour que le graphique soit lisible
-    gf_point(poids ~ taille, title = "Courbe de poids en fonction de la taille", color = ~ sexe, size = ~ nombre) %>%
-    gf_text(label = ~ numind, color='black', size=3)
+donnees_secretes %>%
+  gf_point(nb_habitants ~ nb_guerriers, title = "Les royaumes, selon le nombre d'habitants, de guerriers et de chevaux", size = ~ nb_chevaux)%>%
+  gf_text(label = ~ royaume, color='black', size=2.5,check_overlap=TRUE)
 
 ```
-
 
 Tu sais maintenant faire de beaux graphiques. J'en connais un qui va être furieux.
 
 
-## A vous de jouer
+## À toi de jouer
 
 Pour contrer les velléités du vil Parlyus, Icarius doit identifier un royaume le plus difficile à conquérir pour son armée, selon trois critères, l'éloignement du royaume à conquérir depuis le royaume d'Icarius, le nombre d'hommes armés et enfin le nombre de jours de canicule. Pour identifier ce royaume, il va s'appuyer sur un graphique permettant de représenter en abcisse la distance de chaque royaume au royaume d'Icarius, en ordonnée le nombre de jours de canicule dans ces royaumes. Dans ce graphique, la taille des points varie selon le nombre de guerriers. L'ensemble des informations nécessaires se trouve dans le fichier donnees_secretes.
-A partir de ce fichier et des exemples présentés précédemment, aidez Icarius à identifier le royaume à proposer à Parlyus.
+À partir de ce fichier et des exemples présentés précédemment, aide Icarius à identifier le royaume à proposer à Parlyus.
 
 Quelques indices :
-- le nombre de jour de canicule est contenu dans la variable `Nb_canicule`
+- le nombre de jour de canicule est contenu dans la variable `nb_canicule`
 - la distance au royame est contenue dans la variable `dist_royaume`
 - le nombre de guerriers est contenu dans la variable `nb_guerriers`
 - pour représenter un nuage de point, le sortilège à utiliser est `gf_point()`
@@ -138,14 +139,14 @@ Quelques indices :
 ```{r chapitre6-ex1-solution}
 # Crée le graphique
 
-donnees_secretes%>%gf_point(Nb_canicule~dist_royaume,size=~nb_guerriers)%>%gf_text(Nb_canicule~dist_royaume,label=~royaume,size=2.5,check_overlap = TRUE)
+donnees_secretes%>%gf_point(nb_canicule~dist_royaume,size=~nb_guerriers)%>%gf_text(nb_canicule~dist_royaume,label=~royaume,size=2.5,check_overlap = TRUE)
 
 # Fin de l'exercice
 ``` 
 
 
 ```{r question1,echo=FALSE}
-question("Alors, quel royaume faut-il attaquer? Ne reste plus qu'à cocher la bonne réponse...pour poursuivre l'aventure!",
+question("Alors, quel royaume faut-il attaquer? Il ne reste plus qu'à cocher la bonne réponse...pour poursuivre l'aventure!",
 type="single",
 allow_retry = TRUE,
 incorrect="Retente ta chance",
