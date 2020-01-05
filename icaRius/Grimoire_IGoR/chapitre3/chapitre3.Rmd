@@ -28,9 +28,9 @@ library(tidyverse)
 
 ## Le sortilège: un outil précieux au service d'Icarius
 
-Pour avancer dans son aventure, Icarius dispose de son précieux grimoire, qu'il a pu alimenter au fur et à mesure de ses rencontres avec des mages dans les villages précédents. Ce grimoire renferme une multitude de sortilèges - appelés **fonctions** dans le langage des Runes- permettant chacun d'accomplir une tâche bien spécifique. Nous avons, dans le chapitre précédent, fait la découverte d'un premier sortilège, `import()`, pour charger des données dans R. 
+Pour avancer dans son aventure, Icarius dispose de son précieux grimoire, qu'il a pu alimenter au fur et à mesure de ses rencontres avec des mages dans les villages précédents. Ce grimoire renferme une multitude de sortilèges - appelés **fonctions** dans le langage des Runes - permettant chacun d'accomplir une tâche bien spécifique. Nous avons, dans le chapitre précédent, fait la découverte d'un premier sortilège, `import()`, pour charger des données dans R. 
 
-Ces sortilèges seront d'un grand secours pour mener à bien les différentes missions qui attendent icaRius durant son périple... Nous allons, dans ce chapitre, un découvrir un peu plus sur les sortilèges, et tant que nous y sommes, produire des statistiques grâce à cette magie !
+Nous allons, dans ce chapitre, un découvrir un peu plus sur les sortilèges, et tant que nous y sommes, produire des statistiques grâce à cette magie !
 
 Dans le monde des Runes, un sortilège est identifié par **son nom suivi de parenthèses** :`nomsortilege()`. A l'intérieur des parenthèses, sont précisés les ingrédients utiles à la confection du sortilège. Pas d'inquiétude, une aide intégrée dans R permet de connaître la liste des ingrédients que l'on peut renseigner pour chaque sortilège.
 
@@ -47,8 +47,7 @@ nomsortilege(ingredient1, ingredient2,...,ingredientN)
 
 Parmi les sortilèges utiles, on retrouve `skim()` qui est dédié aux statistiques descriptives. 
 
-Il permet de visualiser en sortie (**output**) des statistiques fondamentales (moyenne, médiane...) sur l'ensemble des variables d'un fichier de données. Mais également le nombre de valeurs manquantes, le nombre de valeur unique... et même un mini histogramme qui symbolise la distribution de la variable.  
-Il a d'autres avantages encore, que vous découvrirez sans doute un jour dans votre quête...
+Il permet de visualiser des statistiques fondamentales (moyenne, médiane...) sur l'ensemble des variables d'un fichier de données. Mais également le nombre de valeurs manquantes, le nombre de valeurs uniques... et même un mini histogramme qui symbolise la distribution de la variable. Il a d'autres avantages encore, que vous découvrirez sans doute un jour dans votre quête...
 
 Essayons sur un fichier factice appelé `mon_fichier`, qui se compose de deux variables `ma_variable_1` et `ma_variable_2`. 
 
@@ -64,29 +63,29 @@ library(skimr)
 
 Appliquons le sortilège `skim()` au fichier :
 ```{r, collapse = FALSE}
-# Appel du sortilège skimr() sur le fichier mon_fichier   
+# Appel du sortilège skim() sur le fichier mon_fichier   
 skim(mon_fichier)
 ```
 
-Les résultats du sortilège se présentent de telle façon que les statistiques essentielles sont regroupées sur une même ligne pour chaque variable. On y retrouve :
+Les résultats du sortilège se présentent de telle façon que **les statistiques essentielles** sont regroupées sur une même ligne pour chaque variable. On y retrouve :
 
 - la moyenne (*Mean*), la valeur minimale (*p0*) et la valeur maximale (*p100*)
 - la médiane (*p50*), qui détermine le seuil séparant les valeurs en deux parties égales, une moitié des valeurs qui sont toutes inférieures ou égales à la médiane et l'autre moitié des valeurs, qui sont toutes supérieures ou égales à la médiane
-- le premier quartile (*p25*) et le troisième quartile (*p75*). Le premier quartile est le seuil pour lequel 25% des valeurs de la variable sont inférieures ou égales à ce seuil. Le troisième quartile est le seuil pour lequel 25% des valeurs de la variable sont supérieures ou égales à ce seuil.  
+- le premier quartile (*p25*) et le troisième quartile (*p75*). Le premier quartile est le niveau pour lequel 25% des valeurs de la variable sont inférieures ou égales à ce seuil. Le troisième quartile est le niveau pour lequel 25% des valeurs de la variable sont supérieures ou égales à ce seuil.  
 
 Tout ceci parce que ces termes font référence à des "moments" d'une distribution, aussi appelés des percentiles (d'où la lettre p). La médiane est donc le 50e percentile, le 1er quartile est le 25e percentile, etc. 
 
 
-Le sortilège `skim()` dispose d'un paramètre complémentaire, assez pratique : il permet de choisir facilement sur quelle(s) variable(s) l'on souhaite calculer les statistiques - et pas nécessairement sur toutes les variables d'un fichier. Il suffit pour cela de préciser le nom de la (ou des) variable(s) qui vous intéresse, comme un ingrédient particulier du sortilège :
+Le sortilège `skim()` dispose d'un paramètre complémentaire, assez pratique : il permet de **choisir facilement sur quelle(s) variable(s) l'on souhaite calculer les statistiques** - et pas nécessairement sur toutes les variables d'un fichier. Il suffit pour cela de préciser le nom de la (ou des) variable(s) qui vous intéresse, comme un ingrédient particulier du sortilège :
 
 
 ```{r, collapse = FALSE}
-# Appel du sortilège skimr() sur le fichier mon_fichier et la variable ma_variable_1  
+# Appel du sortilège skim() sur le fichier mon_fichier et la variable ma_variable_1  
 skim(mon_fichier,ma_variable_1)
 ``` 
 
 
-## A vous de jouer : l'exploitation du fermier Tellus
+## À vous de jouer : l'exploitation du fermier Tellus
 
 Au sein du village de GrissGrass, les deux fermiers Galia et Tellus cultivent la mandragore, une plante dont le jus a des pouvoirs magiques... Le fermier Galia, petit homme frêle et fort âgé, ou le fermier Tellus, robuste gaillard qui joue les gros bras : lequel des deux obtient le meilleur rendement en jus de mandragore ? Qui des deux sait réellement cultiver cette plante ? <p>
 
@@ -96,8 +95,8 @@ Voici l'énigme à résoudre : <span style="color:#18AC3E;font-size:16px">**"En 
 
 
 ```{r,  echo=FALSE, message = FALSE}
-fichier_tellus<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Tellus.ods")
-fichier_galia<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Galia.ods")
+fichier_tellus<-read_ods(path="E:/icaRius/data/chapitre3/recensement_agricole_statia_Tellus.ods")
+fichier_galia<-read_ods(path="E:/icaRius/data/chapitre3/recensement_agricole_statia_Galia.ods")
 ```
 
 **Commençons par exploiter le fichier du fermier Tellus:** 
@@ -141,7 +140,7 @@ skim(fichier_tellus)
 # fin de l'exercice
 ``` 
 
-## A vous de jouer : l'exploitation du fermier Galia
+## À vous de jouer : l'exploitation du fermier Galia
 
 Utilisons ce même sortilège `skim()` pour étudier le livre de récolte du fermier Galia.
 
@@ -162,8 +161,7 @@ fichier_galia
 # Fin de l'exercice
 ``` 
 
-Le livre de récolte du fermier Galia est tenu tout comme celui du fermier Tellus : mêmes variables, même nombre d'enregistrements.  
-Puisque nous nous intéressons précisément à la production moyenne en litres de filtre de Mandragore, sélectionnons de suite la variable `Litres` en lui appliquant le sortilège `skim()`
+Le livre de récolte du fermier Galia est tenu tout comme celui du fermier Tellus : mêmes variables, même nombre d'enregistrements. Puisque nous nous intéressons précisément à la production moyenne en litres de filtre de Mandragore, sélectionnons de suite la variable `Litres` en lui appliquant le sortilège `skim()`
 
 ```{r ex4,exercise=TRUE}
 # Le livre de bilan est déjà chargé, avec le nom : fichier_galia
@@ -194,13 +192,35 @@ question("La production moyenne de Tellus et de Galia sont, respectivement, de :
 type="single",
 allow_retry = TRUE,
 incorrect="Retente ta chance",
-answer("34 et 41"),
-answer("36 et 36,5",correct=TRUE),
-answer("41 et 33"),
+answer("38,6 et 41,2"),
+answer("33,9 et 36,6",correct=TRUE),
+answer("41,2 et 38,5"),
 correct="Félicitations, la réponse à donner au chef du village est donc : Galia (avec G majuscule)"
 )
 
 ```   
  
-Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius** 
+Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius**. Le tutoriel était trop facile ? Vous pouvez aussi répondre au quiz bonus ci-dessous si vous le souhaitez. 
+ 
+><details><summary><font size="3"><b>Pour les plus téméraires : partie optionnelle sur la distribution des variables - cliquez ici</b></font></summary>
+><p><font size="2">
+>
+>Les deux exploitations ont une production moyenne différente : la valeur `mean` de la variable Litres dans les résultats du sortilè skim() donne en effet une moyenne respective de 33,9 litres et 36,5 litres pour les exploitations de Tellus et Galia. 
+>
+>Au delà de cette moyenne, le sortilège skim() révèle des caractéristiques très différentes entre les deux exploitations. Quelle proposition parmi les suivantes est fausse ? Aidez-vous des résultats obtenus avec skim pour les deux exploitations...
+>
+>```{r question2,echo=FALSE}
+question("Quiz bonus - quelle assertion est fausse ?",
+type="single",
+allow_retry = TRUE,
+incorrect="Retente ta chance",
+answer("L'exploitation de Galia présente la production la plus régulière, quand celle de Tellus est très irrégulière"),
+answer("L'exploitation de Galia a enregistré la production maximale sur une année donnée",correct=TRUE),
+answer("L'exploitaton de Tellus a enregistré la production minimale sur une année donnée"),
+correct="Félicitations, c'est la bonne réponse pour ce quiz bonus. La première proposition est juste : l'écart-type pour Galia est de 2,55 contre 8,63 pour Tellus (voir variable `sd`). La troisième proposition est également juste : la production minimale enregistrée par Tellus est de 22, contre 33 pour Galia (voir variable `p0`). Enfin, la deuxième proposition est erronée : la production maximale enregistrée par Galia est de 41, mais elle atteint 44 pour Tellus (voir variable `p100`)"
+)
+```   
+></font></p></details>
+
+ 
 
