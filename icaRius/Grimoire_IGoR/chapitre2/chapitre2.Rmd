@@ -26,15 +26,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Vous venez de rencontrer la fermière du village Kokoro, désespérée d'avoir perdu le livre de compte où, chaque jour, elle note consciencieusement le nombre de pontes. 
 
-Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, éclatée dans plusieurs fragments par le redoutable sorcier SaSSoS ! Il y a ainsi un document par semaine de pontes, et il faut lire les 4 semaines de pontes pour recomposer le livre de compte.
+Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, éclatée dans plusieurs fragments par le redoutable sorcier SaSSoS ! Pour le corser le tout, chaque fragment a été ensorcelé et semble indéchiffrable... Ils sont en effet chacun dans d'étranges formats : SAS, Excel, Calc...
 
-Pour le corser le tout, chaque fragment a été ensorcelé et semble indéchiffrable... Ils sont en effet chacun dans d'étranges formats : SAS, Excel, Calc et Csv...
-
-Aie aie aie. 
+**Aie aie aie.**
 
 ## Un Sasseur sait bien sasser... sur R ?
 
-Commençons par le format SAS - qui rappellera peut-être quelques souvenirs aux aventuriers les plus aguerris. Nous allons donc apprendre, en R, à lire un fichier SAS. 
+Commençons par le fragment ensorcelé sous le format SAS - qui rappellera peut-être quelques souvenirs aux aventuriers les plus aguerris. Nous allons donc apprendre, en R, à lire un fichier SAS. 
 
 Le contenu de ce fichier - que seul le terrible SaSSoS est normalement capable de lire, est le suivant :
 
@@ -59,7 +57,7 @@ livre_compte_1 <- import("chemin_du_fichier")
 De cette façon, en appelant l'objet `livre_compte_1` dans la console R, il est aisé d'en consulter le contenu. En l'occurence :
 
 ```{r, echo=FALSE}
-livre_compte_1 <- import("../../data/pontes_semaine1.sas7bdat")
+livre_compte_1 <- import("../../data/chapitre2/pontes_semaine1.sas7bdat")
 ```
 
 ```{r, collapse = FALSE}
@@ -67,7 +65,7 @@ livre_compte_1 <- import("../../data/pontes_semaine1.sas7bdat")
 livre_compte_1
 ```
 
-Et voilà, c'est fini pour le premier fichier ! Ce dernier comporte deux types d'information : le nom de la poule (colonne `Poule`) et le nombre d'oeufs pondus (colonne `Oeufs`). Il y a 6 enregistrements, un par poule. Par exemple, la poule Kokot a pondu 26 oeufs - c'est d'ailleurs la meilleure pondeuse de la semaine !
+Et voilà, c'est fini pour le premier fichier ! Ce dernier donne le nombre de pontes par poule pour une semaine complète. Il comporte deux types d'information : le nom de la poule (colonne `Poule`) et le nombre d'oeufs pondus (colonne `Oeufs`). Il y a 6 enregistrements, un par poule. Par exemple, la poule Kokot a pondu 26 oeufs - c'est d'ailleurs la meilleure pondeuse de la semaine !
 
 Et si vous pratiquiez vous-même ? Pour cela, il faut d'abord trouver l’emplacement du fichier à lire, sur votre poste de travail par exemple. En l'occurrence, le fichier est présent sur la clé USB qui vous a été remise en début de partie. Cherchons donc l'emplacement à partir  de l'explorateur dans windows. 
 
@@ -78,7 +76,7 @@ Et si vous pratiquiez vous-même ? Pour cela, il faut d'abord trouver l’emplac
 </p>
 
 
-Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/pontes_semaine1.sas7bdat`. Chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/chapitre2/pontes_semaine1.sas7bdat`. Chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
 
 ```{r module2-question1,exercise=TRUE}
 # Charger le fichier pontes_semaine1.sas7bdat en indiquant son chemin
@@ -113,45 +111,70 @@ Nous avons donc deux fichiers issus de tableurs :
 - pontes_semaine2.xls (excel)
 - pontes_semaine3.ods (calc)
 
-Dans calc, nous pouvons les importer de la même façon.
+Importons dans R le fichier excel `pontes_semaine2.xls`
 
 ```{r, echo=FALSE, message = FALSE}
-livre_compte_2 <- import("../../data/pontes_semaine2.xls")
-livre_compte_3 <- import("../../data/pontes_semaine3.ods")
+livre_compte_2 <- import("../../data/chapitre2/pontes_semaine2.xls")
 ```
 
 ```{r, eval=FALSE}
 # Je charge le fichier pontes_semaine2.xls en indiquant son chemin
-livre_compte_2 <- import("E:/icaRius/data/pontes_semaine2.xls")
-# Je charge le fichier pontes_semaine3.ods en indiquant son chemin
-livre_compte_3 <- import("E:/icaRius/data/pontes_semaine3.ods")
+livre_compte_2 <- import("E:/icaRius/data/chapitre2/pontes_semaine2.xls")
 ```
 
 ```{r}
 # J'affiche le contenu de l'objet livre_compte_2
 livre_compte_2
-# J'affiche le contenu de l'objet livre_compte_3
-livre_compte_3
 ```
 
 Tiens tiens. Chaque semaine, la poule Kokot l'emporte haut les plumes côté pontes... Serait-ce la meilleure pondeuse de la ferme ?
 
+## À vous de pratiquer
 
-## Une histoire de séparateur
-
-Il nous reste un dernier fragment à ouvrir. Celui-ci se termine par l'extension `.csv`. Qu'est-ce donc qu'un fichier CSV ?
-
-CSV, c'est un format de fichier où chaque enregistrement apparaît sur sa propre ligne et dont les champs sont séparés par un caractère unique appelé “séparateur”. En l'occurrence, le séparateur est une virgule ou un point-virgule : c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (Comma = virgule en anglais). 
-
-Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être "interopérable", c'est à dire qu'il peut être lu et modifier aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
-
-![](images/pontes_csv.png)
-
-
-D'après-vous, comment allons-nous charger ce fichier csv dans R ? Eh oui: toujours avec le même sortilège `import()` ! Vous savez désormais comment procéder : à vous de charger le fichier `pontes_semaine4.csv` dans la console R, en la sauvegardant dans l'objet nommé `livre_compte_4` 
+Pour ouvrir le fichier calc `pontes_semaine3.ods`, la marche à suivre est identique à celle vue précédemment : il vous faudra utiliser le sortilège `import()`, en indiquant le chemin du fichier à ouvrir. À vous de jouer !
 
 
 ```{r module2-question2,exercise=TRUE}
+# Charger le fichier pontes_semaine3.ods en indiquant son chemin
+# et assigner le résultat à l'objet nommé livre_compte_3
+
+
+# Afficher le contenu de l'objet livre_compte_3
+
+
+# Trouver dans le tableau quelle est la meilleure pondeuse de la semaine.
+``` 
+
+```{r module2-question2-solution}
+# Charger le fichier pontes_semaine3.ods en indiquant son chemin
+# et assigner le résultat à l'objet nommé livre_compte_3
+livre_compte_3 <- import("E:/icaRius/data/chapitre2/pontes_semaine3.ods")
+
+# Afficher le contenu de l'objet livre_compte_3
+livre_compte_3
+
+# Trouver dans le tableau quelle est la meilleure pondeuse de la semaine.
+```
+
+
+## Revenons à nos oeufs...
+
+Nous avons découvert comment charger dans R des fichiers de différents formats. Les quelques exemples ici sont loin d'être exhaustifs : avec import(), vous pourriez aussi charger des fichiers au format SPSS, Stata, Matlab... et bien sûr, des fichiers de données R. Nous découvrirons plus loin dans le grimoire comment R permet de sauvegarder les objets que vous avez créés. Mais pour lors, revenons au livre de compte.
+
+><details><summary><font size="3"><b>Pour les plus téméraires : partie optionnelle sur les fichiers CSV - cliquez ici</b></font></summary>
+><p><font size="2">
+>
+>Il nous reste un dernier fragment à ouvrir. Celui-ci se termine par l'extension `.csv`. Qu'est-ce donc qu'un fichier CSV ?
+>
+>CSV, c'est un format de fichier où chaque enregistrement apparaît sur sa propre ligne et dont les champs sont séparés par un caractère unique appelé “séparateur”. En l'occurrence, le séparateur est une virgule ou un point-virgule : c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (Comma = virgule en anglais). 
+>
+>Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être "interopérable", c'est à dire qu'il peut être lu et modifier aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
+>
+>![](images/pontes_csv.png)
+>
+>D'après-vous, comment allons-nous charger ce fichier csv dans R ? Eh oui: toujours avec le même sortilège `import()` ! Vous savez désormais comment procéder : à vous de charger le fichier `pontes_semaine4.csv` dans la console R, en la sauvegardant dans l'objet nommé `livre_compte_4` 
+>
+>```{r module2-question3,exercise=TRUE}
 # Chargez le fichier pontes_semaine4.csv en indiquant son chemin
 
 
@@ -160,14 +183,11 @@ D'après-vous, comment allons-nous charger ce fichier csv dans R ? Eh oui: toujo
 
 # C'est fini !
 ``` 
- 
+>
+></font></p></details>
 
 
-## Revenons à nos oeufs...
-
-Nous avons découvert comment charger dans R des fichiers de différents formats. Les quelques exemples ici sont loin d'être exhaustifs : avec import(), vous pourriez aussi charger des fichiers au format SPSS, Stata, Matlab... et bien sûr, des fichiers de données R. Nous découvrirons plus loin dans le grimoire comment R permet de sauvegarder les objets que vous avez créés. Mais pour lors, revenons au livre de compte.
-
-Nous avons ouverts les 4 fragments, ce qui répond aux attentes de la fermière. Il ne reste plus qu'à trouver quelle est la meilleure poule pondeuse. Celle qui, chaque semaine, sort en tête des résultats de ponte. Si vous avez bien suivi ce tutoriel, un nom de poule doit vous venir à l'esprit...
+Nous avons ouverts différents fragments, ce qui répond aux attentes de la fermière. Il ne reste plus qu'à trouver quelle est la meilleure poule pondeuse. Celle qui, chaque semaine, sort en tête des résultats de ponte. Si vous avez bien suivi ce tutoriel, un nom de poule doit vous venir à l'esprit...
 
 
 ```{r question1,echo=FALSE}
@@ -178,7 +198,7 @@ incorrect="Retente ta chance",
 answer("Daisy"),
 answer("Poupoule"),
 answer("Kokot",correct=TRUE),
-correct="Félicitations, tu as reconstitué le livre de compte et trouvé la meilleure poule pondeuse, l'aventure peut continuer!"
+correct="Félicitations, vous avez reconstitué le livre de compte et trouvé la meilleure poule pondeuse, l'aventure peut continuer!"
 )
 
 ```   
