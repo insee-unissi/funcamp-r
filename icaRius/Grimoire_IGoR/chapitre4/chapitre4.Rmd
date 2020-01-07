@@ -22,6 +22,7 @@ library(knitr)
 library(readODS)
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+library(skimr)
 ```
 
 
@@ -41,7 +42,7 @@ skim(mon_fichier)
 mon_fichier %>% skim()
 ```
 
-Le sortilège se trouvant immédiatement à la droite du %>% utilise comme objet en entrée l'élement se trouvant à la gauche du %>%. En langue vernaculaire, cela donne: **"Je prends mon fichier de données et ensuite je calcule les indicateurs statistiques sur l'ensemble des variables de ce fichier"**
+Le sortilège se trouvant immédiatement à la droite du %>% utilise comme objet en entrée l'élement se trouvant à la gauche du %>%. En langue vernaculaire, cela donne: **"Je prends mon fichier de données et ensuite je calcule les indicateurs statistiques sur l'ensemble des variables de ce fichier."**
 <p>
 <p>
 On peut également choisir de ne s'intéresser qu'à une seule des variables du fichier :
@@ -63,23 +64,21 @@ fichier_tellus<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Tellu
 fichier_galia<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Galia.ods")
 ```
 
-```{r mod2-tutoriel1-ex5,exercise=TRUE}
+```{r chapitre5-ex1,exercise=TRUE}
 # Le livre de récolte est déjà chargé, avec le nom fichier_tellus
 
 # En utilisant le %>% et le sortilège skim(), 
 # calculer les statistiques descriptives sur toutes les variables 
-# pour le fichier
 
 
 # fin de l'exercice
 ``` 
 
-```{r mod2-tutoriel1-ex5-solution}
+```{r chapitre5-ex1-solution}
 # Le livre de récolte est déjà chargé, avec le nom fichier_tellus
 
 # En utilisant le %>% et le sortilège skim(), 
 # calculer les statistiques descriptives sur toutes les variables 
-# sur fichier_tellus
 fichier_tellus %>% skim()
 
 # fin de l'exercice
@@ -87,25 +86,22 @@ fichier_tellus %>% skim()
 
 Et maintenant passons au fichier du fermier Galia :
 
-```{r mod2-tutoriel1-ex6,exercise=TRUE}
+```{r chapitre5-ex2,exercise=TRUE}
 # Le livre de récolte est déjà chargé, avec le nom fichier_galia
 
 # En utilisant le %>% et le sortilège skim(), 
 # calculer les statistiques descriptives sur la variable Litres
-# sur fichier_galia
-
 
 
 # fin de l'exercice
 ``` 
  
 
-```{r mod2-tutoriel1-ex6-solution}
+```{r chapitre5-ex2-solution}
 # Le livre de récolte est déjà chargé, avec le nom fichier_galia
 
 # En utilisant le %>% et le sortilège skim(), 
 # calculer les statistiques descriptives sur la variable Litres
-# sur fichier_galia
 fichier_galia %>% skim(Litres)
 
 # fin de l'exercice
@@ -142,24 +138,22 @@ Vous avez compris la magie du pipe ? A vous de jouer !
 Tellus a bien fourni son secret, mais dans le désordre. Recomposons les étapes comme il convient. Voici quelques indices :
 
 - Une conjugaison de sortilèges doit d'abord commencer par l'objet sur lequel débute l'enchainement de sortilèges. Ici, l'objet par tout commence, c'est le champ dans lequel on cultive la Mandragore...
-- N'oubliez pas : Galia n'utilise pas de magie noire, donc pas de biotues (et pas de pesticide non plus !)
+- N'oubliez pas : Galia n'utilise pas de magie noire, donc pas de biotues
 - Ne vous laissez pas embrouiller par le terrible SaSSoS et sa langue serpentine - pas de `set` ou de `run` dans la langue des Runes.
 - Le meilleur moment pour arroser une terre, c'est quand elle vient d'être labourée puis semée.
 - Les coccinelles sont les amies des Mandragore, c'est bien connu !
-- pour toute plante fragile, toujours prévoir de désherber à la main...
+- Les coccinelles aiment que la terre soit humide...
 - A la toute fin, il n'y a plus qu'à récolter...
 
 Saurez-vous remettre les étapes dans l'ordre ?
 
 
-```{r quiz}
+```{r chapitre5-quiz}
 question_parsons(
   initial = c(
     "champ %>%",
     "data champ;set champ;run;",
     "semer() %>%",
-    "désherber(avec=mains) %>%",
-    "désherber(avec=herbicides) %>%",
     "arroser() %>%",
     "ajouter(coccinelles) %>%",
     "labourer() %>%",
@@ -172,23 +166,32 @@ question_parsons(
     "labourer() %>%",
     "semer() %>%",
     "arroser() %>%",
-    "désherber(avec=mains) %>%",
     "ajouter(coccinelles) %>%",
     "recolter()"
     ),
-    message = "Bravo vous être des champions de la culture de la mandragore! Rentrez le code 777 dans le jeu icaRius pour continuer l'aventure"
+    message = "Bravo vous êtes des champions de la culture de la mandragore! Rentrez le code 777 dans le jeu icaRius pour continuer l'aventure"
   ),
     pass_if(
     c(
     "champ %>%",
     "labourer() %>%",
     "semer() %>%",
-    "arroser() %>%",
     "ajouter(coccinelles) %>%",
-    "désherber(avec=mains) %>%",
+    "arroser() %>%",
     "recolter()"
     ),
-    message = "Bravo vous être des champions de la culture de la mandragore! Rentrez le code 777 dans le jeu icaRius pour continuer l'aventure"
+    message = "Bravo vous êtes des champions de la culture de la mandragore! Rentrez le code 777 dans le jeu icaRius pour continuer l'aventure"
+  ),
+    pass_if(
+    c(
+    "champ %>%",
+    "labourer() %>%",
+    "ajouter(coccinelles) %>%",
+    "semer() %>%",
+    "arroser() %>%",
+    "recolter()"
+    ),
+    message = "Bravo vous êtes des champions de la culture de la mandragore! Rentrez le code 777 dans le jeu icaRius pour continuer l'aventure"
   ),
   fail_if(
     ~length(.) < 2,
@@ -201,4 +204,4 @@ question_parsons(
 )
 ```
 
- Vous avez trouvé ? L'exercice ci-dessus vous apportera **la réponse à reporter dans le jeu Icarius** 
+ Vous avez trouvé ? L'exercice ci-dessus vous apportera **la réponse à reporter dans le jeu icaRius** 
