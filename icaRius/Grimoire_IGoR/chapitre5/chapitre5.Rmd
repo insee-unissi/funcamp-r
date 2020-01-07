@@ -25,18 +25,24 @@ base_individus <- tibble(poids = sort(rnorm(100, mean = 80, sd = 30)), taille = 
 donnees_secretes <- read_excel("../../data/nbguerriers.xlsx")
 mandragore <- read_excel("../../data/production.xlsx")
 ambroisie <- read_excel("../../data/ambroisie.xlsx")
+livre_ambroisie <- diamonds %>% 
+  filter(color == "D" | color == "J") %>%
+  mutate(col = as.character(color)) %>% 
+  mutate(taste = cut) %>%
+  mutate(puissance = carat + 4) %>%
+  mutate(age = carat + 6) %>%
+  filter(puissance < 7) %>%
+  sample_n(1000) %>%
+  select(prix='price',puissance='puissance',age='age',robe='color',transparence='clarity',saveur='taste') 
+livre_ambroisie$age <- livre_ambroisie$age + ((livre_ambroisie$age)^(1/3))*0.02*sample(100, size = nrow(livre_ambroisie),replace=T) + livre_ambroisie$prix/mean(livre_ambroisie$prix)
+
 ```
 
 
 ## Veuillez confirmer votre identité
 
-Afin de s'assurer de votre identité le cuisto Batreb vous lance un défi: déterminer à quel mois il vaut mieux récolter l'ambroisie. Pour ce faire, vous allez vous appuyer sur un package de R très pratique pour la réalisation de graphiques : le package ggformula
+Afin de s'assurer de votre identité le cuistot Batreb vous lance un défi: déterminer quel est le meilleur mois de l'année pour récolter la divine ambroisie. Pour ce faire, vous allez apprendre un nouvel ensemble de sortilèges, que l'on peut réunir dans une même famille magique : les sortilèges **ggformula**. Ces sortilèges permettent de réaliser différents types de graphique de manière simplifiée, comme l'indique leur nom de famille : **"gg" pour grammaire des graphiques et "formula" pour les formules.**
 
-
-ggformula est un package permettant de réaliser différents types de graphique de manière simplifiée.   
-    <span style="color:#18AC3E;font-size:16px">**"gg" pour grammaire des graphiques et "formula" pour les formules.**</span>
-
- 
 
 ## Des formules magiques pour faire des graphiques
 
@@ -45,65 +51,93 @@ ggformula est un package permettant de réaliser différents types de graphique 
 
  
 
-Chaque graphique est associé a un sortilège, chaque sortilège à des indégrédients, cet ensemble est appelé grammaire des graphiques.
+Chaque graphique est associé a un sortilège, chaque sortilège à des indégrédients, et cet ensemble est appelé grammaire des graphiques.
 
-Tous les sortilèges des graphiques commencent par le nom de code `gf_`.  
-Par exemples,    
- - pour faire un graphique de points, le sortilège est `gf_point`,   
- - pour faire une courbe il y a `gf_line`    
+Tous les sortilèges des graphiques commencent par le nom de code `gf_`. Par exemple :
+ - pour faire un graphique de points, le sortilège est `gf_point`;   
+ - pour faire une courbe il y a `gf_line`;
  - pour faire un diagramme en barre ce sera `gf_bar`.  
-  Il y a pleins d'autres sortillèges sur les graphiques que tu peux voir dans l'aide du package ggformula.
-
- 
+Il y a bien d'autres sortilèges sur les graphiques que vous découvrirez dans la famille magique ggformula.
 
 <span style="color:#18AC3E;font-size:16px">**Les ingrédients**</span>
 
-Pour réussir la recette de grammaire de graphique, il ne faut pas oublier d'ingrédient.  
-Le premier est essentiel, il sert à dire ce que l'on veut représenter.  
-Les autres ingrédients servent à agrémenter la recette (changer la couleur, faire varier la transparence ou ajouter un titre et plus encore). Nous verrons plus tard quelques exemples.  
-Revenons pour le moment à notre ingrédient  essentiel, si je veux représenter un point d'ordonnée 1 et d'abscisse 2, il faut utiliser le sortilège `gf_point` et comme ingrédient principal les coordonnées du point que je veux représenter, prenons 1 et 2.  
-L'écriture est :
+Pour réussir la recette de grammaire de graphique, il ne faut pas oublier d'ingrédient :
+- Le premier est essentiel, il sert à dire ce que l'on veut représenter.  
+- Les autres ingrédients servent à agrémenter la recette (changer la couleur, faire varier la transparence ou ajouter un titre et plus encore). Nous verrons plus tard quelques exemples.  
 
- 
-```{r t1, collapse = TRUE}
+Revenons pour le moment à notre ingrédient  essentiel. Pour maîtriser ce nouveau sortilège, nous allons représenter des informations relatives aux bouteilles d'ambroisie produites dans le royaume de Statis. Le bon Batreb a goûté 1000 liqueurs d'ambroisie différentes (rien que cela), et pour chacune, il a consigné quelques informations... Ce riche (et spiritueux) savoir se trouve consigné dans le fichier `livre_ambroisie`, dont voici le contenu :
 
-# Représenter le point de coordonnées (2, 1)
+```{r}
+head(livre_ambroisie)
+```
 
-gf_point(1 ~ 2)
+Le fichier `livre_ambroisie` comprend ainsi les informations suivantes : la `robe` de la liqueur, sa `transparence`, sa `saveur`, sa `puissance` (en degré d'alcool) et son `prix` (dans la monnaie locale de statis, qui s'appelle des kopek si vous voulez le savoir...).
+
+Cherchons à représenter ce qui détermine le prix d'une liqueur d'ambroisie. Chaque bouteille de liqueur goûtée par Batreb sera représentée par un point si j'utilise le sortilège `gf_point`, et il me reste à préciser, pour chaque point, les informations à croiser. Par exemple, pour représenterle prix en fonction de la puissance des liqueurs d'ambroisie, le sortilège s'écrira :
+
+```{r t1, collapse = TRUE, echo=FALSE, eval=FALSE}
+# Représenter le nuage de points
+# présentant le prix en fonction de la puissance
+gf_point(prix ~ puissance)
 
 ```
 
- C'est un premier exemple. Mais ne vous inquiétez pas, nous allons savoir rapidement comment faire de beaux graphiques pas comme ceux de Sassos ;-)
+Ah non, zut, ça ne peut pas marcher ! Il faut d'abord indiquer que le sortilège s'applique sur le fichier élaboré, cuite après cuite, par Batreb, soit sur `livre_ambroisie`. Reprenons ce que nous avons appris avec le pipe `%>%` : "je prends le fichier `livre_ambroisie` puis je lui appliquer le sortilège `gf_point`, soit :
+
+```{r t1b, collapse = TRUE}
+# Représenter le nuage de points
+# présentant le prix en fonction de la puissance
+livre_ambroisie %>% gf_point(prix ~ puissance)
+
+```
+
+
+C'est un premier exemple. Mais ne vous inquiétez pas, nous allons savoir rapidement comment faire de beaux graphiques pas comme ceux de Sassos ;-)
  
 
 <span style="color:#18AC3E;font-size:16px">**L'opérateur ~ **</span>
   
+Mais à quoi sert le symbole `~` dans le sortilège précédent ?
   
-  
-  Mais à quoi sert le symbole `~` ?
-  
-  L'opérateur `~` remplace la phrase `en fonction de`. Par convention, dans un graphique on trace l'ordonnée (y) en fonction de l'abscisse (x). Donc l'écriture `1 ~ 2` correspond à un point d'ordonnée 1 et d'abscisse 2.
+L'opérateur `~` remplace la phrase `en fonction de`. Par convention, dans un graphique on trace l'ordonnée (y) en fonction de l'abscisse (x). Donc l'écriture `prix ~ puissance` correspond à un graphique où la variable `prix` est en ordonnée et la variable `puissance` est en abscisse.
 
-Si mainenant je veux tracer la courbe du poids en fonction de la taille issus de la base des individus *base_individus*. J'écris la formule magique poids ~ taille et avec le bon sortilège, on a la recette complète :
+Si maintenant je veux tracer le nuage de point représentant les bouteilles d'ambroisie en croisant le prix en fonction de l'âge de la liqueur, j'écris la formule magique poids ~ age en utilisant le sortilège gf_point().
 
- 
-
-```{r t2, collapse = TRUE}
-
-base_individus %>%
-
- gf_line(poids ~ taille)
+```{r t1c, collapse = TRUE}
+# Représenter le nuage de points
+# présentant le prix en fonction de la puissance
+livre_ambroisie %>% gf_point(prix ~ age)
 
 ```
 
+
+A vous de pratiquer, en croisant cette fois la puissance et l'âge des liqueurs d'ambroisie. 
+
+```{r chapitre5-etape1,exercise=TRUE}
+# Créez le graphique à partir du fichier livre_ambroisie
+# croisant l'âge et la puissance sous forme de nuage de points
+
+
+# Fin de l'exercice
+``` 
+
+```{r chapitre5-etape1-solution}
+# Créez le graphique à partir du fichier livre_ambroisie
+# croisant l'âge et la puissance sous forme de nuage de points
+livre_ambroisie %>% gf_point(age ~ puissance)
+
+# Fin de l'exercice
+``` 
+ 
+## A REPRENDRE
  
 Si je veux tracer un diagramme en barre représentant le nombre de personnes selon le sexe:
 
 ```{r t3, collapse = TRUE}
 
-base_individus %>%
+livre_ambroisie %>%
   
- gf_bar( ~ sexe)
+ gf_bar( ~ saveur)
 
 ```
 
