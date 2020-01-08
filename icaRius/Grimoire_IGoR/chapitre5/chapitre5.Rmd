@@ -35,6 +35,8 @@ livre_ambroisie <- diamonds %>%
   sample_n(1000) %>%
   select(prix='price',puissance='puissance',age='age',robe='color',transparence='clarity',saveur='taste') 
 livre_ambroisie$age <- livre_ambroisie$age + ((livre_ambroisie$age)^(1/3))*0.02*sample(100, size = nrow(livre_ambroisie),replace=T) + livre_ambroisie$prix/mean(livre_ambroisie$prix)
+livre_ambroisie$ivresse = livre_ambroisie$puissance^(4)/100
+
 
 ```
 
@@ -49,11 +51,10 @@ Afin de s'assurer de votre identité le cuistot Batreb vous lance un défi: dét
 
 <span style="color:#18AC3E;font-size:16px">**Les recettes de grammaire de graphiques**</span>
 
- 
-
 Chaque graphique est associé a un sortilège, chaque sortilège à des indégrédients, et cet ensemble est appelé grammaire des graphiques.
 
 Tous les sortilèges des graphiques commencent par le nom de code `gf_`. Par exemple :
+
  - pour faire un graphique de points, le sortilège est `gf_point`;   
  - pour faire une courbe il y a `gf_line`;
  - pour faire un diagramme en barre ce sera `gf_bar`.  
@@ -94,7 +95,6 @@ livre_ambroisie %>% gf_point(prix ~ puissance)
 
 C'est un premier exemple. Mais ne vous inquiétez pas, nous allons savoir rapidement comment faire de beaux graphiques pas comme ceux de Sassos ;-)
  
-
 <span style="color:#18AC3E;font-size:16px">**L'opérateur ~ **</span>
   
 Mais à quoi sert le symbole `~` dans le sortilège précédent ?
@@ -110,11 +110,12 @@ livre_ambroisie %>% gf_point(prix ~ age)
 
 ```
 
+## Votre premier graphique (magique)
 
 A vous de pratiquer, en croisant cette fois la puissance et l'âge des liqueurs d'ambroisie. 
 
 ```{r chapitre5-etape1,exercise=TRUE}
-# Créez le graphique à partir du fichier livre_ambroisie
+# Créez le nuage de points à partir du fichier livre_ambroisie
 # croisant l'âge et la puissance sous forme de nuage de points
 
 
@@ -129,51 +130,85 @@ livre_ambroisie %>% gf_point(age ~ puissance)
 # Fin de l'exercice
 ``` 
  
-## A REPRENDRE
+
  
-Si je veux tracer un diagramme en barre représentant le nombre de personnes selon le sexe:
+## 1001 graphiques
+ 
+Il y a bien des subtilités pour démultiplier les possibilités graphiques des sortilèges ggformula : en variant le sortilège (donc le type de graphique) ou en variant les ingrédients.
+
+Essayons un autre type de graphique, en traçant la courbe qui lie l'ivresse de Batreb à la puissance de la liqueur goûtée. Le sortilège `gf_line()` sera utilisé, en croisant la variable ivresse et la variable puissance. 
+
+
+```{r t2, collapse = TRUE}
+# Représenter la courbe présentant le lien 
+# entre l'ivresse de Batreb et la puissance de la liqueur
+livre_ambroisie %>% gf_line(ivresse ~ puissance)
+
+```
+
+Hic ! Visiblement, le bon Batreb connaît une croissance exponentielle de son ivresse quand la liqueur s'intensifie !
+
+Prenons un autre exemple, en traçant un diagramme en barre représentant le nombre de liqueurs d'ambroisie selon leur saveur
 
 ```{r t3, collapse = TRUE}
-
-livre_ambroisie %>%
-  
- gf_bar( ~ saveur)
+# Représenter sous forme de barre
+# le nombre d'observations (de bouteille de liqueurs) selon leur saveur
+livre_ambroisie %>%  gf_bar( ~ saveur)
 
 ```
 
-Remarquez que la partie à gauche du ~ n'est pas renseignée dans ce cas.
-Cela se traduit par je veux représenter tous les individus de la table par sexe.
-Il s'agit alors de compter le nombre d'individus Femme et Homme.
+Notez deux particularités :
 
- 
+- tout d'abord, c'est le sortilège `gf_bar()` qui a été utilisé cette fois, pour spécifier le type de graphique
+- ensuite, la partie à gauche du ~ n'a pas été renseignée. Cela signifie que nous cherchons à représenter toutes les observations du fichier `livre_ambroisie` (en l'occurrence, des bouteilles de liqueur d'ambroisie) selon une variable, la `saveur`. Cela permet in fine de compter le nombre de bouteille de liqueur d'ambroisie selon les différentes modalités de la variable `saveur`.
 
-<span style="color:#18AC3E;font-size:16px">**Les ingrédients exhausteurs de gout**</span>
 
- 
+<span style="color:#18AC3E;font-size:16px">**Les ingrédients exhausteurs de goût**</span>
 
-Sur l'exemple de la courbe de poids, pour ajouter un titre, j'utilise... l'ingrédient title:
+Les graphiques ggformula peuvent être enrichis et voir leur sapidité augmentée par quelques ingrédients supplémentaires. Découvrons-les ensemble en reprenant le graphique avec la courbe liant ivresse et puissance de la liqueur, que nous allons "customizer" (terme non reconnu par l'Académie des Lettres de Statis) 
+
+L'ingrédient title permet par exemple d'ajouter un titre : 
 
 ```{r t4, collapse = TRUE}
-
-base_individus %>%
-  gf_line(poids ~ taille, title = "Courbe de poids en fonction de la taille")
+livre_ambroisie %>%  
+ gf_line(ivresse ~ puissance, title = "Ivresse de Batreb selon la puissance de la liqueur goûtée (hips)")
 
 ```
 
- 
-
-Et pour changer la couleur, il faut ajouter l'ingrédient color:
+Et pour changer la couleur, il faut ajouter l'ingrédient `color`:
   
 ```{r t5, collapse = TRUE}
-
-base_individus %>%
-  
-  gf_line(poids ~ taille, title = "Courbe de poids en fonction de la taille", color = "blue")
+livre_ambroisie %>%  
+ gf_line(ivresse ~ puissance, title = "Ivresse de Batreb selon la puissance de la liqueur goûtée (hips)", color = "red")
 
 ```
 
+La couleur doit être précisée dans la langue de Shakespeare, et rédigée entre guillemets (comme ` "red" ` dans l'exemple). Un ensemble de termes anglais faisant référence à des couleurs est renseigné par défaut dans R, certains très classiques (red, green, blue...) d'autres plus originaux (comme tomato, moccasin, peachpuff...). Vous découvrirez plus tard comment choisir très exactement la couleur de votre choix, dans les plus infimes de nuance (pour reproduire la couleur lie-de-vin, par exemple ?)
 
-## A vous de jouer
+
+Essayez vous-mêmes de faire varier le titre et la couleur pour le graphique en courbe reliant l'ivresse de Batreb et la puissance de la liqueur.
+
+```{r chapitre5-etape2,exercise=TRUE}
+# Représenter la courbe présentant le lien 
+# entre l'ivresse de Batreb et la puissance de la liqueur
+# en ajoutant un titre et une couleur
+
+# Fin de l'exercice
+``` 
+
+```{r chapitre5-etape2-solution}
+# Représenter la courbe présentant le lien 
+# entre l'ivresse de Batreb et la puissance de la liqueur
+# en ajoutant un titre et une couleur
+livre_ambroisie %>% 
+  gf_line(ivresse ~ puissance, title = "Boire un petit coup c'est agréable...", color = "tomato")
+
+# Fin de l'exercice
+``` 
+
+
+
+## A REPRENDRE
 
 Le fichier ambroisie contient la liste des mois qui ont donné les meilleures récoltes d'ambroisie au cours des dernières années. A l'aide du graphique suivant, répondez désormais à l'énigme suivante: "A quel mois vaut il mieux cueillir l'ambroisie?"
 
