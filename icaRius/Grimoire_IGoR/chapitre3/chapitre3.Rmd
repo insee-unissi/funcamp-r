@@ -95,8 +95,8 @@ Voici l'énigme à résoudre : <span style="color:#18AC3E;font-size:16px">**"En 
 
 
 ```{r,  echo=FALSE, message = FALSE}
-fichier_tellus<-read_ods(path="E:/icaRius/data/chapitre3/recensement_agricole_statia_Tellus.ods")
-fichier_galia<-read_ods(path="E:/icaRius/data/chapitre3/recensement_agricole_statia_Galia.ods")
+fichier_tellus<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_Tellus.ods")
+fichier_galia<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_Galia.ods")
 ```
 
 **Commençons par exploiter le fichier du fermier Tellus:** 
