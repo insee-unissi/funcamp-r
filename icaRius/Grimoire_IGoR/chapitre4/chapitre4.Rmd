@@ -60,8 +60,8 @@ Si on traduit, cela donne: **"Je prends mon fichier de données et ensuite je ca
 Continuons avec l'exploitation du fichier des fermiers Tellus et Galia, avec le sortilège `skim()`
 
 ```{r,  echo=FALSE, message = FALSE}
-fichier_tellus<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Tellus.ods")
-fichier_galia<-read_ods(path="E:/icaRius/data/recensement_agricole_statia_Galia.ods")
+fichier_tellus<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_Tellus.ods")
+fichier_galia<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_Galia.ods")
 ```
 
 ```{r chapitre5-ex1,exercise=TRUE}
