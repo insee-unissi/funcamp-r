@@ -312,50 +312,60 @@ div.tocify {
 
 <div id="section-veuillez-confirmer-votre-identité" class="section level2">
 <h2>Veuillez confirmer votre identité</h2>
-<p>Afin de s’assurer de votre identité le cuistot Batreb vous lance un défi: déterminer quel est le meilleur mois de l’année pour récolter la divine ambroisie. Pour ce faire, vous allez apprendre un nouvel ensemble de sortilèges, que l’on peut réunir dans une même famille magique : les sortilèges <strong>ggformula</strong>. Ces sortilèges permettent de réaliser différents types de graphique de manière simplifiée, comme l’indique leur nom de famille : <strong>“gg” pour grammaire des graphiques et “formula” pour les formules.</strong></p>
+<p>Afin de s’assurer de votre identité, le cuistot Batreb vous lance un défi: percer les mystères de l’ivresse liée à l’ambroisie, une liqueur produite depuis des temps ancestraux dans le royaume de Statis. Pour ce faire, vous allez apprendre un nouvel ensemble de sortilèges, que l’on peut réunir dans une même famille magique : les sortilèges <strong>ggformula</strong>. Ces sortilèges permettent de réaliser différents types de graphique de manière simplifiée, comme l’indique leur nom de famille : <strong>“gg” pour grammaire des graphiques et “formula” pour les formules.</strong></p>
 </div>
 <div id="section-des-formules-magiques-pour-faire-des-graphiques" class="section level2">
 <h2>Des formules magiques pour faire des graphiques</h2>
 <p><span style="color:#18AC3E;font-size:16px"><strong>Les recettes de grammaire de graphiques</strong></span></p>
-<p>Chaque graphique est associé a un sortilège, chaque sortilège à des indégrédients, et cet ensemble est appelé grammaire des graphiques.</p>
+<p>Chaque graphique est associé à un sortilège, chaque sortilège à des indégrédients, et cet ensemble est appelé grammaire des graphiques.</p>
 <p>Tous les sortilèges des graphiques commencent par le nom de code <code>gf_</code>. Par exemple :</p>
 <ul>
-<li>pour faire un graphique de points, le sortilège est <code>gf_point</code>;<br />
+<li>pour faire un graphique de points, le sortilège est <code>gf_point()</code>;<br />
 </li>
-<li>pour faire une courbe il y a <code>gf_line</code>;</li>
-<li>pour faire un diagramme en barre ce sera <code>gf_bar</code>.<br />
-Il y a bien d’autres sortilèges sur les graphiques que vous découvrirez dans la famille magique ggformula.</li>
+<li>pour faire une courbe il y a <code>gf_line()</code>;</li>
+<li>pour faire un diagramme en barre ce sera <code>gf_bar()</code>.</li>
 </ul>
+<p>Il y a bien d’autres sortilèges sur les graphiques que vous découvrirez dans la famille magique ggformula.</p>
 <p><span style="color:#18AC3E;font-size:16px"><strong>Les ingrédients</strong></span></p>
-<p>Pour réussir la recette de grammaire de graphique, il ne faut pas oublier d’ingrédient : - Le premier est essentiel, il sert à dire ce que l’on veut représenter.<br />
-- Les autres ingrédients servent à agrémenter la recette (changer la couleur, faire varier la transparence ou ajouter un titre et plus encore). Nous verrons plus tard quelques exemples.</p>
-<p>Revenons pour le moment à notre ingrédient essentiel. Pour maîtriser ce nouveau sortilège, nous allons représenter des informations relatives aux bouteilles d’ambroisie produites dans le royaume de Statis. Le bon Batreb a goûté 1000 liqueurs d’ambroisie différentes (rien que cela), et pour chacune, il a consigné quelques informations… Ce riche (et spiritueux) savoir se trouve consigné dans le fichier <code>livre_ambroisie</code>, dont voici le contenu :</p>
-<div class="sourceCode" id="section-cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">head</span>(livre_ambroisie)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
-##    prix puissance   age robe  transparence saveur    ivresse
-##   &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt;        &lt;ord&gt;       &lt;dbl&gt;
-## 1   791      4.32  9.24 D     VVS2         Very Good    3.48
-## 2  1140      4.32  9.44 D     VVS1         Ideal        3.48
-## 3  4362      4.9   9.82 D     SI1          Good         5.76
-## 4  2122      4.57  7.90 D     VS1          Ideal        4.36
-## 5   756      4.32  7.12 D     SI1          Ideal        3.48
-## 6  4685      5.2  11.7  J     SI2          Premium      7.31</code></pre>
-<p>Le fichier <code>livre_ambroisie</code> comprend ainsi les informations suivantes : la <code>robe</code> de la liqueur, sa <code>transparence</code>, sa <code>saveur</code>, sa <code>puissance</code> (en degré d’alcool) et son <code>prix</code> (dans la monnaie locale de statis, qui s’appelle des kopek si vous voulez le savoir…).</p>
-<p>Cherchons à représenter ce qui détermine le prix d’une liqueur d’ambroisie. Chaque bouteille de liqueur goûtée par Batreb sera représentée par un point si j’utilise le sortilège <code>gf_point</code>, et il me reste à préciser, pour chaque point, les informations à croiser. Par exemple, pour représenterle prix en fonction de la puissance des liqueurs d’ambroisie, le sortilège s’écrira :</p>
-<p>Ah non, zut, ça ne peut pas marcher ! Il faut d’abord indiquer que le sortilège s’applique sur le fichier élaboré, cuite après cuite, par Batreb, soit sur <code>livre_ambroisie</code>. Reprenons ce que nous avons appris avec le pipe <code>%&gt;%</code> : "je prends le fichier <code>livre_ambroisie</code> puis je lui appliquer le sortilège <code>gf_point</code>, soit :</p>
-<div class="sourceCode" id="section-cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Représenter le nuage de points</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># présentant le prix en fonction de la puissance</span></a>
-<a class="sourceLine" id="cb3-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gf_point</span>(prix <span class="op">~</span><span class="st"> </span>puissance)</a></code></pre></div>
+<p>Pour réussir la recette de grammaire d’un graphique, il ne faut pas oublier d’ingrédient :</p>
+<ul>
+<li>Le premier est essentiel, il sert à dire ce que l’on veut représenter.<br />
+</li>
+<li>Les autres ingrédients servent à agrémenter la recette (changer la couleur, ajouter un titre et plus encore). Nous verrons plus tard quelques exemples.</li>
+</ul>
+<p>Revenons pour le moment à notre ingrédient essentiel. Pour maîtriser ce nouveau sortilège, nous allons représenter des informations relatives aux bouteilles d’ambroisie produites dans le royaume de Statis. Le bon Batreb a goûté 100 liqueurs d’ambroisie différentes (rien que cela), et pour chacune, il a consigné quelques informations… Ce riche (et spiritueux) savoir se trouve répertorié dans le fichier <code>livre_ambroisie</code>, dont voici le contenu :</p>
+<pre><code>##   prix puissance age    saveur ivresse
+## 1  162      9.86  93 Délicieux      96
+## 2  161      9.29  69 Extatique      80
+## 3  124      9.34  71  Très bon      81
+## 4  149      8.97  58 Délicieux      72
+## 5  183     10.25 113       Bon     108
+## 6  132      8.58  46 Délicieux      63</code></pre>
+<p>Le fichier <code>livre_ambroisie</code> comprend ainsi, pour chaque observation (chaque liqueur consommée) les informations suivantes :</p>
+<ul>
+<li>le <code>prix</code> de la bouteille d’ambroisie bue par Batreb - prix exprimé dans la monnaie locale de statis, qui s’appelle des kopek si vous voulez le savoir…</li>
+<li>la <code>puissance</code> de la liqueur, comparable au nombre de degré d’une boisson alcoolisée</li>
+<li>l’ <code>age</code> de la liqueur, c’est-à-dire depuis combien de temps elle murit. Certains bouteilles d’ambroisie ont plusieurs siècles !</li>
+<li>la <code>saveur</code>, qui correspond à l’appréciation portée par Batreb sur la liqueur consommée.</li>
+<li>l’ <code>ivresse</code>, mesurée dans une échelle bien particulière : le nombre de hoquets de Batreb dans l’heure qui suit la consommation.</li>
+</ul>
+<p>Cherchons d’abord à représenter ce qui détermine le prix d’une liqueur d’ambroisie. Chaque bouteille de liqueur goûtée par Batreb sera représentée par un point en utilisant le sortilège <code>gf_point</code>. Il reste alors à préciser, pour chaque point, les informations à croiser. Par exemple, pour représenterle prix en fonction de la puissance des liqueurs d’ambroisie, le sortilège s’écrira :</p>
+<p>Ah non, zut, ça ne peut pas marcher ! Il faut d’abord indiquer que le sortilège s’applique sur le fichier élaboré, cuite après cuite, par Batreb, soit sur <code>livre_ambroisie</code>. Reprenons ce que nous avons appris avec le pipe <code>%&gt;%</code> : “je prends le fichier <code>livre_ambroisie</code> puis je lui applique le sortilège <code>gf_point</code>”, soit :</p>
+<div class="sourceCode" id="section-cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Représenter le nuage de points</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># présentant le prix en fonction de la puissance</span></a>
+<a class="sourceLine" id="cb2-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gf_point</span>(prix <span class="op">~</span><span class="st"> </span>puissance)</a></code></pre></div>
 <p><img src="chapitre5_files/figure-html/t1b-1.png" width="672" /></p>
-<p>C’est un premier exemple. Mais ne vous inquiétez pas, nous allons savoir rapidement comment faire de beaux graphiques pas comme ceux de Sassos ;-)</p>
+<p>Le nuage de points semble indiquer une relation (quoique bruitée) entre la puissance d’une liqueur et le prix de la bouteille, les deux variables progressant de pair.</p>
+<p>Ce graphique est un premier exemple d’illustration produite avec un sortilège de la famille ggformula. Mais ne vous inquiétez pas, nous allons savoir rapidement comment faire de beaux graphiques pas comme ceux de Sassos ;-)</p>
 <p><span style="color:#18AC3E;font-size:16px"><strong>L’opérateur ~ </strong></span></p>
-<p>Mais à quoi sert le symbole <code>~</code> dans le sortilège précédent ?</p>
+<p>Au fait, à quoi sert le symbole <code>~</code> dans le sortilège précédent ?</p>
 <p>L’opérateur <code>~</code> remplace la phrase <code>en fonction de</code>. Par convention, dans un graphique on trace l’ordonnée (y) en fonction de l’abscisse (x). Donc l’écriture <code>prix ~ puissance</code> correspond à un graphique où la variable <code>prix</code> est en ordonnée et la variable <code>puissance</code> est en abscisse.</p>
-<p>Si maintenant je veux tracer le nuage de point représentant les bouteilles d’ambroisie en croisant le prix en fonction de l’âge de la liqueur, j’écris la formule magique poids ~ age en utilisant le sortilège gf_point().</p>
-<div class="sourceCode" id="section-cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Représenter le nuage de points</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co"># présentant le prix en fonction de la puissance</span></a>
-<a class="sourceLine" id="cb4-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gf_point</span>(prix <span class="op">~</span><span class="st"> </span>age)</a></code></pre></div>
+<p>Traçons maintenant le nuage de point représentant les liqueurs d’ambroisie en croisant le prix en fonction de l’âge de la liqueur, j’écris la formule magique poids ~ age en utilisant le sortilège gf_point().</p>
+<div class="sourceCode" id="section-cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Représenter le nuage de points</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># présentant le prix en fonction de l&#39;âge de la liqueur</span></a>
+<a class="sourceLine" id="cb3-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gf_point</span>(prix <span class="op">~</span><span class="st"> </span>age)</a></code></pre></div>
 <p><img src="chapitre5_files/figure-html/t1c-1.png" width="672" /></p>
+<p>De nouveau, une relation se dessine entre les deux variables, tout en présentant une certaine dispersion. D’ailleurs, la forme globale du nuage est assez similaire à la précédente. Voilà qui invite à étudier de plus près la liaison entre âge et puissance, qui semblent très liées…</p>
 </div>
 <div id="section-votre-premier-graphique-magique" class="section level2">
 <h2>Votre premier graphique (magique)</h2>
@@ -371,45 +381,53 @@ Il y a bien d’autres sortilèges sur les graphiques que vous découvrirez dans
 <div class="tutorial-exercise-support" data-label="chapitre5-etape1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Créez le graphique à partir du fichier livre_ambroisie
 # croisant l&#39;âge et la puissance sous forme de nuage de points
-livre_ambroisie %&gt;% gf_point(age ~ puissance)
+livre_ambroisie %&gt;% gf_point(puissance ~ age)
 
 # Fin de l&#39;exercice</code></pre>
 </div>
+<p>Ce nuage de points présente une relation bien établie entre la puissance d’une liqueur, et son ancienneté : plus la liqueur compte d’années (voire de siècles), puis son intensité sera élevée… Comme quoi, la patience est toujours récompensée ! La forme de la relation est de type logarithmique : la puissance croît d’abord fortement avec l’âge, puis de moins en moins.</p>
 </div>
 <div id="section-graphiques" class="section level2">
 <h2>1001 graphiques</h2>
 <p>Il y a bien des subtilités pour démultiplier les possibilités graphiques des sortilèges ggformula : en variant le sortilège (donc le type de graphique) ou en variant les ingrédients.</p>
-<p>Essayons un autre type de graphique, en traçant la courbe qui lie l’ivresse de Batreb à la puissance de la liqueur goûtée. Le sortilège <code>gf_line()</code> sera utilisé, en croisant la variable ivresse et la variable puissance.</p>
-<div class="sourceCode" id="section-cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Représenter la courbe présentant le lien </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co"># entre l&#39;ivresse de Batreb et la puissance de la liqueur</span></a>
-<a class="sourceLine" id="cb7-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gf_line</span>(ivresse <span class="op">~</span><span class="st"> </span>puissance)</a></code></pre></div>
+<p>Essayons un autre type de graphique, en traçant la courbe qui lie la puissance de la liqueur à son âge : c’est la même relation que celle représentée précédemment, mais en changeant le type d’illustration. Le sortilège <code>gf_line()</code> sera ainsi utilisé :</p>
+<div class="sourceCode" id="section-cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Tracer la courbe présentant le lien </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># entre la puissance de la liqueur et son âge</span></a>
+<a class="sourceLine" id="cb6-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gf_line</span>(puissance <span class="op">~</span><span class="st"> </span>age)</a></code></pre></div>
 <p><img src="chapitre5_files/figure-html/t2-1.png" width="672" /></p>
-<p>Hic ! Visiblement, le bon Batreb connaît une croissance exponentielle de son ivresse quand la liqueur s’intensifie !</p>
-<p>Prenons un autre exemple, en traçant un diagramme en barre représentant le nombre de liqueurs d’ambroisie selon leur saveur</p>
-<div class="sourceCode" id="section-cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Représenter sous forme de barre</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co"># le nombre d&#39;observations (de bouteille de liqueurs) selon leur saveur</span></a>
-<a class="sourceLine" id="cb8-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">gf_bar</span>( <span class="op">~</span><span class="st"> </span>saveur)</a></code></pre></div>
-<p><img src="chapitre5_files/figure-html/t3-1.png" width="672" /></p>
+<p>Prenons un autre exemple, en traçant un diagramme en barre représentant le nombre de liqueurs d’ambroisie selon leur saveur.</p>
+<div class="sourceCode" id="section-cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Représenter sous forme de barres</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># le nombre d&#39;observations (de bouteille de liqueurs) selon leur saveur</span></a>
+<a class="sourceLine" id="cb7-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">gf_bar</span>( <span class="op">~</span><span class="st"> </span>saveur)</a></code></pre></div>
+<p><img src="chapitre5_files/figure-html/t3a-1.png" width="672" /></p>
 <p>Notez deux particularités :</p>
 <ul>
 <li>tout d’abord, c’est le sortilège <code>gf_bar()</code> qui a été utilisé cette fois, pour spécifier le type de graphique</li>
 <li>ensuite, la partie à gauche du ~ n’a pas été renseignée. Cela signifie que nous cherchons à représenter toutes les observations du fichier <code>livre_ambroisie</code> (en l’occurrence, des bouteilles de liqueur d’ambroisie) selon une variable, la <code>saveur</code>. Cela permet in fine de compter le nombre de bouteille de liqueur d’ambroisie selon les différentes modalités de la variable <code>saveur</code>.</li>
 </ul>
+<p>Il est aussi possible de changer l’orientation du graphique, pour avoir des barres horizontales, avec le sortilège <code>gf_barh()</code>.</p>
+<div class="sourceCode" id="section-cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Représenter sous forme de barres horizontales</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co"># le nombre d&#39;observations (de bouteille de liqueurs) selon leur saveur</span></a>
+<a class="sourceLine" id="cb8-3" title="3">livre_ambroisie <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">gf_barh</span>( <span class="op">~</span><span class="st"> </span>saveur)</a></code></pre></div>
+<p><img src="chapitre5_files/figure-html/t3b-1.png" width="672" /></p>
 <p><span style="color:#18AC3E;font-size:16px"><strong>Les ingrédients exhausteurs de goût</strong></span></p>
-<p>Les graphiques ggformula peuvent être enrichis et voir leur sapidité augmentée par quelques ingrédients supplémentaires. Découvrons-les ensemble en reprenant le graphique avec la courbe liant ivresse et puissance de la liqueur, que nous allons “customizer” (terme non reconnu par l’Académie des Lettres de Statis)</p>
-<p>L’ingrédient title permet par exemple d’ajouter un titre :</p>
+<p>Les graphiques ggformula peuvent être enrichis et voir leur sapidité augmentée par quelques ingrédients supplémentaires. Découvrons-les ensemble en reprenant le graphique avec la courbe liant puissance et âge de la liqueur, que nous allons “customizer” (terme non reconnu par l’Académie des Lettres de Statis)</p>
+<p>L’ingrédient <code>title</code> permet par exemple d’ajouter un titre :</p>
 <div class="sourceCode" id="section-cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">livre_ambroisie <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st"> </span><span class="kw">gf_line</span>(ivresse <span class="op">~</span><span class="st"> </span>puissance, <span class="dt">title =</span> <span class="st">&quot;Ivresse de Batreb selon la puissance de la liqueur goûtée (hips)&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st"> </span><span class="kw">gf_line</span>(puissance <span class="op">~</span><span class="st"> </span>age,</a>
+<a class="sourceLine" id="cb9-3" title="3">         <span class="dt">title =</span> <span class="st">&quot;Puissance de la liqueur selon son âge (hips !)&quot;</span>)</a></code></pre></div>
 <p><img src="chapitre5_files/figure-html/t4-1.png" width="672" /></p>
 <p>Et pour changer la couleur, il faut ajouter l’ingrédient <code>color</code>:</p>
 <div class="sourceCode" id="section-cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">livre_ambroisie <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="st"> </span><span class="kw">gf_line</span>(ivresse <span class="op">~</span><span class="st"> </span>puissance, <span class="dt">title =</span> <span class="st">&quot;Ivresse de Batreb selon la puissance de la liqueur goûtée (hips)&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st"> </span><span class="kw">gf_line</span>(puissance <span class="op">~</span><span class="st"> </span>age, </a>
+<a class="sourceLine" id="cb10-3" title="3">         <span class="dt">title =</span> <span class="st">&quot;Puissance de la liqueur selon son âge (hips !)&quot;</span>,</a>
+<a class="sourceLine" id="cb10-4" title="4">         <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="chapitre5_files/figure-html/t5-1.png" width="672" /></p>
-<p>La couleur doit être précisée dans la langue de Shakespeare, et rédigée entre guillemets (comme <code>"red"</code> dans l’exemple). Un ensemble de termes anglais faisant référence à des couleurs est renseigné par défaut dans R, certains très classiques (red, green, blue…) d’autres plus originaux (comme tomato, moccasin, peachpuff…). Vous découvrirez plus tard comment choisir très exactement la couleur de votre choix, dans les plus infimes de nuance (pour reproduire la couleur lie-de-vin, par exemple ?)</p>
+<p>La couleur doit être précisée dans la langue de Shakespeare, et rédigée entre guillemets (comme <code>"red"</code> dans l’exemple). Un ensemble de termes anglais faisant référence à des couleurs est renseigné par défaut dans R, certains très classiques (red, green, blue…) d’autres plus originaux (comme tomato, moccasin, peachpuff…). Vous découvrirez plus tard comment choisir très exactement la couleur de votre choix, dans les plus infimes nuances (pour reproduire la couleur lie-de-vin, par exemple ?)</p>
 <p>Essayez vous-mêmes de faire varier le titre et la couleur pour le graphique en courbe reliant l’ivresse de Batreb et la puissance de la liqueur.</p>
 <div class="tutorial-exercise" data-label="chapitre5-etape2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Représenter la courbe présentant le lien 
-# entre l&#39;ivresse de Batreb et la puissance de la liqueur
+# entre la puissance de la liqueur et son âge
 # en ajoutant un titre et une couleur
 
 # Fin de l&#39;exercice</code></pre>
@@ -417,55 +435,65 @@ livre_ambroisie %&gt;% gf_point(age ~ puissance)
 </div>
 <div class="tutorial-exercise-support" data-label="chapitre5-etape2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Représenter la courbe présentant le lien 
-# entre l&#39;ivresse de Batreb et la puissance de la liqueur
+# entre la puissance de la liqueur et son âge
 # en ajoutant un titre et une couleur
 livre_ambroisie %&gt;% 
-  gf_line(ivresse ~ puissance, title = &quot;Boire un petit coup c&#39;est agréable...&quot;, color = &quot;tomato&quot;)
+  gf_line(puissance ~ age, title = &quot;Boire un petit coup c&#39;est agréable...&quot;, color = &quot;tomato&quot;)
 
 # Fin de l&#39;exercice</code></pre>
 </div>
 </div>
-<div id="section-a-reprendre" class="section level2">
-<h2>A REPRENDRE</h2>
-<p>Le fichier ambroisie contient la liste des mois qui ont donné les meilleures récoltes d’ambroisie au cours des dernières années. A l’aide du graphique suivant, répondez désormais à l’énigme suivante: “A quel mois vaut il mieux cueillir l’ambroisie?”</p>
-<p>Mais tout d’abord, quel serait le bon ordre des ingrédients pour tracer le diagramme des meilleurs mois ? <div class="panel panel-default">
-<div data-label="quiz_parsons1" class="tutorial-question panel-body">
-<div id="quiz_parsons1-answer_container" class="shiny-html-output"></div>
-<div id="quiz_parsons1-message_container" class="shiny-html-output"></div>
-<div id="quiz_parsons1-action_button_container" class="shiny-html-output"></div>
-<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
-</div>
-</div></p>
-<p>Une fois le bon ordre déterminé ci-dessus, il te reste à pratiquer directement dans la console R (avec la même formule).</p>
-<div class="tutorial-exercise" data-label="module2-etape1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code># Créez le graphique
+<div id="section-a-consommer-avec-modération" class="section level2">
+<h2>A consommer avec modération</h2>
+<p>Il est temps désormais de répondre à la question posée par Batreb : <em>Quelle est (hips!) la puissance d’une liqueur d’ambroisie (hips!) qui me fait franchir le seuil (hips!) fatidique des 100 hoquets par heure ?</em>. Le fichier <code>livre_ambroisie</code> contient deux variables pour répondre à cette question :</p>
+<ul>
+<li>la variable <code>ivresse</code> indique le nombre de hoquets que Batreb a eu dans l’heure qui suit la consommation d’une liqueur d’ambroisie.</li>
+<li>la variable <code>puissance</code> indique l’intensité de la liqueur d’ambroisie en degré.</li>
+</ul>
+<p>Pour répondre à Batreb, il vous faudra élaborer un graphique croisant l’ivresse et la puissance puis lire sur le graphique à quel degré de puissance l’ivresse dépasse le seuil de 100 hoquets</p>
+<div class="tutorial-exercise" data-label="chapitre5-etape3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># Créez le graphique avec gf_line
+# et lire à quelle puissance l&#39;ivresse dépasse le seuil de 100
 
 # Fin de l&#39;exercice</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":"NULL"}</script>
 </div>
-Vous avez trouvé ? <strong>Revenez au jeu Icarius</strong> 
+<div class="tutorial-exercise-support" data-label="chapitre5-etape3-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># Créez le graphique avec gf_line
+# et lire à quelle puissance l&#39;ivresse dépasse le seuil de 100
+livre_ambroisie %&gt;% 
+  gf_line(ivresse ~ puissance, title = &quot;Attention à l&#39;abus d&#39;ambroisie trop forte...&quot;)
+# Fin de l&#39;exercice</code></pre>
+</div>
+<p>Vous avez trouvé ? Vérifiez votre résultat dans le quiz.</p>
+<div class="panel panel-default">
+<div data-label="question1" class="tutorial-question panel-body">
+<div id="question1-answer_container" class="shiny-html-output"></div>
+<div id="question1-message_container" class="shiny-html-output"></div>
+<div id="question1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+Vous pouvez désormais reporter la bonne réponse dans le jeu <strong>icaRius</strong> et reprendre votre partie ! 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
 library(parsons)
 library(dplyr)
 library(ggformula)
-library(readxl)
-base_individus <- tibble(poids = sort(rnorm(100, mean = 80, sd = 30)), taille = sort(rnorm(100, mean = 170, sd = 20)), nombre = rnorm(100, 100, 50), sexe = sample(c("H","F"),size = 100,replace = T))
-donnees_secretes <- read_excel("../../data/nbguerriers.xlsx")
-mandragore <- read_excel("../../data/production.xlsx")
-ambroisie <- read_excel("../../data/ambroisie.xlsx")
 livre_ambroisie <- diamonds %>% 
   filter(color == "D" | color == "J") %>%
-  mutate(col = as.character(color)) %>% 
   mutate(taste = cut) %>%
-  mutate(puissance = carat + 4) %>%
-  mutate(age = carat + 6) %>%
-  filter(puissance < 7) %>%
-  sample_n(1000) %>%
-  select(prix='price',puissance='puissance',age='age',robe='color',transparence='clarity',saveur='taste') 
-livre_ambroisie$age <- livre_ambroisie$age + ((livre_ambroisie$age)^(1/3))*0.02*sample(100, size = nrow(livre_ambroisie),replace=T) + livre_ambroisie$prix/mean(livre_ambroisie$prix)
-livre_ambroisie$ivresse = livre_ambroisie$puissance^(4)/100
+  mutate(puissance = round((carat)^2+4,digits=2)) %>%
+  mutate(prix = round(price/100,digits=0))  %>%
+  filter(puissance < 12, puissance > 6) %>%
+  mutate(age = round((puissance)^(5)/1000),digits=0) %>%
+  mutate(ivresse = round((puissance)^(3)/10,digits = 0)) %>%
+  filter(prix<3*age,prix>0.5*age) %>%
+  sample_n(100) %>%
+  select(prix='prix',puissance='puissance',age='age',saveur='taste',ivresse="ivresse") %>%
+  mutate(saveur=recode(saveur,"Fair"="Sympathique", "Good"="Bon", "Very Good"="Très bon", "Premium"="Délicieux", "Ideal"="Extatique"))
 
+livre_ambroisie_df <- as.data.frame(livre_ambroisie)
 
 </script>
  
@@ -488,14 +516,14 @@ output$`tutorial-exercise-chapitre5-etape2-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "parsons_question", label = "quiz_parsons1",     question = NULL, answers = list(structure(list(id = "lnr_ans_c8b214",         option = c("ambroisie", "%>%", "gf_bar", "(~ Meilleure_recolte)"        ), value = c("ambroisie", "%>%", "gf_bar", "(~ Meilleure_recolte)"        ), label = structure("ambroisie\n%&gt;%\ngf_bar\n(~ Meilleure_recolte)", html = TRUE, class = c("html",         "character")), correct = TRUE, message = structure("Tu as le code pour tracer un beau graphique, écris le code dans la console en dessous", html = TRUE, class = c("html",         "character"))), .Names = c("id", "option", "value", "label",     "correct", "message"), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = structure(list(        submit = structure("Give feedback", html = TRUE, class = c("html",         "character")), try_again = structure("Try Again", html = TRUE, class = c("html",         "character"))), .Names = c("submit", "try_again")), messages = structure(list(        correct = structure("Correct!", html = TRUE, class = c("html",         "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",         "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",         "character")), message = NULL, post_message = NULL), .Names = c("correct",     "try_again", "incorrect", "message", "post_message")), ids = structure(list(        answer = "quiz_parsons1-answer", question = "quiz_parsons1"), .Names = c("answer",     "question")), loading = structure("Loading: ", html = TRUE, class = c("html",     "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 1896694085.61678, options = structure(list(initial = c("ambroisie",     "(~ Meilleure_recolte)", "gf_bar", "%>%"), pass = list(),         fail = list(), problem_type = "base", sortable_options = structure(list(), class = "sortable_options")), .Names = c("initial",     "pass", "fail", "problem_type", "sortable_options"))), .Names = c("type", "label", "question", "answers", "button_labels", "messages", "ids", "loading", "random_answer_order", "allow_retry", "seed", "options"), class = c("parsons_question", "tutorial_question")))
+`tutorial-exercise-chapitre5-etape3-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-chapitre5-etape3-code-editor`)), session)
+output$`tutorial-exercise-chapitre5-etape3-output` <- renderUI({
+  `tutorial-exercise-chapitre5-etape3-result`()
+})
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-module2-etape1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-module2-etape1-code-editor`)), session)
-output$`tutorial-exercise-module2-etape1-output` <- renderUI({
-  `tutorial-exercise-module2-etape1-result`()
-})
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "question1", question = structure("A partir de quelle puissance d&#39;ambroisie Batreb franchit le seuil des 100 hoquets par heure ?", html = TRUE, class = c("html", "character")), answers = list(structure(list(id = "lnr_ans_9a16b5f",     option = "6", value = "6", label = structure("6", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), .Names = c("id", "option", "value", "label", "correct", "message"), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c830ee8",     option = "8", value = "8", label = structure("8", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), .Names = c("id", "option", "value", "label", "correct", "message"), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_866e698",     option = "10", value = "10", label = structure("10", html = TRUE, class = c("html",     "character")), correct = TRUE, message = NULL), .Names = c("id", "option", "value", "label", "correct", "message"), class = c("tutorial_question_answer", "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bdd72ab",     option = "jamais", value = "jamais", label = structure("jamais", html = TRUE, class = c("html",     "character")), correct = FALSE, message = NULL), .Names = c("id", "option", "value", "label", "correct", "message"), class = c("tutorial_question_answer", "tutorial_quiz_answer"))), button_labels = structure(list(submit = structure("Submit Answer", html = TRUE, class = c("html", "character")), try_again = structure("Try Again", html = TRUE, class = c("html", "character"))), .Names = c("submit", "try_again")), messages = structure(list(    correct = structure("Félicitations, c&#39;est la bonne réponse (hips!)", html = TRUE, class = c("html",     "character")), try_again = structure("Retente ta chance", html = TRUE, class = c("html",     "character")), incorrect = structure("Retente ta chance", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), .Names = c("correct", "try_again", "incorrect", "message", "post_message")), ids = structure(list(    answer = "question1-answer", question = "question1"), .Names = c("answer", "question")), loading = structure("<strong>Loading:<\u002fstrong> \nA partir de quelle puissance d&#39;ambroisie Batreb franchit le seuil des 100 hoquets par heure ?\n<br/><br/><br/>", html = TRUE, class = c("html", "character")), random_answer_order = FALSE, allow_retry = TRUE,     seed = 286717278.866487, options = list()), .Names = c("type", "label", "question", "answers", "button_labels", "messages", "ids", "loading", "random_answer_order", "allow_retry", "seed", "options"), class = c("learnr_radio", "tutorial_question")))
 </script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
@@ -504,7 +532,7 @@ output$`tutorial-exercise-module2-etape1-output` <- renderUI({
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69]},"class":{"type":"character","attributes":{},"value":["data.frame"]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","cellranger","checkmate","cli","colorspace","compiler","crayon","datasets","digest","dplyr","ellipsis","evaluate","fansi","fastmap","ggformula","ggplot2","ggstance","glue","graphics","grDevices","grid","gtable","htmltools","htmlwidgets","httpuv","jsonlite","knitr","labeling","later","lazyeval","learnr","magrittr","markdown","MASS","methods","mime","mosaicCore","munsell","parsons","pillar","pkgconfig","promises","purrr","R6","Rcpp","readxl","rlang","rmarkdown","rprojroot","scales","shiny","sortable","stats","stringi","stringr","tibble","tidyr","tidyselect","tools","utf8","utils","vctrs","withr","xfun","xtable","yaml","zeallot"]},{"type":"character","attributes":{},"value":["0.2.1","1.1.5","3.4.1","1.1.0","1.9.1","1.1.0","1.4-1","3.4.1","1.3.4","3.4.1","0.6.12","0.8.0.1","0.3.0","0.14","0.4.0","1.0.1","0.9.1","3.2.1","0.3.2","1.3.0","3.4.1","3.4.1","3.4.1","0.3.0","0.4.0","1.5.1","1.5.2","1.6","1.25","0.3","1.0.0","0.2.2","0.10.0","1.5","1.1","7.3-47","3.4.1","0.6","0.6.0","0.5.0","0.0.2.9000","1.4.2","2.0.3","1.1.0","0.3.2","2.4.0","1.0.1","1.3.1","0.4.0","1.16","1.3-2","1.0.0","1.4.0","0.3.1","3.4.1","1.4.3","1.4.0","2.1.1","0.8.3","0.2.5","3.4.1","1.1.4","3.4.1","0.2.0","2.1.2","0.10","1.8-4","2.2.0","0.1.0"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63]},"class":{"type":"character","attributes":{},"value":["data.frame"]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","checkmate","colorspace","compiler","crayon","datasets","digest","dplyr","ellipsis","evaluate","fastmap","ggformula","ggplot2","ggstance","glue","graphics","grDevices","grid","gtable","htmltools","htmlwidgets","httpuv","jsonlite","knitr","labeling","later","lazyeval","learnr","magrittr","markdown","MASS","methods","mime","mosaicCore","munsell","parsons","pillar","pkgconfig","plyr","promises","purrr","R6","Rcpp","rlang","rmarkdown","rprojroot","scales","shiny","sortable","stats","stringi","stringr","tibble","tidyr","tidyselect","tools","utils","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.1.5","3.4.1","1.9.1","1.4-1","3.4.1","1.3.4","3.4.1","0.6.12","0.8.0.1","0.3.0","0.14","1.0.1","0.9.1","3.2.1","0.3.2","1.3.0","3.4.1","3.4.1","3.4.1","0.3.0","0.4.0","1.5.1","1.5.2","1.6","1.25","0.3","1.0.0","0.2.2","0.10.0","1.5","1.1","7.3-47","3.4.1","0.6","0.6.0","0.5.0","0.0.2.9000","1.4.2","2.0.3","1.8.4","1.1.0","0.3.2","2.4.0","1.0.1","0.4.0","1.16","1.3-2","1.0.0","1.4.0","0.3.1","3.4.1","1.4.3","1.4.0","2.1.1","0.8.3","0.2.5","3.4.1","3.4.1","2.1.2","0.10","1.8-4","2.2.0"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>
