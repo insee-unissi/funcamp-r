@@ -45,7 +45,7 @@ mon_fichier %>% skim()
 Le sortilège se trouvant immédiatement à la droite du %>% utilise comme objet en entrée l'élement se trouvant à la gauche du %>%. En langue vernaculaire, cela donne: **"Je prends mon fichier de données et ensuite je calcule les indicateurs statistiques sur l'ensemble des variables de ce fichier."**
 <p>
 <p>
-On peut également choisir de ne s'intéresser qu'à une seule des variables du fichier comme nous l'avion fait au chapitre précédent :
+On peut également choisir de ne s'intéresser qu'à une seule des variables du fichier comme nous l'avions fait au chapitre précédent :
 
 ```{r, collapse = TRUE, eval=FALSE, echo=TRUE}
 skim(mon_fichier,nom_variable)
