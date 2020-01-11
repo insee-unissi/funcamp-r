@@ -1,5 +1,5 @@
 ---
-title: "Chapitre 7 - la plume d'IGoR"
+title: "Chapitre 8 - la plume d'IGoR"
 output: 
   html_document:
     theme: cerulean
@@ -128,7 +128,9 @@ Parmi les nombreux chapitres de sortilèges que vous pourriez ajouter au grimoir
 - manipulation de variables
 - (...)
 
-Pour certaines tâches, il peut exister plusieurs solutions différentes pour les réaliser. Dans la mesure où il n’est pas possible d’être exhaustif, nous avons fait le choix dans l'aventure d'icaRius de retenir en priorité les sortilèges du tidyverse. En particulier, dans de prochains chapitres, vous ferez la découverte de `dplyr` pour la manipulation de données et de `ggformula` pour la réalisation de graphiques.
+Pour certaines tâches, il peut exister plusieurs solutions différentes pour les réaliser. Dans la mesure où il n’est pas possible d’être exhaustif, nous avons fait le choix dans l'aventure d'icaRius de retenir en priorité les sortilèges du tidyverse. 
+
+**D'ailleurs, vous avez déjà utilisé des sortilèges du tidyverse, sans le savoir !**. Ainsi, le pipe %>% vient du tidyverse. De même, les sortilèges `ggformula` pour la réalisation de graphiques sont une composante du tidyverse !
 
 Plutôt que d'installer un à un tous les packages de la constellation tidyverse, une extension éponyme permet en une ligne d'ajouter dans votre grimoire IGoR tous ces nouveaux sortilèges. Prenez votre plume :
 
@@ -147,4 +149,4 @@ Vous voilà désormais en capacité d'invoquer les extensions du tidyverse, dont
 De quoi acquérir une force statistique herculéenne ! Voyons d'ailleurs comment icaRius soulève les obstacles rencontrés, maintenant qu'ils deviennent légers comme une plume...
 
 
-**Fin du chapitre 7 >> reprenez la partie d'Icarius !!!** 
+**Fin du chapitre >> reprenez la partie d'Icarius !!!** 
