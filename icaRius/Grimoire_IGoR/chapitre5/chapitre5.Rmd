@@ -40,7 +40,7 @@ livre_ambroisie_df <- as.data.frame(livre_ambroisie)
 
 ## Veuillez confirmer votre identité
 
-Afin de s'assurer de votre identité, le cuistot Batreb vous lance un défi: percer les mystères de l'ivresse liée à l'ambroisie, une liqueur produite depuis des temps ancestraux dans le royaume de Statis. Pour ce faire, vous allez apprendre un nouvel ensemble de sortilèges, que l'on peut réunir dans une même famille magique : les sortilèges **ggformula**. Ces sortilèges permettent de réaliser différents types de graphique de manière simplifiée, comme l'indique leur nom de famille : **"gg" pour grammaire des graphiques et "formula" pour les formules.**
+Afin de s'assurer de votre identité, le cuistot Batreb vous lance un défi: percer les mystères de l'ivresse liée à l'ambroisie, une liqueur produite depuis des temps ancestraux dans le royaume de Statis. Pour ce faire, vous allez apprendre un nouvel ensemble de sortilèges, que l'on peut réunir dans une même famille magique : les sortilèges **ggformula**. Ces sortilèges permettent de réaliser différents types de graphiques de manière simplifiée, comme l'indique leur nom de famille : **"gg" pour grammaire des graphiques et "formula" pour les formules.**
 
 
 ## Des formules magiques pour faire des graphiques
@@ -48,21 +48,24 @@ Afin de s'assurer de votre identité, le cuistot Batreb vous lance un défi: per
 
 <span style="color:#18AC3E;font-size:16px">**Les recettes de grammaire de graphiques**</span>
 
-Chaque graphique est associé à un sortilège, chaque sortilège à des indégrédients, et cet ensemble est appelé grammaire des graphiques.
+Chaque graphique est associé à un sortilège, chaque sortilège à des ingrédients, et cet ensemble est appelé grammaire des graphiques.
 
 Tous les sortilèges des graphiques commencent par le nom de code `gf_`. Par exemple :
 
  - pour faire un graphique de points, le sortilège est `gf_point()`;   
+ 
  - pour faire une courbe il y a `gf_line()`;
+ 
  - pour faire un diagramme en barre ce sera `gf_bar()`.  
 
 Il y a bien d'autres sortilèges sur les graphiques que vous découvrirez dans la famille magique ggformula.
 
 <span style="color:#18AC3E;font-size:16px">**Les ingrédients**</span>
 
-Pour réussir la recette de grammaire d'un graphique, il ne faut pas oublier d'ingrédient :
+Pour réussir la recette de grammaire d'un graphique, il ne faut pas oublier d'ingrédients :
 
-- Le premier est essentiel, il sert à dire ce que l'on veut représenter.  
+- Le premier est essentiel, il sert à dire ce que l'on veut représenter.
+
 - Les autres ingrédients servent à agrémenter la recette (changer la couleur, ajouter un titre et plus encore). Nous verrons plus tard quelques exemples.  
 
 Revenons pour le moment à notre ingrédient  essentiel. Pour maîtriser ce nouveau sortilège, nous allons représenter des informations relatives aux bouteilles d'ambroisie produites dans le royaume de Statis. Le bon Batreb a goûté 100 liqueurs d'ambroisie différentes (rien que cela), et pour chacune, il a consigné quelques informations... Ce riche (et spiritueux) savoir se trouve répertorié dans le fichier `livre_ambroisie`, dont voici le contenu :
@@ -77,13 +80,17 @@ head(livre_ambroisie_df)
 
 Le fichier `livre_ambroisie` comprend ainsi, pour chaque observation (chaque liqueur consommée) les informations suivantes : 
 
-- le `prix` de la bouteille d'ambroisie bue par Batreb - prix exprimé dans la monnaie locale de statis, qui s'appelle des kopek si vous voulez le savoir...
+- le `prix` de la bouteille d'ambroisie bue par Batreb - prix exprimé dans la monnaie locale de statis, qui s'appelle des kopeks si vous voulez le savoir...
+
 - la `puissance` de la liqueur, comparable au nombre de degré d'une boisson alcoolisée 
+
 - l' `age` de la liqueur, c'est-à-dire depuis combien de temps elle murit. Certains bouteilles d'ambroisie ont plusieurs siècles !
+
 - la `saveur`, qui correspond à l'appréciation portée par Batreb sur la liqueur consommée. 
+
 - l' `ivresse`, mesurée dans une échelle bien particulière : le nombre de hoquets de Batreb dans l'heure qui suit la consommation.
 
-Cherchons d'abord à représenter ce qui détermine le prix d'une liqueur d'ambroisie. Chaque bouteille de liqueur goûtée par Batreb sera représentée par un point en utilisant le sortilège `gf_point`. Il reste alors à préciser, pour chaque point, les informations à croiser. Par exemple, pour représenterle prix en fonction de la puissance des liqueurs d'ambroisie, le sortilège s'écrira :
+Cherchons d'abord à représenter ce qui détermine le prix d'une liqueur d'ambroisie. Chaque bouteille de liqueur goûtée par Batreb sera représentée par un point en utilisant le sortilège `gf_point`. Il reste alors à préciser, pour chaque point, les informations à croiser. Par exemple, pour représenter le prix en fonction de la puissance des liqueurs d'ambroisie, le sortilège s'écrira :
 
 ```{r t1, collapse = TRUE, echo=FALSE, eval=FALSE}
 # Représenter le nuage de points
@@ -109,9 +116,9 @@ Ce graphique est un premier exemple d'illustration produite avec un sortilège d
   
 Au fait, à quoi sert le symbole `~` dans le sortilège précédent ?
   
-L'opérateur `~` remplace la phrase `en fonction de`. Par convention, dans un graphique on trace l'ordonnée (y) en fonction de l'abscisse (x). Donc l'écriture `prix ~ puissance` correspond à un graphique où la variable `prix` est en ordonnée et la variable `puissance` est en abscisse.
+L'opérateur `~` (tilde de son petit nom) se lit `en fonction de`. Par convention, dans un graphique on trace l'ordonnée (`y`) en fonction de l'abscisse (`x`). Donc l'écriture `prix ~ puissance` correspond à un graphique où la variable `prix` est en ordonnée et la variable `puissance` est en abscisse.
 
-Traçons maintenant le nuage de point représentant les liqueurs d'ambroisie en croisant le prix en fonction de l'âge de la liqueur, j'écris la formule magique poids ~ age en utilisant le sortilège gf_point().
+Traçons maintenant le nuage de point représentant les liqueurs d'ambroisie en croisant le *prix en fonction de l'âge de la liqueur*, j'écris la formule magique `poids ~ age` en utilisant le sortilège `gf_point()`.
 
 ```{r t1c, collapse = TRUE}
 # Représenter le nuage de points
@@ -171,7 +178,8 @@ livre_ambroisie %>%  gf_bar( ~ saveur)
 Notez deux particularités :
 
 - tout d'abord, c'est le sortilège `gf_bar()` qui a été utilisé cette fois, pour spécifier le type de graphique
-- ensuite, la partie à gauche du ~ n'a pas été renseignée. Cela signifie que nous cherchons à représenter toutes les observations du fichier `livre_ambroisie` (en l'occurrence, des bouteilles de liqueur d'ambroisie) selon une variable, la `saveur`. Cela permet in fine de compter le nombre de bouteille de liqueur d'ambroisie selon les différentes modalités de la variable `saveur`.
+
+- ensuite, la partie à gauche du symbole `~` n'a pas été renseignée. Cela signifie que nous cherchons à représenter toutes les observations du fichier `livre_ambroisie` (en l'occurrence, des bouteilles de liqueur d'ambroisie) selon une variable, la `saveur`. Cela permet *in fine* de compter le nombre de bouteilles de liqueur d'ambroisie selon les différentes modalités de la variable `saveur`.
 
 Il est aussi possible de changer l'orientation du graphique, pour avoir des barres horizontales, avec le sortilège `gf_barh()`. 
 
@@ -195,7 +203,9 @@ livre_ambroisie %>%
 
 ```
 
-Et pour changer la couleur, il faut ajouter l'ingrédient `color`:
+Notez ici que, comme le sortilège peut comporter de nombreux ingrédients, nous allons dorénavant les appeler par leur nom consciencieusement, ici : `title = `. 
+
+Pour changer la couleur, il faudra ajouter l'ingrédient `color =`:
   
 ```{r t5, collapse = TRUE}
 livre_ambroisie %>%  
@@ -250,7 +260,7 @@ Pour répondre à Batreb, il vous faudra élaborer un graphique croisant l'ivres
 # Créez le graphique avec gf_line
 # et lire à quelle puissance l'ivresse dépasse le seuil de 100
 livre_ambroisie %>% 
-  gf_line(ivresse ~ puissance, title = "Attention à l'abus d'ambroisie trop forte...")
+  gf_line(ivresse ~ puissance, title = "Attention à l'abus d'ambroisie...")
 # Fin de l'exercice
 ``` 
 
