@@ -26,7 +26,7 @@ library(tidyverse)
 
 
 
-## Le sortilège: un outil précieux au service d'Icarius
+## Le sortilège : un outil précieux au service d'Icarius
 
 Pour avancer dans son aventure, Icarius dispose de son précieux grimoire, qu'il a pu alimenter au fur et à mesure de ses rencontres avec des mages dans les villages précédents. Ce grimoire renferme une multitude de sortilèges - appelés **fonctions** dans le langage des Runes - permettant chacun d'accomplir une tâche bien spécifique. Nous avons, dans le chapitre précédent, fait la découverte d'un premier sortilège, `import()`, pour charger des données dans R. 
 
@@ -49,7 +49,7 @@ Parmi les sortilèges utiles, on retrouve `skim()` qui est dédié aux statistiq
 
 Il permet de visualiser des statistiques fondamentales (moyenne, médiane...) sur l'ensemble des variables d'un fichier de données. Mais également le nombre de valeurs manquantes, le nombre de valeurs uniques... et même un mini histogramme qui symbolise la distribution de la variable. Il a d'autres avantages encore, que vous découvrirez sans doute un jour dans votre quête...
 
-Essayons sur un fichier factice appelé `mon_fichier`, qui se compose de deux variables `ma_variable_1` et `ma_variable_2`. 
+Essayons sur un fichier factice que nous allons construire de toutes pièces et que nous allons appeler `mon_fichier` : il se compose de deux variables `ma_variable_1` et `ma_variable_2`. Chacune de ces variables contient une suite de valeurs
 
 ```{r,  echo=FALSE}
 mon_fichier <- data.frame("ma_variable_1" = c(10,9,13,18,7,12), "ma_variable_2" = c(35,29,43,26,34,31))
@@ -195,7 +195,7 @@ incorrect="Retente ta chance",
 answer("38,6 et 41,2"),
 answer("33,9 et 36,6",correct=TRUE),
 answer("41,2 et 38,5"),
-correct="Félicitations, la réponse à donner au chef du village est donc : Galia (avec G majuscule)"
+correct="Félicitations, la réponse à donner au chef du village est donc : Galia (avec un G majuscule)"
 )
 
 ```   
@@ -205,9 +205,9 @@ Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius**. Le tutoriel é
 ><details><summary><font size="3"><b>Pour les plus téméraires : partie optionnelle sur la distribution des variables - cliquez ici</b></font></summary>
 ><p><font size="2">
 >
->Les deux exploitations ont une production moyenne différente : la valeur `mean` de la variable Litres dans les résultats du sortilè skim() donne en effet une moyenne respective de 33,9 litres et 36,5 litres pour les exploitations de Tellus et Galia. 
+>Les deux exploitations ont une production moyenne différente : la valeur `mean` de la variable Litres dans les résultats du sortilège `skim()` donne en effet une moyenne respective de 33,9 litres et 36,5 litres pour les exploitations de Tellus et Galia. 
 >
->Au delà de cette moyenne, le sortilège skim() révèle des caractéristiques très différentes entre les deux exploitations. Quelle proposition parmi les suivantes est fausse ? Aidez-vous des résultats obtenus avec skim pour les deux exploitations...
+>Au delà de cette moyenne, le sortilège `skim()` révèle des caractéristiques très différentes entre les deux exploitations. Quelle proposition parmi les suivantes est fausse ? Aidez-vous des résultats obtenus avec skim pour les deux exploitations...
 >
 >```{r question2,echo=FALSE}
 question("Quiz bonus - quelle assertion est fausse ?",
