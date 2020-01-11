@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Vous venez de rencontrer la fermière du village Kokoro, désespérée d'avoir perdu le livre de compte où, chaque jour, elle note consciencieusement le nombre de pontes. 
 
-Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, éclatée dans plusieurs fragments par le redoutable sorcier SaSSoS ! Pour le corser le tout, chaque fragment a été ensorcelé et semble indéchiffrable... Ils sont en effet chacun dans d'étranges formats : SAS, Excel, Calc...
+Aidons IcaRius à reconstituer le livre de compte. Ce dernier n'est pas tout à fait perdu : il en reste une copie, éclatée dans plusieurs fragments par le redoutable sorcier SaSSoS ! Pour  corser le tout, chaque fragment a été ensorcelé et semble indéchiffrable... Ils sont en effet chacun dans d'étranges formats : SAS, Excel, Calc...
 
 **Aie aie aie.**
 
@@ -47,7 +47,7 @@ Pour lors, nous allons découvrir un premier sortilège, dénommé `import()`, q
 import("chemin_du_fichier")
 ```
 
-Pour s'y retrouver, autant tout de suite ranger ce que l'on est en train d'importer dans R. Pour cela, on assigne à un nouvel objet le contenu du fichier importé, en choisissant le nom de cet objet. Par exemple, appelons `livre_compte_1` ce qui sera importé dans R en lisant le fichier SAS. 
+Pour s'y retrouver, autant tout de suite ranger ce que l'on est en train d'importer dans R. Pour cela, on assigne à un nouvel objet le contenu du fichier importé, en choisissant astucieusementle nom de cet objet. Par exemple, appelons `livre_compte_1` ce qui sera importé dans R en lisant le fichier SAS. 
 
 ```{r, collapse = TRUE, eval=FALSE}
 # J'importe le fichier et je l'assigne à l'objet livre_compte_1
@@ -72,7 +72,7 @@ Et si vous pratiquiez vous-même ? Pour cela, il faut d'abord trouver l’emplac
 ![](images/pontes_chemin.png)
 
 <p style="border:1px; border-style:solid; border-color:#000000; padding: 1em;">
-**Attention :** pour spécifier le chemin d’un fichier, il va falloir jongler avec les signes cabalistiques que sont les `/` et les `\` (ça ne s'appelle pas le langage des Runes pour rien). Contrairement à Windows où le backslash `\` est utilisé pour écrire un chemin, en R il faut écrire avec un slash `/`. Pensez donc à modifier le chemin du répertoire lors d'un copier coller de ce dernier depuis l’explorateur. Enfin, n'oubliez pas d'ajouter à la fin le nom du fichier (pontes_semaine1) avec son extension (.sas7bdat). 
+**Attention :** pour spécifier le chemin d’un fichier, il va falloir jongler avec les signes cabalistiques que sont les `/` et les `\` (ça ne s'appelle pas le langage des Runes pour rien). Contrairement à Windows où le backslash `\` est utilisé pour écrire un chemin, en R il faut écrire avec un slash `/`. Pensez donc à modifier le chemin du répertoire lors d'un copier coller de ce dernier depuis l’explorateur. Enfin, n'oubliez pas d'ajouter à la fin le nom du fichier (`pontes_semaine1`) avec son extension (`.sas7bdat`). 
 </p>
 
 
@@ -88,30 +88,30 @@ Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est don
 ``` 
 
 <div id="module2-question1-hint">
-**Aide 1:** Utiliser la fonction import(). Veillez à indiquer le bon chemin entre parenthèses
+**Aide 1:** Utiliser la fonction `import()`. Veillez à indiquer le bon chemin entre parenthèses
 </div>
 
 
 ## Tremblez, messieurs les tableurs
 
 
-Bon, il nous reste à ouvrir les autres fragments. Deux d'entre eux correspondent à des fichiers produits par des tableurs, comme Excel (extension .xls ou xlsx) et Calc (extension .ods). Pour les ouvrir... nous allons utiliser le même sortilège que précédemment. Et oui : le sortilège `import()` permet aussi d'ouvrir les documents des tableurs ! Magiques !
+Bon, il nous reste à ouvrir les autres fragments. Deux d'entre eux correspondent à des fichiers produits par des tableurs, comme Excel (extension `.xls` ou `xlsx`) et Calc (extension `.ods`). Pour les ouvrir... nous allons utiliser le même sortilège que précédemment. Et oui : le sortilège `import()` permet aussi d'ouvrir les documents des tableurs ! Magiques !
 
-Comme précédemment, il nous faut spécifier le chemin du fichier, et bien veiller à renseigner son extension (ce qui figure après le "."). Une astuce à ce sujet : dans l'explorateur Windows, l'extension d'un fichier est parfois masquée. Comment dans ce cas découvrir l'extension des fichiers `pontes_semaine2`, `pontes_semaine3` et `pontes_semaine4` dans l'exemple ci-dessous ? 
+Comme précédemment, il nous faut spécifier le chemin du fichier, et bien veiller à renseigner son extension (ce qui figure après le `.`). Une astuce à ce sujet : dans l'explorateur Windows, l'extension d'un fichier est parfois masquée. Comment dans ce cas découvrir l'extension des fichiers `pontes_semaine2`, `pontes_semaine3` et `pontes_semaine4` dans l'exemple ci-dessous ? 
 
 ![](images/pontes_chemin_extensions.png)
 
-Dans l'explorateur Windows, vous pouvez faire un clic-droit sur le nom du fichier que vous souhaitez consulter (par exemple `pontes_semaine2`) puis choisir dans la liste déroulante `Propriétés`. Sur l'onglet qui apparaît, une ligne donne le type de fichier et précise l'extension (ici, .xls).
+Dans l'explorateur Windows, vous pouvez faire un clic-droit sur le nom du fichier que vous souhaitez consulter (par exemple `pontes_semaine2`) puis choisir dans la liste déroulante `Propriétés`. Sur l'onglet qui apparaît, une ligne donne le type de fichier et précise l'extension (ici, `.xls`).
 
 ![](images/pontes_chemin_extensions_steps.png)
 
 
 Nous avons donc deux fichiers issus de tableurs :
 
-- pontes_semaine2.xls (excel)
-- pontes_semaine3.ods (calc)
+- `pontes_semaine2.xls` (Excel)
+- `pontes_semaine3.ods` (Calc)
 
-Importons dans R le fichier excel `pontes_semaine2.xls`
+Importons dans R le fichier Excel `pontes_semaine2.xls`
 
 ```{r, echo=FALSE, message = FALSE}
 livre_compte_2 <- import("../../data/chapitre2/pontes_semaine2.xls")
@@ -159,16 +159,16 @@ livre_compte_3
 
 ## Revenons à nos oeufs...
 
-Nous avons découvert comment charger dans R des fichiers de différents formats. Les quelques exemples ici sont loin d'être exhaustifs : avec import(), vous pourriez aussi charger des fichiers au format SPSS, Stata, Matlab... et bien sûr, des fichiers de données R. Nous découvrirons plus loin dans le grimoire comment R permet de sauvegarder les objets que vous avez créés. Mais pour lors, revenons au livre de compte.
+Nous avons maintenant le pouvoir de charger dans R des fichiers de différents formats. Les quelques exemples ici sont loin d'être exhaustifs : avec `import()`, vous pourriez aussi charger des fichiers au format SPSS, Stata, Matlab... et bien sûr, des fichiers de données R. Nous découvrirons plus loin dans le grimoire comment R permet de sauvegarder les objets que vous avez créés. Mais pour lors, revenons au livre de compte.
 
 ><details><summary><font size="3"><b>Pour les plus téméraires : partie optionnelle sur les fichiers CSV - cliquez ici</b></font></summary>
 ><p><font size="2">
 >
 >Il nous reste un dernier fragment à ouvrir. Celui-ci se termine par l'extension `.csv`. Qu'est-ce donc qu'un fichier CSV ?
 >
->CSV, c'est un format de fichier où chaque enregistrement apparaît sur sa propre ligne et dont les champs sont séparés par un caractère unique appelé “séparateur”. En l'occurrence, le séparateur est une virgule ou un point-virgule : c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (Comma = virgule en anglais). 
+>CSV, c'est un format de fichier où chaque enregistrement apparaît sur sa propre ligne et dont les champs sont séparés par un caractère unique appelé “séparateur”. En l'occurrence, le séparateur est une virgule ou un point-virgule : c'est d'ailleurs le sens de l'acronyme CSV, pour Comma Separated Value (comma = virgule en anglais). 
 >
->Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être "interopérable", c'est à dire qu'il peut être lu et modifier aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans windows par exemple.
+>Un fichier CSV peut être produit de multiples manières, et a l'avantage d'être "interopérable", c'est à dire qu'il peut être lu et modifié aussi bien avec un tableur comme Excel ou Calc qu'avec des logiciels statistiques comme R. Vous pouvez même créer un fichier CSV "à la main", juste avec le Notepad dans Windows par exemple.
 >
 >![](images/pontes_csv.png)
 >
