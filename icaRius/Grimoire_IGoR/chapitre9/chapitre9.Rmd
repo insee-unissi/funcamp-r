@@ -27,15 +27,9 @@ naissances <- read_csv2(file="E:/icaRius/data/naissances.csv")
 ```
 
 
-## Manipuler les données en toute facilité
+## Le registre des naissances
 
-Dans le chapitre précédent, vous avez découvert des nouveaux sortilèges à ajouter à votre grimoire, grâce à la plume `tidyverse`. Parmi ces sortilèges, nous allons désormais apprendre à utiliser les sorts de l'extension `dplyr`, qui facilite le traitement et la manipulation de données contenues dans une table. `dplyr` fait partie du coeur du `tidyverse`, elle est donc chargée automatiquement en écrivant `library(tidyverse)` au début du programme R
-
-```{r, eval=FALSE}
-library(tidyverse)
-```
-
-Pour maîtriser ces nouveaux sortilèges apportés par l'extension `dplyr`, nous allons explorer le registre des naissances, que vous venez de découvrir dans le village de Sandia. Ce registre est déjà chargé, sous le nom de `naissances`. Souvenez-vous le chapitre 2 du grimoire IGoR : nous avions appris à découvrir le contenu d'un fichier avec les instructions `names()` pour avoir le noms des variables, `head()` pour consulter les premiers enregistrements, et `nrow()`pour en connaître le nombre de lignes. Allons-y :
+Pour répondre à l'énigme posée par Mam'Grouxi, nous allons explorer le registre des naissances, que vous venez de découvrir dans le village de Sandia. Ce registre est déjà chargé, sous le nom de `naissances`. Souvenez-vous le chapitre 2 du grimoire IGoR : nous avions appris à découvrir le contenu d'un fichier avec les instructions `names()` pour avoir le noms des variables, `head()` pour consulter les premiers enregistrements, et `nrow()`pour en connaître le nombre de lignes. Allons-y :
 
 ```{r, collapse = TRUE}
 names(naissances)
@@ -45,6 +39,16 @@ nrow(naissances)
 
 Le registre des naissances comporte 6 variables : le `Nom` de l'enfant, son `Genre`, l'`An` de sa naissance, la `Taille`de l'enfant et son `Poids`à la naissance, son niveau de `Force`et sa spiritualité `Spirit`. Nous devrions donc avoir toutes les informations appropriées pour résoudre l'énigme qui vous est posée : *"Les enfants du royaume de Statis naissent avec une force et une spiritualité dont la somme égale ce que l'on appelle le Mana. Dans quel village est née la fille dont le Mana a la naissance était le plus grand ?"*
 
+
+## Manipuler les données en toute facilité
+
+Dans le chapitre précédent, vous avez découvert des nouveaux sortilèges à ajouter à votre grimoire, grâce à la plume `tidyverse`. Parmi ces sortilèges, nous allons désormais apprendre à utiliser les sorts de l'extension `dplyr`, qui facilite le traitement et la manipulation de données contenues dans une table. `dplyr` fait partie du coeur du `tidyverse`, elle est donc chargée automatiquement en écrivant `library(tidyverse)` au début du programme R.
+
+```{r, eval=FALSE}
+library(tidyverse)
+```
+
+Nous allons désormais utilisés les sortilèges apportés par `dplyr` pour étudier le registre des naissances.
 
 ## De nouvelles fonctions apportées par dplyr
 
@@ -118,19 +122,17 @@ On peut ensuite afficher la liste des naissances rangée selon le `Ratio`:
 arrange(naissances,Ratio)
 ```
 
+Au fait, n'oublions pas de conjuguer les sortilèges en utilisant le pipe %>%. A vous de prendre la plume dans l'exercice suivant :
 
-A vous de prendre la plume !
 ```{r module5-question2,exercise=TRUE}
-# Filtrer le registre des naissances pour l'année 1212 
-# et enregistrer le résultat dans l'objet naissances_1212
-
-
-# Ajouter la variable Ratio comme le ratio
+# (i) Filtrer le registre des naissances pour l'année 1212 
+# (ii) Ajouter la variable Ratio comme le ratio
 # entre la variable Taille et la variable Poids au carré
+# (iii) Trier selon le Ratio, de façon décroissante 
+# (du plus grand au plus petit)
 
 
-# Trier le fichier naissances_1212 selon le Ratio, 
-# de façon décroissante (du plus grand au plus petit)
+
 
 
 # fin de l'exercice
@@ -138,17 +140,15 @@ A vous de prendre la plume !
 
 
 ```{r module5-question2-solution}
-# Filtrer le registre des naissances pour l'année 1212 
-# et enregistrer le résultat dans l'objet naissances_1212
-naissances_1212 <- filter(naissances, An == 1212)
-
-# Ajouter la variable Ratio comme le ratio
+# (i) Filtrer le registre des naissances pour l'année 1212 
+# (ii) Ajouter la variable Ratio comme le ratio
 # entre la variable Taille et la variable Poids au carré
-naissances_1212 <- mutate(naissances_1212, Ratio = Taille / Poids^2)
+# (iii) Trier selon le Ratio, de façon décroissante 
+# (du plus grand au plus petit)
 
-# Trier le fichier naissances_1212 selon le Ratio, 
-# de façon décroissante (du plus grand au plus petit)
-arrange(naissances,desc(Ratio))
+naissances %>% filter(An == 1212) %>%
+  mutate(Ratio = Taille / Poids^2) %>%
+  arrange(desc(Ratio))
 
 # fin de l'exercice
 ``` 
@@ -158,34 +158,34 @@ arrange(naissances,desc(Ratio))
 
 Voyons comment utiliser ces nouveaux pouvoirs pour résoudre l'énigme posée par Mam' Grouxi. Voici l'énigme : **"Les enfants du royaume de Statis naissent avec une force et une spiritualité dont la somme égale ce que l'on appelle le Mana. De quel village vient la fille dont le Mana était le plus grand à la naissance ?"**
 
-A vous de jouer ! La première ligne du tableau final vous donnera le nom et surtout le village de naissance de cette petite fille pas tout à fait comme les autres...
+A vous de jouer ! La première ligne du tableau final vous donnera le nom et surtout le village de naissance de cette petite fille pas tout à fait comme les autres... N'oubliez pas d'utiliser le pipe %>% pour combiner les sortilèges entre eux !
 
 ```{r module5-question3,exercise=TRUE}
-# Sélectionner les observations de genre féminin (F)
-# et enregistrer le résultat dans l'objet naissances_filles
-
-
-# Ajouter la variable Mana 
+# A partir du fichier naissances,
+# (i) Sélectionner les observations de genre féminin (F)
+# (ii) Ajouter la variable Mana 
 # Comme somme de la Force et de Spiritualité
+# (iii) Triez par ordre décroissant selon le Mana
+# (iv) la première ligne vous donnera la réponse !
 
 
-# Triez par ordre décroissant selon le Mana
+
 
 
 # fin de l'exercice
 ``` 
  
 ```{r module5-question3-solution}
-# Sélectionner les observations de genre féminin (F)
-# et enregistrer le résultat dans l'objet naissances_filles
-naissances_filles <- filter(naissances,Genre=="F")
-
-# Ajouter la variable Mana 
+# A partir du fichier naissances,
+# (i) Sélectionner les observations de genre féminin (F)
+# (ii) Ajouter la variable Mana 
 # Comme somme de la Force et de Spiritualité
-naissances_filles <- mutate(naissances_filles,Mana = Force + Spirit)
-
-# Triez par ordre décroissant selon le Mana
-arrange(naissances_filles,desc(Mana))
+# (iii) Triez par ordre décroissant selon le Mana
+# (iv) la première ligne vous donnera la réponse !
+naissances %>% 
+  filter(Genre=="F") %>%
+  mutate(Mana = Force + Spirit) %>%
+  arrange(desc(Mana))
 
 # fin de l'exercice
 ``` 
@@ -205,4 +205,4 @@ correct="Félicitations, la réponse à donner à Mam' Grouxi est donc : Hylia (
 
 Vous avez trouvé ? **Reportez la réponse dans le jeu Icarius** pour reprendre la partie...
 
-**Fin du chapitre 8 >> reprenez la partie d'Icarius !!!** 
+**Fin du chapitre >> reprenez la partie d'Icarius !!!** 

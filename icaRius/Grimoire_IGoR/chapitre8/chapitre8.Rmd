@@ -93,7 +93,7 @@ Bon, les packages sont documentés en anglais - mais la communauté francophone 
 
 ```{r, collapse = TRUE}
 library(babynames)
-head(babynames)
+head(babynames,5)
 ```
 
 Laissons de côté les prénoms américains : ce n'est pas l'objet de ce chapitre que d'explorer les prénoms, et si le sujet vous intéresse vraiment, regarder plutôt du côté du [fichier des prénoms](https://www.insee.fr/fr/statistiques/2540004 "fichier des prénoms") en France diffusé par l'Insee :-)

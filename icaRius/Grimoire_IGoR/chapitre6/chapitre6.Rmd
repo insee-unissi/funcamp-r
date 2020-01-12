@@ -49,11 +49,11 @@ Le mage Essespéus a en sa possession le répertoire des forces armées des roya
 En voici un aperçu :
 
 ```{r, collapse = TRUE, echo=FALSE, eval=FALSE}
-head(donnees_secretes)
+head(donnees_secretes,5)
 ```
 
 ```{r, collapse = TRUE, echo=FALSE, eval=T}
-head(donnees_secretes_df)
+head(donnees_secretes_df,5)
 ```
 
 Essespéus propose à icaRius de rapporter une fausse information auprès du prétendu chef des armées de Statis, pour le tromper et diriger les forces obscures le plus loin possible - afin de gagner un peu de temps. Pour établir cette fausse information, vous allez construire une représentation graphique s'appuyant sur les données secrètes.

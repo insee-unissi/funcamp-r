@@ -71,11 +71,11 @@ Pour réussir la recette de grammaire d'un graphique, il ne faut pas oublier d'i
 Revenons pour le moment à notre ingrédient  essentiel. Pour maîtriser ce nouveau sortilège, nous allons représenter des informations relatives aux bouteilles d'ambroisie produites dans le royaume de Statis. Le bon Batreb a goûté 100 liqueurs d'ambroisie différentes (rien que cela), et pour chacune, il a consigné quelques informations... Ce riche (et spiritueux) savoir se trouve répertorié dans le fichier `livre_ambroisie`, dont voici le contenu :
 
 ```{r, collapse = TRUE, echo=FALSE, eval=FALSE}
-head(livre_ambroisie)
+head(livre_ambroisie,5)
 ```
 
 ```{r, collapse = TRUE, echo=FALSE, eval=T}
-head(livre_ambroisie_df)
+head(livre_ambroisie_df,5)
 ```
 
 Le fichier `livre_ambroisie` comprend ainsi, pour chaque observation (chaque liqueur consommée) les informations suivantes : 
