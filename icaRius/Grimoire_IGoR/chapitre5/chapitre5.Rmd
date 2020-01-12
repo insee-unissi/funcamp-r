@@ -52,11 +52,9 @@ Chaque graphique est associé à un sortilège, chaque sortilège à des ingréd
 
 Tous les sortilèges des graphiques commencent par le nom de code `gf_`. Par exemple :
 
- - pour faire un graphique de points, le sortilège est `gf_point()`;   
- 
- - pour faire une courbe il y a `gf_line()`;
- 
- - pour faire un diagramme en barre ce sera `gf_bar()`.  
+- pour faire un graphique de points, le sortilège est `gf_point()`;   
+- pour faire une courbe il y a `gf_line()`;
+- pour faire un diagramme en barre ce sera `gf_bar()`.  
 
 Il y a bien d'autres sortilèges sur les graphiques que vous découvrirez dans la famille magique ggformula.
 
@@ -65,7 +63,6 @@ Il y a bien d'autres sortilèges sur les graphiques que vous découvrirez dans l
 Pour réussir la recette de grammaire d'un graphique, il ne faut pas oublier d'ingrédients :
 
 - Le premier est essentiel, il sert à dire ce que l'on veut représenter.
-
 - Les autres ingrédients servent à agrémenter la recette (changer la couleur, ajouter un titre et plus encore). Nous verrons plus tard quelques exemples.  
 
 Revenons pour le moment à notre ingrédient  essentiel. Pour maîtriser ce nouveau sortilège, nous allons représenter des informations relatives aux bouteilles d'ambroisie produites dans le royaume de Statis. Le bon Batreb a goûté 100 liqueurs d'ambroisie différentes (rien que cela), et pour chacune, il a consigné quelques informations... Ce riche (et spiritueux) savoir se trouve répertorié dans le fichier `livre_ambroisie`, dont voici le contenu :
@@ -133,7 +130,7 @@ De nouveau, une relation se dessine entre les deux variables, tout en présentan
 
 A vous de pratiquer, en croisant cette fois la puissance et l'âge des liqueurs d'ambroisie. 
 
-```{r chapitre5-etape1,exercise=TRUE}
+```{r ok-chapitre5-etape1,exercise=TRUE}
 # Créez le nuage de points à partir du fichier livre_ambroisie
 # croisant l'âge et la puissance sous forme de nuage de points
 
@@ -141,7 +138,7 @@ A vous de pratiquer, en croisant cette fois la puissance et l'âge des liqueurs 
 # Fin de l'exercice
 ``` 
 
-```{r chapitre5-etape1-solution}
+```{r ok-chapitre5-etape1-solution}
 # Créez le graphique à partir du fichier livre_ambroisie
 # croisant l'âge et la puissance sous forme de nuage de points
 livre_ambroisie %>% gf_point(puissance ~ age)
@@ -220,15 +217,16 @@ La couleur doit être précisée dans la langue de Shakespeare, et rédigée ent
 
 Essayez vous-mêmes de faire varier le titre et la couleur pour le graphique en courbe reliant l'ivresse de Batreb et la puissance de la liqueur.
 
-```{r chapitre5-etape2,exercise=TRUE}
+```{r ok-chapitre5-etape2,exercise=TRUE}
 # Représenter la courbe présentant le lien 
 # entre la puissance de la liqueur et son âge
 # en ajoutant un titre et une couleur
 
+
 # Fin de l'exercice
 ``` 
 
-```{r chapitre5-etape2-solution}
+```{r ok-chapitre5-etape2-solution}
 # Représenter la courbe présentant le lien 
 # entre la puissance de la liqueur et son âge
 # en ajoutant un titre et une couleur
@@ -248,15 +246,16 @@ Il est temps désormais de répondre à la question posée par Batreb : *Quelle 
 
 Pour répondre à Batreb, il vous faudra élaborer un graphique croisant l'ivresse et la puissance puis lire sur le graphique à quel degré de puissance l'ivresse dépasse le seuil de 100 hoquets
 
-```{r chapitre5-etape3,exercise=TRUE}
+```{r ok-chapitre5-etape3,exercise=TRUE}
 # Créez le graphique avec gf_line
 # et lire à quelle puissance l'ivresse dépasse le seuil de 100
+
 
 # Fin de l'exercice
 ``` 
 
 
-```{r chapitre5-etape3-solution}
+```{r ok-chapitre5-etape3-solution}
 # Créez le graphique avec gf_line
 # et lire à quelle puissance l'ivresse dépasse le seuil de 100
 livre_ambroisie %>% 
@@ -266,7 +265,7 @@ livre_ambroisie %>%
 
  Vous avez trouvé ? Vérifiez votre résultat dans le quiz. 
  
-```{r question1,echo=FALSE}
+```{r ok-chapitre5-quiz1,echo=FALSE}
 question("A partir de quelle puissance d'ambroisie Batreb franchit le seuil des 100 hoquets par heure ?",
 type="single",
 allow_retry = TRUE,

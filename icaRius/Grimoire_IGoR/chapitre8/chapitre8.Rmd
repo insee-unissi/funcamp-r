@@ -146,6 +146,7 @@ Vous voilà désormais en capacité d'invoquer les extensions du tidyverse, dont
 <img src="images/tidyverse_core_packages.png" class="img-rounded" alt="les principaux packages du tidyverse">
 <br>
 
+
 De quoi acquérir une force statistique herculéenne ! Voyons d'ailleurs comment icaRius soulève les obstacles rencontrés, maintenant qu'ils deviennent légers comme une plume...
 
 

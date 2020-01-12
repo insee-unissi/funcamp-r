@@ -64,14 +64,14 @@ Lors du précédent chapitre, vous avez découvert plusieurs sortilèges de la f
 
 A partir de ces rappels, quel est le code pour faire un nuage de points à partir de la table `donnees_secretes` en représentant le nombre d'habitants du royaume (variable `nb_habitants`) en ordonnées et le nombre de guerriers (variable `nb_guerriers`) en abcisse ?
 
-```{r chapitre6-etape1,exercise=TRUE}
+```{r ok-chapitre6-etape1,exercise=TRUE}
 # Créez le graphique
 
 
 # Fin de l'exercice
 ``` 
 
-```{r chapitre6-etape1-solution}
+```{r ok-chapitre6-etape1-solution}
 # Créez le graphique
 donnees_secretes %>%
   gf_point(nb_habitants ~ nb_guerriers)
@@ -223,16 +223,20 @@ Quelques indices :
 - pour représenter un nuage de point, le sortilège à utiliser est `gf_point()`
 - n'oubliez pas d'ajouter le nom des royaumes avec la variable `royaume`
 
-```{r chapitre6-ex1,exercise=TRUE}
-# Créez le graphique
+```{r ok-chapitre6-etape2,exercise=TRUE}
+# Créez un graphique en utilisant gf_point et gf_text 
+# (voire gf_refine pour améliorer la lisibilité)
+
+
 
 
 
 # Fin de l'exercice
 ``` 
 
-```{r chapitre6-ex1-solution}
-# Créez le graphique
+```{r ok-chapitre6-etape2-solution}
+# Créez un graphique en utilisant gf_point et gf_text 
+# (voire gf_refine pour améliorer la lisibilité)
 
 donnees_secretes %>% 
   gf_point(nb_canicule ~ dist_royaume,
@@ -247,7 +251,7 @@ donnees_secretes %>%
 ``` 
 
 
-```{r question1,echo=FALSE}
+```{r ok-chapitre6-quiz1,echo=FALSE}
 question("Alors, quel royaume faut-il attaquer? Il ne reste plus qu'à cocher la bonne réponse...pour poursuivre l'aventure!",
 type="single",
 allow_retry = TRUE,

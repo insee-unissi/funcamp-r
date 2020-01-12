@@ -132,7 +132,7 @@ vecteur_seuil <- vecteur_seuil + runif(20)*vecteur_ajust
 
 ```
 
-```{r module3-question1,exercise=TRUE}
+```{r ok-chapitre7-etape1,exercise=TRUE}
 # Les deux vecteurs sont déjà chargés sous les noms
 # vecteur_choix et vecteur_seuil
 # Déterminer le type d'information dans vecteur_choix
@@ -148,7 +148,7 @@ vecteur_seuil <- vecteur_seuil + runif(20)*vecteur_ajust
 # (à chaque opération, appuyer sur le bouton "Run code")
 ``` 
  
-```{r module3-question1-solution}
+```{r ok-chapitre7-etape1-solution}
 # Les deux vecteurs sont déjà chargés sous les noms
 # vecteur_choix et vecteur_seuil
 # Déterminer le type d'information dans vecteur_choix
@@ -215,7 +215,7 @@ names(mon_vecteur_icarius)
 
 A vous de pratiquer !
 
-```{r module3-question2,exercise=TRUE}
+```{r ok-chapitre7-etape2,exercise=TRUE}
 # Les deux vecteurs sont déjà chargés sous les noms
 # vecteur_choix et vecteur_seuil
 # Afficher l'élément en 6ème position dans vecteur_choix
@@ -227,7 +227,7 @@ A vous de pratiquer !
 # (à chaque opération, appuyer sur le bouton "Run code")
 ``` 
  
-```{r module3-question2-solution}
+```{r ok-chapitre7-etape2-solution}
 # Les deux vecteurs sont déjà chargés sous les noms
 # vecteur_choix et vecteur_seuil
 # Afficher l'élément en 6ème position dans vecteur_choix
@@ -320,7 +320,7 @@ Il nous faut donc :
 
 Allons-y... dans R !
 
-```{r module3-question3,exercise=TRUE}
+```{r ok-chapitre7-etape3,exercise=TRUE}
 # Les deux vecteurs sont déjà chargés sous les noms
 # vecteur_choix et vecteur_seuil
 
@@ -336,7 +336,7 @@ Allons-y... dans R !
 # à la succession des directions à prendre dans le labyrinthe !
 ``` 
  
-```{r module3-question3-solution}
+```{r ok-chapitre7-etape3-solution}
 # Les deux vecteurs sont déjà chargés sous les noms
 # vecteur_choix et vecteur_seuil
 
@@ -352,7 +352,7 @@ vecteur_choix[vecteur_position]
 # à la succession des directions à prendre dans le labyrinthe !
 ``` 
 
-<div id="module3-question2-hint">
+<div id="ok-chapitre7-etape3-hint">
 **Aide 1:** il suffit de taper pi dans R pour indiquer sa valeur
 **Aide 2:** which(mon_vecteur > X) donne la position des éléments > X
 **Aide 3:** mon_vecteur[c(2,4)] extrait les éléments de mon_vecteur en position 2 et 4

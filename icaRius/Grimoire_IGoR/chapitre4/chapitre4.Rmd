@@ -64,7 +64,7 @@ fichier_tellus<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_
 fichier_galia<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_Galia.ods")
 ```
 
-```{r chapitre5-ex1,exercise=TRUE}
+```{r ok-chapitre4-etape1,exercise=TRUE}
 # Le livre de récolte est déjà chargé, avec le nom fichier_tellus
 
 # En utilisant le %>% et le sortilège skim(), 
@@ -74,7 +74,7 @@ fichier_galia<-read_ods(path="../../data/chapitre3/recensement_agricole_statia_G
 # fin de l'exercice
 ``` 
 
-```{r chapitre5-ex1-solution}
+```{r ok-chapitre4-etape1-solution}
 # Le livre de récolte est déjà chargé, avec le nom fichier_tellus
 
 # En utilisant le %>% et le sortilège skim(), 
@@ -86,7 +86,7 @@ fichier_tellus %>% skim()
 
 Et maintenant passons au fichier du fermier Galia :
 
-```{r chapitre5-ex2,exercise=TRUE}
+```{r ok-chapitre4-etape2,exercise=TRUE}
 # Le livre de récolte est déjà chargé, avec le nom fichier_galia
 
 # En utilisant le %>% et le sortilège skim(), 
@@ -97,7 +97,7 @@ Et maintenant passons au fichier du fermier Galia :
 ``` 
  
 
-```{r chapitre5-ex2-solution}
+```{r ok-chapitre4-etape2-solution}
 # Le livre de récolte est déjà chargé, avec le nom fichier_galia
 
 # En utilisant le %>% et le sortilège skim(), 
@@ -155,7 +155,7 @@ Tellus a bien fourni son secret, mais dans le désordre. Recomposons les étapes
 Saurez-vous remettre les étapes dans l'ordre ?
 
 
-```{r chapitre5-quiz}
+```{r ok-chapitre4-quiz}
 question_parsons(
   initial = c(
     "champ %>%",

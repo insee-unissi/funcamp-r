@@ -46,7 +46,7 @@ Dans l'aventure d'icaRius, vous serez parfois amené(e) à répondre à des quiz
 
 En cas de besoin sur le mode de fonctionnement, n'hésitez pas à solliciter un animateur circulant dans la salle.
 
-```{r quiz,echo=FALSE}
+```{r ok-quiz-1,echo=FALSE}
 quiz(
   question("Qu'est-ce que R ne fait PAS ?",
     answer("de très beaux graphiques"),
@@ -70,7 +70,7 @@ Vous pourriez penser que nous allons vous proposer une "console" de jeux vidéo.
 Sous ces lignes se trouve une console R et, à la manière d'une calculatrice, il est possible de lui demander de réaliser des calculs  : tapez ci-dessous, dans la console, un calcul tel que `2 + 2` (c'est tout de même plus dur que `1 + 1`). Appuyez ensuite sur le bouton  ![](images/run_code.png) en haut à droite de la console pour faire executer le code (*run code* signifie *exécuter le code*). La réponse de votre calcul s'affichera alors en dessous de la console.
 
 
-```{r two-plus-two, exercise=TRUE}
+```{r ok-two-plus-two, exercise=TRUE}
 
 ```
 
@@ -82,7 +82,7 @@ R a ses tics, comme tout le monde. Ici, son tic de langage, c'est d'afficher la 
 
 Voici une console un peu plus grande qui contient des instructions pré-remplies, exécutez-les toujours avec le bouton ![](images/run_code.png) pour voir comment R structure sa réponse à votre sollicitation :
 
-```{r several_instructions, exercise=TRUE, exercices.lines = 10}
+```{r ok-several_instructions, exercise=TRUE, exercices.lines = 10}
 3 + 3
 3+3
 12345678 * 4
@@ -97,7 +97,7 @@ Chaque langage a sa façon de comprendre des opérations mathématiques. Pour le
 
 Essayez quelques calculs, librement et par vous-même : 
 
-```{r error_is_ok, exercise=TRUE}
+```{r ok-error_is_ok, exercise=TRUE}
 
 ```
 
@@ -157,7 +157,7 @@ knitr::include_graphics("images/solution.png")
 ```
 
 
-```{r module1-etape1,exercise=TRUE}
+```{r ok-chapitre1-etape1,exercise=TRUE}
 # Création des variables nb_coeur et max_nb_coeur
 
 
@@ -168,7 +168,7 @@ knitr::include_graphics("images/solution.png")
 ``` 
   
 
-```{r module1-etape1-solution}
+```{r ok-chapitre1-etape1-solution}
 # Création des variables nb_coeur et max_nb_coeur
 nb_coeur<-3
 max_nb_coeur<-2*nb_coeur
@@ -235,7 +235,7 @@ Et si vous écriviez vous-mêmes la solution pour trouver l'âge d'IcaRius ? Ecr
 knitr::include_graphics("images/run_code.png")
 ```
 
-```{r module1-etape3,exercise=TRUE}
+```{r ok-chapitre1-etape2,exercise=TRUE}
 # Les objets nb_coeur et max_nb_coeur sont déjà chargés
 nb_coeur <- 3
 max_nb_coeur <- 2*nb_coeur
@@ -244,7 +244,7 @@ max_nb_coeur <- 2*nb_coeur
 # Fin de l'exercice
 ``` 
      
-```{r module1-etape3-solution}
+```{r ok-chapitre1-etape2-solution}
 # Les objets nb_coeur et max_nb_coeur sont déjà chargés
 nb_coeur <- 3
 max_nb_coeur <- 2*nb_coeur
@@ -255,7 +255,7 @@ max_nb_coeur <- 2*nb_coeur
 
 À noter que l'on pourrait aller plus loin en calculant dans R l'arrondi du résultat obtenu. Mais nous verrons cela plus tard : pour l'instant, à vous de faire cet arrondi... de tête !
 
-```{r question1,echo=FALSE}
+```{r ok-question1,echo=FALSE}
 question("Alors, quel âge a Icarius? Ne reste plus qu'à cocher la bonne réponse...pour poursuivre l'aventure!",
 type="single",
 allow_retry = TRUE,

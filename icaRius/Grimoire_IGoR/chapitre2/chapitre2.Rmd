@@ -76,9 +76,9 @@ Et si vous pratiquiez vous-même ? Pour cela, il faut d'abord trouver l’emplac
 </p>
 
 
-Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/chapitre2/pontes_semaine1.sas7bdat`. Chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/chapitre2/pontes_semaine1.sas7bdat`. **Attention, dans votre cas, la première lettre peut être différente et dépend de votre poste de travail (lettre D, E, F...)**. En ayant pris soin de vérifier la lettre correspondant à celle assignée pour votre clef USB, chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
 
-```{r module2-question1,exercise=TRUE}
+```{r ok-chapitre2-etape1,exercise=TRUE}
 # Charger le fichier pontes_semaine1.sas7bdat en indiquant son chemin
 # et assigner le résultat à l'objet nommé livre_compte_1
 
@@ -87,7 +87,7 @@ Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est don
 
 ``` 
 
-<div id="module2-question1-hint">
+<div id="ok-chapitre2-etape1-hint">
 **Aide 1:** Utiliser la fonction `import()`. Veillez à indiquer le bon chemin entre parenthèses
 </div>
 
@@ -134,7 +134,7 @@ Tiens tiens. Chaque semaine, la poule Kokot l'emporte haut les plumes côté pon
 Pour ouvrir le fichier calc `pontes_semaine3.ods`, la marche à suivre est identique à celle vue précédemment : il vous faudra utiliser le sortilège `import()`, en indiquant le chemin du fichier à ouvrir. À vous de jouer !
 
 
-```{r module2-question2,exercise=TRUE}
+```{r ok-chapitre2-question2,exercise=TRUE}
 # Charger le fichier pontes_semaine3.ods en indiquant son chemin
 # et assigner le résultat à l'objet nommé livre_compte_3
 
@@ -145,7 +145,7 @@ Pour ouvrir le fichier calc `pontes_semaine3.ods`, la marche à suivre est ident
 # Trouver dans le tableau quelle est la meilleure pondeuse de la semaine.
 ``` 
 
-```{r module2-question2-solution}
+```{r ok-chapitre2-question2-solution}
 # Charger le fichier pontes_semaine3.ods en indiquant son chemin
 # et assigner le résultat à l'objet nommé livre_compte_3
 livre_compte_3 <- import("E:/icaRius/data/chapitre2/pontes_semaine3.ods")
@@ -225,7 +225,7 @@ Nous avons maintenant le pouvoir de charger dans R des fichiers de différents f
 Nous avons ouverts différents fragments, ce qui répond aux attentes de la fermière. Il ne reste plus qu'à trouver quelle est la meilleure poule pondeuse. Celle qui, chaque semaine, sort en tête des résultats de ponte. Si vous avez bien suivi ce tutoriel, un nom de poule doit vous venir à l'esprit...
 
 
-```{r question1,echo=FALSE}
+```{r ok-chapitre2-quiz1,echo=FALSE}
 question("Alors, quelle est la meilleure poule pondeuse ? Ne reste plus qu'à cocher la bonne réponse...pour poursuivre l'aventure!",
 type="single",
 allow_retry = TRUE,

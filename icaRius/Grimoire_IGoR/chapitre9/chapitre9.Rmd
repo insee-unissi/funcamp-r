@@ -89,7 +89,7 @@ arrange(naissances, Village, desc(Taille))
 
 A vous de prendre la plume ! 
 
-```{r chapitre5-ex1,exercise=TRUE}
+```{r ok-chapitre9-etape1,exercise=TRUE}
 # Filtrer le registre des naissances pour avoir les naissances
 # de l'année 1213 dans le village de Kokoro
 
@@ -98,7 +98,7 @@ A vous de prendre la plume !
 # fin de l'exercice
 ``` 
  
-```{r chapitre5-ex1-solution}
+```{r ok-chapitre9-etape1-solution}
 # Filtrer le registre des naissances pour avoir les naissances
 # de l'année 1213 dans le village de Kokoro
 filter(naissances, An == 1213, Village == "Kokoro")
@@ -124,7 +124,7 @@ arrange(naissances,Ratio)
 
 Au fait, n'oublions pas de conjuguer les sortilèges en utilisant le pipe %>%. A vous de prendre la plume dans l'exercice suivant :
 
-```{r module5-question2,exercise=TRUE}
+```{r ok-chapitre9-etape2,exercise=TRUE}
 # (i) Filtrer le registre des naissances pour l'année 1212 
 # (ii) Ajouter la variable Ratio comme le ratio
 # entre la variable Taille et la variable Poids au carré
@@ -139,7 +139,7 @@ Au fait, n'oublions pas de conjuguer les sortilèges en utilisant le pipe %>%. A
 ``` 
 
 
-```{r module5-question2-solution}
+```{r ok-chapitre9-etape2-solution}
 # (i) Filtrer le registre des naissances pour l'année 1212 
 # (ii) Ajouter la variable Ratio comme le ratio
 # entre la variable Taille et la variable Poids au carré
@@ -160,7 +160,7 @@ Voyons comment utiliser ces nouveaux pouvoirs pour résoudre l'énigme posée pa
 
 A vous de jouer ! La première ligne du tableau final vous donnera le nom et surtout le village de naissance de cette petite fille pas tout à fait comme les autres... N'oubliez pas d'utiliser le pipe %>% pour combiner les sortilèges entre eux !
 
-```{r module5-question3,exercise=TRUE}
+```{r ok-chapitre9-etape3,exercise=TRUE}
 # A partir du fichier naissances,
 # (i) Sélectionner les observations de genre féminin (F)
 # (ii) Ajouter la variable Mana 
@@ -175,7 +175,7 @@ A vous de jouer ! La première ligne du tableau final vous donnera le nom et sur
 # fin de l'exercice
 ``` 
  
-```{r module5-question3-solution}
+```{r ok-chapitre9-etape3-solution}
 # A partir du fichier naissances,
 # (i) Sélectionner les observations de genre féminin (F)
 # (ii) Ajouter la variable Mana 
@@ -190,7 +190,7 @@ naissances %>%
 # fin de l'exercice
 ``` 
 
-```{r question1,echo=FALSE}
+```{r ok-chapitre9-quiz1,echo=FALSE}
 question("Le village de naissance de la petite fille avec le plus grand Mana est :",
 type="single",
 allow_retry = TRUE,
