@@ -76,7 +76,7 @@ Et si vous pratiquiez vous-même ? Pour cela, il faut d'abord trouver l’emplac
 </p>
 
 
-Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/icaRius/data/chapitre2/pontes_semaine1.sas7bdat`. **Attention, dans votre cas, la première lettre peut être différente et dépend de votre poste de travail (lettre D, E, F...)**. En ayant pris soin de vérifier la lettre correspondant à celle assignée pour votre clef USB, chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
+Dans l'exemple ci-dessus, la bonne adresse pour notre fichier de ponte c'est donc `E:/data/chapitre2/pontes_semaine1.sas7bdat`. **Attention, dans votre cas, la première lettre peut être différente et dépend de votre poste de travail (lettre D, E, F...)**. En ayant pris soin de vérifier la lettre correspondant à celle assignée pour votre clef USB, chargez vous-mêmes le fichier dans une table nommée `livre_compte_1`
 
 ```{r ok-chapitre2-etape1,exercise=TRUE}
 # Charger le fichier pontes_semaine1.sas7bdat en indiquant son chemin
@@ -119,7 +119,7 @@ livre_compte_2 <- import("../../data/chapitre2/pontes_semaine2.xls")
 
 ```{r, eval=FALSE}
 # Je charge le fichier pontes_semaine2.xls en indiquant son chemin
-livre_compte_2 <- import("E:/icaRius/data/chapitre2/pontes_semaine2.xls")
+livre_compte_2 <- import("E:/data/chapitre2/pontes_semaine2.xls")
 ```
 
 ```{r}
@@ -148,7 +148,7 @@ Pour ouvrir le fichier calc `pontes_semaine3.ods`, la marche à suivre est ident
 ```{r ok-chapitre2-question2-solution}
 # Charger le fichier pontes_semaine3.ods en indiquant son chemin
 # et assigner le résultat à l'objet nommé livre_compte_3
-livre_compte_3 <- import("E:/icaRius/data/chapitre2/pontes_semaine3.ods")
+livre_compte_3 <- import("E:/data/chapitre2/pontes_semaine3.ods")
 
 # Afficher le contenu de l'objet livre_compte_3
 livre_compte_3
