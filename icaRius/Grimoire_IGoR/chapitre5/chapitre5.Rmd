@@ -89,7 +89,7 @@ Le fichier `livre_ambroisie` comprend ainsi, pour chaque observation (chaque liq
 
 Cherchons d'abord à représenter ce qui détermine le prix d'une liqueur d'ambroisie. Chaque bouteille de liqueur goûtée par Batreb sera représentée par un point en utilisant le sortilège `gf_point`. Il reste alors à préciser, pour chaque point, les informations à croiser. Par exemple, pour représenter le prix en fonction de la puissance des liqueurs d'ambroisie, le sortilège s'écrira :
 
-```{r t1, collapse = TRUE, echo=FALSE, eval=FALSE}
+```{r t1, collapse = TRUE, echo=TRUE, eval=FALSE}
 # Représenter le nuage de points
 # présentant le prix en fonction de la puissance
 gf_point(prix ~ puissance)
@@ -115,7 +115,7 @@ Au fait, à quoi sert le symbole `~` dans le sortilège précédent ?
   
 L'opérateur `~` (tilde de son petit nom) se lit `en fonction de`. Par convention, dans un graphique on trace l'ordonnée (`y`) en fonction de l'abscisse (`x`). Donc l'écriture `prix ~ puissance` correspond à un graphique où la variable `prix` est en ordonnée et la variable `puissance` est en abscisse.
 
-Traçons maintenant le nuage de point représentant les liqueurs d'ambroisie en croisant le *prix en fonction de l'âge de la liqueur*, j'écris la formule magique `poids ~ age` en utilisant le sortilège `gf_point()`.
+Traçons maintenant le nuage de point représentant les liqueurs d'ambroisie en croisant le *prix en fonction de l'âge de la liqueur*, j'écris la formule magique `prix ~ age` en utilisant le sortilège `gf_point()`.
 
 ```{r t1c, collapse = TRUE}
 # Représenter le nuage de points
@@ -124,15 +124,15 @@ livre_ambroisie %>% gf_point(prix ~ age)
 
 ```
 
-De nouveau, une relation se dessine entre les deux variables, tout en présentant une certaine dispersion. D'ailleurs, la forme globale du nuage est assez similaire à la précédente. Voilà qui invite à étudier de plus près la liaison entre âge et puissance, qui semblent très liées...
+De nouveau, une relation se dessine entre les deux variables, tout en présentant une certaine dispersion. D'ailleurs, la forme globale du nuage est assez similaire à la précédente. Voilà qui invite à étudier de plus près la liaison entre puissance et âge, qui semblent très liées...
 
 ## Votre premier graphique (magique)
 
-A vous de pratiquer, en croisant cette fois la puissance et l'âge des liqueurs d'ambroisie. 
+À vous de pratiquer, en croisant cette fois puissance et âge des liqueurs d'ambroisie. 
 
 ```{r ok-chapitre5-etape1,exercise=TRUE}
 # Créez le nuage de points à partir du fichier livre_ambroisie
-# croisant l'âge et la puissance sous forme de nuage de points
+# croisant la puissance et l'âge sous forme de nuage de points
 
 
 # Fin de l'exercice
@@ -140,7 +140,7 @@ A vous de pratiquer, en croisant cette fois la puissance et l'âge des liqueurs 
 
 ```{r ok-chapitre5-etape1-solution}
 # Créez le graphique à partir du fichier livre_ambroisie
-# croisant l'âge et la puissance sous forme de nuage de points
+# croisant la puissance et l'âge sous forme de nuage de points
 livre_ambroisie %>% gf_point(puissance ~ age)
 
 # Fin de l'exercice
@@ -215,7 +215,7 @@ livre_ambroisie %>%
 La couleur doit être précisée dans la langue de Shakespeare, et rédigée entre guillemets (comme ` "red" ` dans l'exemple). Un ensemble de termes anglais faisant référence à des couleurs est renseigné par défaut dans R, certains très classiques (red, green, blue...) d'autres plus originaux (comme tomato, moccasin, peachpuff...). Vous découvrirez plus tard comment choisir très exactement la couleur de votre choix, dans les plus infimes nuances (pour reproduire la couleur lie-de-vin, par exemple ?)
 
 
-Essayez vous-mêmes de faire varier le titre et la couleur pour le graphique en courbe reliant l'ivresse de Batreb et la puissance de la liqueur.
+Essayez vous-même de faire varier le titre et la couleur pour le graphique en courbe reliant l'ivresse de Batreb et la puissance de la liqueur.
 
 ```{r ok-chapitre5-etape2,exercise=TRUE}
 # Représenter la courbe présentant le lien 
@@ -237,7 +237,7 @@ livre_ambroisie %>%
 ``` 
 
 
-## A consommer avec modération
+## À consommer avec modération
 
 Il est temps désormais de répondre à la question posée par Batreb : *Quelle est (hips!) la puissance d'une liqueur d'ambroisie (hips!) qui me fait franchir le seuil (hips!) fatidique des 100 hoquets par heure ?*. Le fichier `livre_ambroisie` contient deux variables pour répondre à cette question :
 
