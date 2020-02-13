@@ -1,0 +1,309 @@
+<html>
+ <head>
+
+<HTA:APPLICATION ID="icaRius-0.15"
+  APPLICATIONNAME="icaRius - Accueil pédagogique"
+  BORDER="none"
+  BORDERSTYLE="normal"
+  CAPTION="yes"
+  CONTEXTMENU="yes"
+  ICON="Grimoire_IGoR/accueil/icon.bmp"
+  INNERBORDER="yes"
+  MAXIMIZEBUTTON="yes"
+  MINIMIZEBUTTON="yes"
+  NAVIGABLE="yes"
+  SCROLL="yes"
+  SCROLLFLAT="no"
+  SELECTION="yes"
+  SHOWINTASKBAR="yes"
+  SINGLEINSTANCE="yes"
+  SYSMENU="yes"
+  VERSION="1.0"
+  WINDOWSTATE="maximize" />
+
+
+<script type="text/vbscript">
+
+' Declare global variable outside the Subs
+Dim intSeconds
+Dim OnlyOnce
+Dim iTimerID
+Dim spanID
+Dim drive
+
+Function GetDriveLetter (label)
+	GetDriveLetter = ""
+        'DriveType is one of                        '
+        '   0 = Unknown            3 = Network      '
+        '   1 = Removable          4 = CD-ROM       '
+        '   2 = Fixed              5 = RAM Disk     '
+ 
+        For Each drive In CreateObject("Scripting.FileSystemObject").Drives
+            If drive.IsReady Then
+                If drive.DriveType = 1 And drive.VolumeName = label Then
+                    GetDriveLetter = drive.DriveLetter
+                    Exit Function
+                End If
+            End If
+        Next
+End Function
+
+Sub countdown_launch(theNumber)
+      intSeconds = 0
+      OnlyOnce = 0
+      iTimerID = window.setInterval("TimerRefresh", 1000)
+      spanID = "span_clock_" & theNumber
+End Sub
+
+Sub TimerRefresh
+
+      If OnlyOnce = 0 Then
+            msgbox "Démarrage en cours. Merci de patienter quelques secondes..."
+            intSeconds = 30
+	    OnlyOnce = 1
+      Else
+	If IntSeconds > 0 Then
+        	intSeconds = intSeconds - 1
+		document.getElementById(spanID).innerHTML = "Le tutoriel se lance et sera disponible d'ici environ : " & Right("00" & intSeconds, 2) & " secondes"
+	Else
+		IntSeconds = 0
+		window.clearInterval(iTimerID)
+		document.getElementById(spanID).innerHTML = "tutoriel exécuté"
+	End If
+
+      End If
+      
+End Sub
+
+sub enigme(theNumber)
+
+	Call countdown_launch(theNumber)
+
+	Dim oShell : Set oShell = CreateObject("WScript.Shell")
+	' Kill previous Rscript.exe '
+	oShell.Run "taskkill /im Rscript.exe", , True
+
+	Rexe           = GetDriveLetter("FUNCAMP") & ":\ressources\R\bin\Rscript.exe"
+	Ropts          = "--no-save --no-environ --no-init-file --no-restore --no-Rconsole"
+	RScriptFile    = GetDriveLetter("FUNCAMP") & ":\Grimoire_IGoR\launch_chapitre.R"
+	Outfile        = GetDriveLetter("FUNCAMP") & ":\grimoire_IGoR\launch_chapitre" & theNumber & ".log" 
+	strCommand     = Rexe & " " & Ropts & " " & RScriptFile & " " & theNumber & " 1> " & Outfile & " 2>&1"
+	intWindowStyle = 0     ' Hide the window and activate another window.'
+	bWaitOnReturn  = False ' continue running script after launching R   
+
+	' Run new Rscript.exe with related R program'
+	Set wshShell = CreateObject("WScript.Shell")
+    	WshShell.Run strCommand, intWindowStyle, bWaitOnRetur
+
+end sub
+  
+</script>
+
+ <title>Funcamp R</title>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html">
+ <style>
+  body
+  {
+   background-color:white;
+  }
+   
+  #titre
+  {
+   width:100vw;
+   text-align:center;
+   color:#067790;
+   font-family:calibri,arial;
+  }
+ 
+p  {
+   text-align:center;
+   font-family:calibri,arial;
+  }
+
+#outer-div {
+  width: 100%; 
+  text-align: center;
+}
+
+#inner-div {
+  display: inline-block; 
+  text-align:left;
+  background-color: white;
+  border: 1px solid black;
+  padding: 25px;
+  margin: 25px auto;
+  width: 1100px;
+  font-family:calibri,arial;
+}
+
+span.b {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  padding: 5px;
+  margin: 20px;
+  border: 1px solid black;    
+  background-color: white; 
+}
+
+</style>
+</head>
+<body>
+<div id ="outer-div" width="100%">
+<div id ="inner-div">
+<p><img src="grimoire_IGoR/accueil/Funcamp-Frise.png"> <h1 id='titre'>Funcamp R - Accueil</h1></p>
+Soyez le/la bienvenu(e) au Funcamp R. Cette page rassemble les supports pédagogiques relatifs à la formation à laquelle vous prendrez part pendant la journée. Pardon : cette page ouvre le grimoire IGoR, qui vous accompagnera dans l’épopée statistico-ludique dont vous êtes le héros / l’héroïne. Vous y trouverez, distillée au fur et à mesure des chapitres enluminés, toute la sagesse accumulée par ces mages qui, dans l’ombre, ont imaginé les épreuves que vous aurez à franchir.<br>
+<br>
+Parcourir ce grimoire vous permettra d’apprendre, pas à pas, le langage des Runes, nécessaire pour aider le jeune icaRius, votre alter-ego numérique, à sauver le royaume de Statis de la menace qui le guette. Au cours de cette aventure, il vous sera ainsi demandé de résoudre des énigmes, dont la solution vous permettra d’avancer un peu plus loin dans les terres de Statis. Ces énigmes sont autant d’étapes pour découvrir les possibilités (magiques!) offertes par R. La solution sera ensuite à renseigner dans l’écran du jeu icaRius, prévu à cet effet.<br>
+<br>
+<p><img src="grimoire_IGoR/accueil/grimoire.png"></p><br>
+Au fait, il est bientôt temps de démarrer votre partie d’IcaRius. Pour cela, dans quelques instants, vous double-cliquerez sur l’icone icaRius <b>dans le répertoire de la clé USB</b> - que vous pourrez emporter avec vous à l’issue de la partie, pour rejouer à loisir ;-) <BR>
+<br>
+<p><img src="grimoire_IGoR/accueil/icaRius_lancement.png"></p><br>
+<br>
+Au fur et à mesure de votre aventure, vous aurez à résoudre des énigmes, posées par les personnages que vous croiserez au cours de votre quête. A chaque énigme correspond un tutoriel d'apprentissage en R. Pour lancer le tutoriel correspondant, il vous faudra cliquer, <b>en bas de cette page</b>, sur le bouton correspondant : chaque tutoriel est numéroté pour bien s'y retrouver.<br> 
+<br>
+Au bout de quelques minutes de jeu, vous rencontrerez ainsi le Mage RegoR, qui vous proposera de résoudre une première énigme. Voici la question posée : “quel est l’âge d’icaRius ?”. Le premier tutoriel R de cette aventure vous apportera la réponse. Une fois trouvée, il faudra la reporter dans le jeu icaRius, dans l'écran bleu, pour débloquer la suite de l'histoire. 
+<br>
+<p><img src="grimoire_IGoR/accueil/icaRius_premiers_pas.png"></p><br>
+<br>
+<b><i>Vous êtes prêt(e)s ? Lancer donc le jeu icaRius puis, le moment venu, activez depuis cette page chaque tutoriel correspondant à votre énigme via les panneaux ci-dessous. </i></b>
+
+<p>
+<span class="b"> 
+<b>Enigme 1</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme01.png"><br>
+<br>
+Vous venez de rencontrer le mage RegoR, dans la maison d'icaRius.<br>
+<br>
+<input type="button" name="launch_enigme_1" Value="Lancez le tutoriel" onClick="enigme 1"><br>
+<br>
+<span id="span_clock_1"> * <BR> *  * </span>
+<br>
+</span> 
+
+<span class="b"> 
+<b>Enigme 2</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme02.png"><br>
+<br>
+Des poules en or ? Aidez la fermière à compter les pontes...<br>
+<br>
+<input type="button" name="launch_enigme_2" Value="Lancez le tutoriel" onClick="enigme 2"><br>
+<br>
+<span id="span_clock_2"> * <BR> *  * </span>
+<br>
+</span> 
+
+</p>
+
+
+<p>
+<span class="b"> 
+<b>Enigme 3</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme03.png"><br>
+<br>
+Le chef du village de GrissGrass vous demande de trouver le meilleur exploitant.<br>
+<br>
+<input type="button" name="launch_enigme_3" Value="Lancez le tutoriel" onClick="enigme 3"><br>
+<br>
+<span id="span_clock_3"> * <BR> *  * </span>
+<br>
+</span> 
+
+<span class="b"> 
+<b>Enigme 4</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme04.png"><br>
+<br>
+Découvrez le secret de la culture de la Mandragore !<br>
+<br>
+<input type="button" name="launch_enigme_4" Value="Lancez le tutoriel" onClick="enigme 4"><br>
+<br>
+<span id="span_clock_4"> * <BR> *  * </span>
+<br>
+</span> 
+
+</p>
+
+<p>
+<span class="b"> 
+<b>Enigme 5</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme05.png"><br>
+<br>
+Dans le château de Statis, le cuistot Batreb vous parle d'ivresse...<br>
+<br>
+<input type="button" name="launch_enigme_5" Value="Lancez le tutoriel" onClick="enigme 5"><br>
+<br>
+<span id="span_clock_5"> * <BR> *  * </span>
+<br>
+</span> 
+
+<span class="b"> 
+<b>Enigme 6</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme06.png"><br>
+<br>
+Fabriquez une fake news avec l'aide du mage Essespéus !<br>
+<br>
+<input type="button" name="launch_enigme_6" Value="Lancez le tutoriel" onClick="enigme 6"><br>
+<br>
+<span id="span_clock_6"> * <BR> *  * </span>
+<br>
+</span> 
+
+</p>
+
+
+
+<p>
+<span class="b"> 
+<b>Enigme 7 (optionnelle)</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme07.png"><br>
+<br>
+Vous voici à l'entrée du labyrinthe, avec le mage Delagarde...<br>
+<br>
+<input type="button" name="launch_enigme_7" Value="Lancez le tutoriel" onClick="enigme 7"><br>
+<br>
+<span id="span_clock_7"> * <BR> *  * </span>
+<br>
+</span> 
+
+<span class="b"> 
+<b>Enigme 8</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme08.png"><br>
+<br>
+Nouvelle rencontre avec le mage Zilap, pour libérer le passage...<br>
+<br>
+<input type="button" name="launch_enigme_8" Value="Lancez le tutoriel" onClick="enigme 8"><br>
+<br>
+<span id="span_clock_8"> * <BR> *  * </span>
+<br>
+</span> 
+
+<span class="b"> 
+<b>Enigme 9</b> <br>
+<br>
+<img src="grimoire_IGoR/accueil/enigme09.png"><br>
+<br>
+Dans le village de Sandia, Mam'Grouxi vous parle des enfants de Statia.<br>
+<br>
+<input type="button" name="launch_enigme_9" Value="Lancez le tutoriel" onClick="enigme 9"><br>
+<br>
+<span id="span_clock_9"> * <BR> *  * </span>
+<br>
+</span> 
+
+</p>
+
+</div>
+</div>
+
+ </body>
+</html>
