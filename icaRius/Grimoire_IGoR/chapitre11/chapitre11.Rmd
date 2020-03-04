@@ -191,6 +191,53 @@ round(3.1415)
 
 Il est temps pour vous de pratiquer ! Créez votre sortilège `calcul_age_arrondi()`, avec comme ingrédient `nb_coeur`, de telle façon que l'âge calculé soit arrondi avec le sortilège `round()`
 
+
+```{r question_brique,echo=FALSE}
+question_parsons(
+  initial = c(
+    "calcul_age_arrondi",
+    "<-",
+    "function",
+    "(",
+    ")",
+    "{",
+    "}",
+    "round()",
+    "calcul_age(nb_coeur)",
+    "%>%",
+    "nb_coeur"
+  ),
+  pass_if(
+    c(
+    "calcul_age_arrondi",
+    "<-",
+    "function",
+    "(",
+    "nb_coeur",
+    ")",
+    "{",
+    "calcul_age(nb_coeur)",
+    "%>%",
+    "round()",    
+    "}"
+    )
+  ),
+  fail_if(
+    ~length(.) < 11,
+    message = "Vous devez utiliser tous les éléments"
+  ),
+  fail_if(
+    function(x){"round" %in% x},
+    message = "Vous devez utiliser la fonction arrondi dans votre réponse"
+  ),
+  fail_if(
+    ~{.[1] != "calcul_age_arrondi"},
+    message = "La solution doit commencer par le nom de la fonction"
+  )
+)
+```
+
+
 ```{r ok-chapitre11-etape1,exercise=TRUE}
 # Créez le sortilège calcul_age_arrondi()
 # qui utilise en son sein le sortilège round()
