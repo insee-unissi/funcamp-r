@@ -23,17 +23,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Conversations runiques - bis repetita
 
-Vous voilà revenu(e) au tout début de l'aventure ! Comme d'ouvrir le grimoire IGoR au premier chapitre. Tout ce chemin accomplir pour rien : quelle frustration... L'automate TeCo vous a en effet projeté en arrière, faute de maîtriser la "statistique reproductible"...
+Vous voilà revenu(e) au tout début de l'aventure ! Comme d'ouvrir le grimoire IGoR au premier chapitre. Tout ce chemin accompli pour rien : quelle frustration... L'automate TeoC vous a en effet projeté en arrière, faute de maîtriser la "statistique reproductible"...
 
 Mais que veut-il dire par là ? 
 
 La notion de reproductibilité désigne à l’origine, dans le cadre des sciences expérimentales, la nécessité de disposer d’une répétition des évènements à partir desquels une conclusion est formulée. Cette condition
 permet de s’affranchir d’effets aléatoires venant fausser les résultats ainsi que des erreurs de manipulations de la part des scientifiques. C’est un des critères de scientificité établi par Karl Popper.
 
-La reproductibilité a vu son domaine d’application s’élargir au delà des sciences expérimentales, pour qualifier plus généralement les étude fondés sur le traitement d’inputs externes au processus lui-même mais en conditionnant le résultat. S’y rattache ainsi toute étude se fondant sur des données qui lui sont préalables et dont l’étude propose un traitement : ainsi, l’ensemble des études statistiques sont
-potentiellement concernées par la question de la reproductibilité.
-
-Plus généralement encore, la reproductibilité permet de désigner une méthode de travail qui vise à faciliter la répétition de l'ensemble des étapes qui ont été suivies, de façon automatisées et maîtrisées. La reproductibilité prévoit que ces étapes puissent être réalisées par une autre personne que l'auteur du processus : autrement dit, c'est aussi une méthode pour documenter un travail et en assurer la transmission à d'autres collègues.
+Plus généralement, la reproductibilité permet de désigner une méthode de travail qui vise à faciliter la répétition de l'ensemble des étapes qui ont été suivies, de façon automatisées et maîtrisées. La reproductibilité prévoit que ces étapes puissent être réalisées par une autre personne que l'auteur du processus : autrement dit, c'est aussi une méthode pour documenter un travail et en assurer la transmission à d'autres collègues.
 
 En quelques mots, penser "reproductible", c'est pour commencer :
 - automatiser le plus possible chaque étape d'un processus
@@ -51,7 +48,7 @@ quiz(
 )
 ```
 
-## Automatisons avec l'automate TeCo 
+## Automatisons avec l'automate TeoC 
 
 Penchons-nous sur la première dimension de la reproductibilité, et jouons à l'automate ! 
 
@@ -81,20 +78,7 @@ nb_coeur * pi^2 - max_nb_coeur
 
 ```
 
-Ce faisant, un tout premier a été fait dans l'idée de reproductibilité, en utilisant comme ingrédient dans votre formule runique des "variables" dont la valeur peut être modifiée, plutôt que d'écrire directement le calcul avec les valeurs finales.
-
-L'idée est équivalente au fait d'utiliser des variables dans une équation :
-
-```{r, eval=FALSE}
-# Une formule avec des éléments fixes
-3 * pi^2 - 6
-# Une formule avec des éléments variables x et y
-x * pi^2 - y
-# ici notre formule runique est équivalente à dire :
-x <- 3
-y <- 2*x
-x * pi^2 - y
-```
+Ce faisant, un tout premier exemple a été fait dans l'idée de reproductibilité, en utilisant comme ingrédient dans votre formule runique des "variables" dont la valeur peut être modifiée, plutôt que d'écrire directement le calcul avec les valeurs finales.
 
 Ce faisant, il vous suffit de changer la valeur pour la variable x, puis d'exécuter le code pour obtenir à chaque fois le résultat qui en découle.
 
@@ -147,7 +131,7 @@ calcul_age <- function(nb_coeur) {
 }
 ```
 
-Pas sorcier finalement. Comme quoi, cette histoire d'automate TeCo, c'est très surfait. Pour utiliser votre tout nouveau sortilège, il suffit de l'invoquer avec la valeur souhaitée pour l'ingrédient `nb_coeur`
+Pas sorcier finalement. Comme quoi, cette histoire d'automate TeoC, c'est très surfait. Pour utiliser votre tout nouveau sortilège, il suffit de l'invoquer avec la valeur souhaitée pour l'ingrédient `nb_coeur`
 
 ```{r}
 calcul_age(3)
