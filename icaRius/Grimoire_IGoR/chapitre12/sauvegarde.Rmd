@@ -1,1 +1,69 @@
+## A la recherche du sortilège de la mémoire éternelle
 
+Pourquoi Icarius aurait-il besoin de remobiliser des résultats déjà vus dans les précédents chapitres? 
+
+  ->Possibilité 1:
+  on suit le fil conducteur du tutoriel 1(1) dvp par Pascal et Arnaud (mais à condition dans ce cas là que notre tuto vienne après) dans lequel Icarius revient au début de sa quête. Zut,retour à la case départ pour Icarius qui s'apprêtait pourtant à quitter le monde de Statis! Passé le moment de frustration, Icarius parvient à se remotiver et est bien determiné à refaire le parcours beaucoup plus vite que la 1ère fois.Ce dernier est d'autant plus confiant qu'il sait qu'il peut compter sur sa remarquable mémoire pour se souvenir des résultats des différentes énigmes et pouvoir avancer rapidement... mais ça c'était sans compter sur le terrible Sassos qui lui jette un sort lui faisant progressivement perdre la mémoire...Icarius a alors l'idée de sauvergarder le plus rapidement possible l'ensemble des résultats, infos déjà croisées... Pour s'en sortir, un seul moyen, trouver le sortilège de mémoire éternelle...**Commentaire Fabrice: voir si on peut imaginer deux options à la suite du retour à la case départ: la reproductibilité[Arnaud et Pascal] vs la sauvegarde des résultats[Laure et Fabrice]**
+  
+  ->Possibilité 2:
+  La sortie du monde des Sassos d'Icarius est imminente et ce dernier sait qu'il devra réussir l'interrogatoire final des Runos pour pouvoir réintégrer leur monde. Avant de pouvoir définitivement retourner dans le monde des Runes, les Runos vont vouloir s'assurer qu'il s'agit bien d'Icarius et non d'un sasien ayant pris son apparence, venu pour semer la zizanie dans leur village. Pour s'assurer qu'il s'agit du vrai Icarius, ce dernier devra le prouver en remobilisant des informations recueillies lors de sa quête...Seulemennt, pour empêcher Icarius de retourner dans le monde des Runes et de diffuser les nouveaux sortilèges découverts lors de son périple, le terrible Sassos lui a jeté un sort lui faisant progressivement perdre la mémoire...Pour s'en sortir, un seul moyen, trouver le sortilège de mémoire éternelle... Sans ça, Icarius restera bloqué à tout jamais dans le monde des Sassos.**commentaire Fabrice: cette 2ème possibilité me parait un peu compliquée: je penche pour la première**
+
+
+Frappé par le terrible sort de Sassos, Icarius perd progressivement la mémoire..Sa seule solution pour s'en sortir est de partir à la recherche du Magelefant détenteur du sortilège de mémoire éternelle.
+
+
+## SAVE qui peut!
+
+Dans le monde des Runes, le sortilège `save` du chapitre "base" va permettre la sauvegarde d'un objet R, par exemple une table (=un data.frame),dans un format propre au langage runique: le fichier "RData".
+
+*Souvenez-vous, dans le chapitre 1, nous avons vu qu'un objet c'est comme une boite sur laquelle on peut apposer une étiquette (un nom) et dans laquelle on range un contenu (le résultat d'un calcul par exemple). L'objet est l'élément de base du langage runique. Les objets R peuvent être de type différents: data frame, un vecteur, une liste, un graphique...
+Les objets sont stockés dans notre environnement de travail, lequel peut être enregistré à l'aide de la fonction `save`*
+
+Le sortilège save le plus basique nécessite au minimum 2 ingrédients :
+
+- le nom de l'objet que l'on souhaite sauvegarder
+- l'emplacement et le nom du fichier RData dans lequel va être stocké l'objet.
+
+```{r, collapse = TRUE, eval=FALSE}
+save(nom_objet_à_sauvegarder,file="chemin_du_fichier/nom_du_fichier.RData")
+```
+
+Ce fichier RData pourra ensuite être ouvert et lu à tout moment grâce au sortilège `load`, vu dans le chapitre 3.
+
+**Pour aller plus loin**:
+Il est possible de stocker dans un même fichier "RData", plusieurs objets R pouvant être de type différents. Pour cela, rien de plus simple, il suffit dans la liste des ingrédients de séparer nos différents objets à sauvegarder par des virgules, ce qui donne:
+
+```{r, collapse = TRUE, eval=FALSE}
+save(data_frame1_à_sauvegarder,vecteur_à_sauvegarder,data_frame2_à_sauvegarder,file="chemin_du_fichier/nom_du_fichier.RData")
+```
+
+Prenons l'exemple
+
+## À vous de jouer !
+
+Lancé dans une incroyable course contre la montre pour sauvegarder l'ensemble de ses résultats, Icarius a besoin de votre aide pour pouvoir finir avant que sa mémoire n'ait totalement disparu.
+
+Pour aller encore plus vite,il va falloir privilégier le stockage de plusieurs objets, de type différents dans un même RData!
+
+## Oui mais si je veux sauvegarder des objets en dehors de l'environnement R
+Il est parfois nécessaire de sauvegarder des informations statistiques "en dehors de R" dans des formats qui sont compatibles avec d'autres logiciels, que ce soit des tableaux de résultats ou des graphiques. On parle alors d'exporter des objets. Par exemple, sauvegarder un graphique en format jpeg ou en format pdf, sauvegarder un dataframe dans un fichier csv. Pour chaque objet, il existe des sortilèges d'export différents. Par exemple, pour les graphiques, on peut utiliser le sortilège ggsave en précisant le nom du graphique:
+
+```{r, collapse = TRUE, eval=FALSE}
+u=ggplot(iris,aes(Sepal.Length, Sepal.Width))+geom_point()
+ggsave(u,path ="C:/Users/W3FKCS/",filename="iris.pdf",device = "pdf" )
+```
+**Commentaire Fabrice: voir si on peut faire en sorte que les participants puissent exporter dans une arborescence similaire à celle qu'ils connaissent**
+
+
+Pour exporter un tableau de données, on peut utiliser le sortilège export :
+```{r, collapse = TRUE, eval=FALSE}
+install.packages("rio")
+library("rio")
+export(mtcars, "mtcars.csv")
+```
+
+## Pour aller plus loin: et organiser les données d'Icarius pour qu'elles soient plus facilement retrouvables
+
+Peut-être que nous pourrions voir ici la notion d'export dans plusieurs onglets d'un même fichier calc ou excel
+
+**Fin du chapitre   >>  reprenez la partie d'Icarius**
