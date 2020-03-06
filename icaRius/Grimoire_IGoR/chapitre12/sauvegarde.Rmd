@@ -15,7 +15,7 @@ Frappé par le terrible sort de Sassos, Icarius perd progressivement la mémoire
 ## SAVE qui peut!
 
 Dans le monde des Runes, le sortilège `save` du chapitre "base" va permettre la sauvegarde d'un objet R, par exemple une table (=un data.frame),dans un format propre au langage runique: le fichier "RData".
-
+ 
 *Souvenez-vous, dans le chapitre 1, nous avons vu qu'un objet c'est comme une boite sur laquelle on peut apposer une étiquette (un nom) et dans laquelle on range un contenu (le résultat d'un calcul par exemple). L'objet est l'élément de base du langage runique. Les objets R peuvent être de type différents: data frame, un vecteur, une liste, un graphique...
 Les objets sont stockés dans notre environnement de travail, lequel peut être enregistré à l'aide de la fonction `save`*
 
