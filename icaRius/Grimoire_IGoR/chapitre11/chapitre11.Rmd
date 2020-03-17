@@ -18,6 +18,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(knitr)
+library(parsons)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -300,6 +301,63 @@ calcul_age_arrondi(3)
 ># Fin de l'exercice
 >```
 
+Félicitation, tu sais maintenant créer tes propres sortilèges.
+Mais si tu veux que ton sortilège puisse être utilisé par un autre statisien, il faut l'écrire dans le grimoire. 
+Tu devras, expliquer ce que fait le sortilège, renseigner les ingrédients nécessaires et préciser ce que l'on obtient pour que chacun puisse utiliser ton sortilçège
+Ce texte explicatif apparaîtra au format commentaire, souviens toi, c'est le `#` qui permet d'écrire les commentaires. 
 
+```{r}
+#' @titre sortilege_mandragore
+#' @description recette pour obtenir de la mandragore
+#' @ingredient un champ 
+#' @resultat de la mandragore
+#' @exemple sortilege_mandragore(champ = champ_de_Icarius)
+sortilege_mandragore <- function(champ) { 
+  champ %>% labourer() %>%
+    semer() %>%
+    ajouter(coccinelles) %>%
+    arroser() %>%
+    recolter()
+}
+```
+
+A ton tour, rédige les commentaires du sortilège `calcul_age_arrondi` afin de l'inscrire dans le grimoire.
+
+```{r question_brique_commentaire,echo=FALSE}
+question_parsons(
+  initial = c(
+    "calcul_age_arrondi <- function(nb_coeur) 
+    { 
+      round(nb_coeur * pi^2 - 2 * nb_coeur)
+    }",
+    "#' @titre",
+    "calcul_age_arrondi",
+    "#' @description",
+    "Calculer l'age des statisiens",
+    "#' @ingredient",
+    "nb_coeur",
+    "#' @resultat",
+    "un age",
+    "#' @exemple",
+    "calcul_age_arrondi(nb_coeur = 4)"
+  ),
+  pass_if(c(
+    "#' @titre",
+    "calcul_age_arrondi",
+    "#' @description",
+    "Calculer l'age des statisiens",
+    "#' @ingredient",
+    "nb_coeur",
+    "#' @resultat",
+    "un age",
+    "#' @exemple",
+    "calcul_age_arrondi(nb_coeur = 4)",
+    "calcul_age_arrondi <- function(nb_coeur) 
+    { 
+      round(nb_coeur * pi^2 - 2 * nb_coeur)
+    }"
+  )), try_again_button = "Essaie encore" 
+)
+```
 
 **Fin du chapitre 11  >>  reprenez la partie d'Icarius**
