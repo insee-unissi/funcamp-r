@@ -260,7 +260,7 @@ question("Alors, quel âge a Icarius? Ne reste plus qu'à cocher la bonne répon
 type="single",
 allow_retry = TRUE,
 incorrect="Retente ta chance",
-answer("15 ans"),
+answer("18 ans"),
 answer("36 ans"),
 answer("24 ans",correct=TRUE),
 answer("La bonne réponse n'est pas dans les propositions"),
