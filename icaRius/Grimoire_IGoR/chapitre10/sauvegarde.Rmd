@@ -1,0 +1,127 @@
+---
+title: "Chapitre 10 - Save me !"
+output: 
+  html_document:
+    theme: cerulean
+    highlight: haddock
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    number_sections: false
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(parsons)
+library(knitr)
+library(ggformula)
+library(skimr)
+knitr::opts_chunk$set(echo = TRUE)
+#creation du graphe contenant la séquence secrète:
+
+coord=data.frame(x1=c(1,2,3,4,6,7),x2=c(1,2,3,4,5,8),y1=c(0,0,1,1,0.5,0.5),y2=c(1,1,0,0,0.5,0.5))
+des_chiffres_et_des_lettres=ggplot(coord, aes(x = x1, y = y1, xend = x2, yend = y2)) +
+  geom_segment(
+    size = 2, arrow = arrow(length = unit(0.3, "inches"))
+  ) + theme(plot.margin = margin(6,.2,6,.2, "cm"),
+      plot.background = element_rect(fill = "darkgrey"), 
+      axis.title=element_blank(),axis.text=element_blank(),axis.ticks = element_blank())
+
+```
+
+
+## A la recherche du sortilège de la mémoire éternelle
+
+
+
+Pourquoi Icarius aurait-il besoin de remobiliser des résultats déjà vus dans les précédents chapitres? 
+
+  ->Possibilité 1:
+  on suit le fil conducteur du tutoriel 1(1) dvp par Pascal et Arnaud (mais à condition dans ce cas là que notre tuto vienne après) dans lequel Icarius revient au début de sa quête. Zut,retour à la case départ pour Icarius qui s'apprêtait pourtant à quitter le monde de Statis! Passé le moment de frustration, Icarius parvient à se remotiver et est bien determiné à refaire le parcours beaucoup plus vite que la 1ère fois.Ce dernier est d'autant plus confiant qu'il sait qu'il peut compter sur sa remarquable mémoire pour se souvenir des résultats des différentes énigmes et pouvoir avancer rapidement... mais ça c'était sans compter sur le terrible Sassos qui lui jette un sort lui faisant progressivement perdre la mémoire...Icarius a alors l'idée de sauvergarder le plus rapidement possible l'ensemble des résultats, infos déjà croisées... Pour s'en sortir, un seul moyen, trouver le sortilège de mémoire éternelle...**Commentaire Fabrice: voir si on peut imaginer deux options à la suite du retour à la case départ: la reproductibilité[Arnaud et Pascal] vs la sauvegarde des résultats[Laure et Fabrice]**
+  
+  ->Possibilité 2:
+  La sortie du monde des Sassos d'Icarius est imminente et ce dernier sait qu'il devra réussir l'interrogatoire final des Runos pour pouvoir réintégrer leur monde. Avant de pouvoir définitivement retourner dans le monde des Runes, les Runos vont vouloir s'assurer qu'il s'agit bien d'Icarius et non d'un sasien ayant pris son apparence, venu pour semer la zizanie dans leur village. Pour s'assurer qu'il s'agit du vrai Icarius, ce dernier devra le prouver en remobilisant des informations recueillies lors de sa quête...Seulemennt, pour empêcher Icarius de retourner dans le monde des Runes et de diffuser les nouveaux sortilèges découverts lors de son périple, le terrible Sassos lui a jeté un sort lui faisant progressivement perdre la mémoire...Pour s'en sortir, un seul moyen, trouver le sortilège de mémoire éternelle... Sans ça, Icarius restera bloqué à tout jamais dans le monde des Sassos.**commentaire Fabrice: cette 2ème possibilité me parait un peu compliquée: je penche pour la première**
+
+
+Frappé par le terrible sort de Sassos, Icarius perd progressivement la mémoire..Sa seule solution pour s'en sortir est de partir à la recherche du Magelefant détenteur du sortilège de mémoire éternelle.
+
+
+## SAVE qui peut!
+
+Dans le monde des Runes, le sortilège `save` du chapitre "base" va permettre la sauvegarde d'un objet R, par exemple une table (=un data.frame),dans un format propre au langage runique: le fichier "RData".
+
+*Souvenez-vous, dans le chapitre 1, nous avons vu qu'un objet c'est comme une boite sur laquelle on peut apposer une étiquette (un nom) et dans laquelle on range un contenu (le résultat d'un calcul par exemple). L'objet est l'élément de base du langage runique. Les objets R peuvent être de type différents: data frame, vecteur, liste, graphique...
+Les objets sont stockés dans notre environnement de travail, lequel peut être enregistré à l'aide de la fonction `save`*
+
+Le sortilège save le plus basique nécessite au minimum 2 ingrédients :
+
+- le nom de l'objet que l'on souhaite sauvegarder
+- l'emplacement et le nom du fichier RData dans lequel va être stocké l'objet.
+
+```{r, collapse = TRUE, eval=FALSE}
+save(nom_objet_à_sauvegarder,file="chemin_du_fichier/nom_du_fichier.RData")
+```
+
+Ce fichier RData pourra ensuite être ouvert et lu à tout moment grâce au sortilège `load`, vu dans le chapitre 3.
+
+**Pour aller plus loin**:
+Il est possible de stocker dans un même fichier "RData", plusieurs objets R pouvant être de type différents. Pour cela, rien de plus simple, il suffit dans la liste des ingrédients de séparer nos différents objets à sauvegarder par des virgules, ce qui donne:
+
+```{r, collapse = TRUE, eval=FALSE}
+save(data_frame1_à_sauvegarder,vecteur_à_sauvegarder,data_frame2_à_sauvegarder,file="chemin_du_fichier/nom_du_fichier.RData")
+```
+
+Prenons l'exemple
+
+## À vous de jouer !
+
+Lancé dans une incroyable course contre la montre pour sauvegarder l'ensemble de ses résultats, Icarius a besoin de votre aide pour pouvoir finir avant que sa mémoire n'ait totalement disparu.
+
+Pour aller encore plus vite,il va falloir privilégier le stockage de plusieurs objets, de type différents dans un même RData!
+
+## Oui mais si je veux sauvegarder des objets en dehors de l'environnement R
+Il est parfois nécessaire de sauvegarder des informations statistiques "en dehors de R" dans des formats qui sont compatibles avec d'autres logiciels, que ce soit le contenu de la console, des tableaux de résultats ou des graphiques. On parle alors d'exporter des objets. Par exemple, sauvegarder le contenu de la console dans un fichier txt,sauvegarder un graphique en format jpeg ou en format pdf, sauvegarder un dataframe dans un fichier csv. Pour chaque objet, il existe des sortilèges d'export différents.
+
+Pour sauvegarder le contenu de la console, le sortilège sink est très efficace. Les ingrédients nécessaires à ce sortilèges sont le chemin complet vers le fichier texte dans lequel on va stocker le résultat. Exemple :
+
+```{r, collapse = TRUE, eval=FALSE}
+sink(file="maconsole.txt")
+nb_pontes <- data.frame(poulette=c("Cocotte1","Cocotte2","Cocotte3","Cocotte4"),nb_oeufs=c(10,9,20,18))
+skim(nb_pontes)
+sink()
+```
+
+
+Pour les graphiques, on peut utiliser le sortilège ggsave en précisant le nom du graphique:
+
+```{r, collapse = TRUE, eval=FALSE}
+u=iris%>%gf_point(Sepal.Length~Sepal.Width)
+ggsave(u,path ="C:/Users/W3FKCS/",filename="iris.pdf",device = "pdf" )
+```
+**Commentaire Fabrice: voir si on peut faire en sorte que les participants puissent exporter dans une arborescence similaire à celle qu'ils connaissent**
+
+
+Pour exporter un tableau de données, le sortilège export  :
+```{r, collapse = TRUE, eval=FALSE}
+install.packages("rio")
+library("rio")
+export(mtcars, "mtcars.csv")
+```
+
+## A vous de jouer
+L'horrible Sassos a téléporté Icarius dans une forêt magique dont il ne peut sortir sans votre aide. Vous devez ainsi lui indiquer le chemin qu'il doit suivre. Les indications que vous devez lui fournir se trouvent cachées dans un objet R que vous devez sauvegarder à la racine de la clé USB contenant les tutoriels. Indication: l'objet est un graphique dénommé "des_chiffres_et_des_lettres" que vous stockerez au format jpg dans un fichier dénommé enigme_chap10.jpg
+
+```{r chapitre10-ex1,exercise=TRUE}
+```
+
+```{r chapitre10-ex1-solution}
+ggsave(des_chiffres_et_des_lettres, filename="enigme_chap10.jpg",device = "jpeg")
+```
+
+
+**Fin du chapitre   >>  reprenez la partie d'Icarius**
