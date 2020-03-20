@@ -113,7 +113,7 @@ library("rio")
 export(mtcars, "mtcars.csv")
 ```
 
-## A vous de jouer
+## À vous de jouer
 L'horrible Sassos a téléporté Icarius dans une forêt magique dont il ne peut sortir sans votre aide. Vous devez ainsi lui indiquer le chemin qu'il doit suivre. Les indications que vous devez lui fournir se trouvent cachées dans un objet R que vous devez sauvegarder à la racine de la clé USB contenant les tutoriels. Indication: l'objet est un graphique dénommé "des_chiffres_et_des_lettres" que vous stockerez au format jpg dans un fichier dénommé enigme_chap10.jpg
 
 ```{r chapitre10-ex1,exercise=TRUE}
