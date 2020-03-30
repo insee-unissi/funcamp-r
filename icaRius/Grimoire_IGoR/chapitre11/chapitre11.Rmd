@@ -18,6 +18,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(knitr)
+library(parsons)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -30,7 +31,7 @@ Mais que veut-il dire par là ?
 La notion de reproductibilité désigne à l’origine, dans le cadre des sciences expérimentales, la nécessité de disposer d’une répétition des évènements à partir desquels une conclusion est formulée. Cette condition permet de s’affranchir d’effets aléatoires venant fausser les résultats ainsi que des erreurs de manipulations de la part des scientifiques. C’est un des critères de scientificité établi par Karl Popper. L’ensemble des études statistiques sont
  concernées par la question de la reproductibilité.
 
-Plus généralement encore, la reproductibilité permet de désigner une méthode de travail qui vise à faciliter la répétition de l'ensemble des étapes qui ont été suivies, de façon automatisées et maîtrisées. La reproductibilité prévoit que ces étapes puissent être réalisées par une autre personne que l'auteur du processus : autrement dit, c'est aussi une méthode pour documenter un travail et en assurer la transmission à d'autres collègues.
+Plus généralement, la reproductibilité permet de désigner une méthode de travail qui vise à faciliter la répétition de l'ensemble des étapes qui ont été suivies, de façon automatisées et maîtrisées. La reproductibilité prévoit que ces étapes puissent être réalisées par une autre personne que l'auteur du processus : autrement dit, c'est aussi une méthode pour documenter un travail et en assurer la transmission à d'autres collègues.
 
 En quelques mots, penser "reproductible", c'est pour commencer :
 - automatiser le plus possible chaque étape d'un processus
@@ -191,7 +192,8 @@ Pour l'instant, nous avons calculé mentalement l'arrondi, plutôt que de demand
 round(3.1415)
 ```
 
-Il est temps pour vous de pratiquer ! Créez votre sortilège `calcul_age_arrondi()`, avec comme ingrédient `nb_coeur`, de telle façon que l'âge calculé soit arrondi avec le sortilège `round()`
+Il est temps pour vous de pratiquer ! Assemblez d'abord votre sortilège `calcul_age_arrondi()`, avec comme ingrédient `nb_coeur`, de telle façon que l'âge calculé soit arrondi avec le sortilège `round()`.
+
 
 ```{r ok-chapitre11-etape1,exercise=TRUE}
 # Créez le sortilège calcul_age_arrondi()
@@ -214,6 +216,7 @@ calcul_age_arrondi <- function(nb_coeur) {
 calcul_age_arrondi(3)
 # Fin de l'exercice
 ```
+
 
 
 ><details><summary><font size="3">Pour les plus téméraires : cliquez ici</font></summary>
@@ -255,8 +258,75 @@ calcul_age_arrondi(3)
 ># Fin de l'exercice
 >```
 
+## Ni tout à fait le même, ni tout à fait un autre
 
-*Au fait, vous n'avez pas remarqué une anomalie dans cette histoire ?* A l'origine, la formule de calcul de l'âge se fonde sur le nombre de coeurs à la naissance, et le nombre maximum de coeurs que le statisien peut obtenir dans sa vie. Il vous a été indiqué ainsi, au début du chapitre 1, comme au début de ce chapitre 1(1), les indications suivantes :
+La langue des runes est d'une richesse infinie... En témoigne la multitude des façon d'écrire le court sortilège que vous venez de formuler. C'est un peu déroutant, certes : le même calcul peut être rédiger de multiples façons possibles en R. 
+
+Reprenons l'exemple du sortilège `calcul_age_arrondi()`. Cette fois, il vous est proposé de le composer en réutilisant le sortilège `calcul_age()`, en complétant ce dernier par l'usage d'un pipe `%>%` et du sortilège `round()`. Pour vous guider, essayer d'assembler les briques ci-dessous :
+
+
+```{r question_brique,echo=FALSE}
+question_parsons(
+  initial = c(
+    "calcul_age_arrondi",
+    "<-",
+    "function",
+    "(",
+    ")",
+    "{",
+    "}",
+    "round()",
+    "calcul_age(nb_coeur)",
+    "%>%",
+    "nb_coeur"
+  ),
+  pass_if(
+    c(
+    "calcul_age_arrondi",
+    "<-",
+    "function",
+    "(",
+    "nb_coeur",
+    ")",
+    "{",
+    "calcul_age(nb_coeur)",
+    "%>%",
+    "round()",    
+    "}"
+    )
+  ),
+  fail_if(
+    ~length(.) < 11,
+    message = "Vous devez utiliser tous les éléments"
+  ),
+  fail_if(
+    function(x){"round" %in% x},
+    message = "Vous devez utiliser la fonction arrondi dans votre réponse"
+  ),
+  fail_if(
+    ~{.[1] != "calcul_age_arrondi"},
+    message = "La solution doit commencer par le nom de la fonction"
+  )
+)
+```
+
+
+><details><summary><font size="3">Pour afficher la solution, cliquez ici</font></summary>
+><p><font size="2">
+>
+> Le sortilège `calcul_age_arrondi()` peut être obtenu en "augmentant" le sortilège `calcul_age()` de la façon suivante :
+>```{r, eval=FALSE}
+>calcul_age_arrondi <- function(nb_coeur){
+>  calcul_age(nb_coeur)
+>    %>% round()
+>}
+>```
+
+
+
+## Une erreur de formule !
+
+*Au fait, vous n'avez pas remarqué une anomalie dans cette histoire de calcul d'âge ?* A l'origine, la formule de calcul de l'âge se fonde sur le nombre de coeurs à la naissance, et le nombre maximum de coeurs que le statisien peut obtenir dans sa vie. Il vous a été indiqué ainsi, au début du chapitre 1, comme au début de ce chapitre 1(1), les indications suivantes :
 
 ```{r, echo=FALSE}
 # Pour le commun des statisiens...
