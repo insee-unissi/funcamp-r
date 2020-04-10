@@ -70,7 +70,7 @@ save(data_frame1_à_sauvegarder,vecteur_à_sauvegarder,data_frame2_à_sauvegarde
 Ces tables seront sauvegardées sur la clé USB remise en début de séance sur l'epace dédié intitulé: :.../Sauvegarde/entrainement_chap10" (mettre à jour nom emplacement)
 *Il faudra penser à renseigner la lettre de la clé USB (si besoin, demander à l'animateur de vous aider)*
 
-```{r chap-question1,exercise=TRUE}
+```{r chap10-question1,exercise=TRUE}
 # Sauvegarder les tables "naiss_1213" et "vill_fille_mana_plus_grand"
 ``` 
 ```{r chap10-question1-solution}
@@ -105,10 +105,10 @@ export(mtcars, "mtcars.csv")
 ```
 ## Entraine toi !
 A toi de jouer : tu dois désormais exporter la table naiss_1213 au format csv dans un fichier nommé naissances.csv à la racine de la clé USB qui t'a été remise en début de Funcamp.
-```{r chap-question1,exercise=TRUE}
+```{r chap10-question2,exercise=TRUE}
 # Sauvegarder les tables "naiss_1213" au format csv
 ``` 
-```{r chap10-question1-solution}
+```{r chap10-question2-solution}
 #  Sauvegarder les tables "naiss_1213" et "vill_fille_mana_plus_grand"
 export(naiss_1213,"/cloud/project/MODULE_SAUVEGARDE/naissance.csv")
 ``` 
